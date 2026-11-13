@@ -93,26 +93,36 @@
       const tabs = toggle.querySelectorAll("[data-audience-tab]");
       const panels = document.querySelectorAll("[data-audience-panel]");
       const imgs = document.querySelectorAll("[data-audience-img]");
-      let busy = false;
       const activate = (key) => {
-        if (busy) return;
-        const current = toggle.dataset.active || "yes";
-        if (current === key) return;
-        busy = true;
+        if ((toggle.dataset.active || "yes") === key) return;
         toggle.dataset.active = key;
-        tabs.forEach((t) => { const on = t.dataset.audienceTab === key; t.classList.toggle("is-active", on); t.setAttribute("aria-selected", String(on)); });
-        imgs.forEach((im) => im.classList.toggle("is-active", im.dataset.audienceImg === key));
-        const out = Array.from(panels).find((p) => p.dataset.audiencePanel === current);
-        const inn = Array.from(panels).find((p) => p.dataset.audiencePanel === key);
-        const show = () => {
-          out.hidden = true; inn.hidden = false;
-          if (reduced) { busy = false; return; }
-          gsap.fromTo(inn.children, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.07, ease: "expo.out", onComplete: () => { busy = false; ST.refresh(); } });
-        };
-        if (reduced) show(); else gsap.to(out.children, { opacity: 0, y: -10, duration: 0.3, stagger: 0.03, ease: "power2.in", onComplete: show });
+        tabs.forEach((tab) => {
+          const active = tab.dataset.audienceTab === key;
+          tab.classList.toggle("is-active", active);
+          tab.setAttribute("aria-selected", String(active));
+          tab.tabIndex = active ? 0 : -1;
+        });
+        imgs.forEach((img) => img.classList.toggle("is-active", img.dataset.audienceImg === key));
+        panels.forEach((panel) => {
+          const active = panel.dataset.audiencePanel === key;
+          gsap.killTweensOf(panel.children);
+          panel.hidden = !active;
+          if (active && !reduced) {
+            gsap.fromTo(panel.children, { opacity: 0, y: 10 }, {
+              opacity: 1, y: 0, duration: 0.5, stagger: 0.055, ease: "power2.out", clearProps: "opacity,transform",
+            });
+          }
+        });
+        ST.refresh();
       };
-      tabs.forEach((t) => t.addEventListener("click", () => activate(t.dataset.audienceTab)));
-      toggle.addEventListener("keydown", (e) => { if (e.key === "ArrowRight") activate("no"); if (e.key === "ArrowLeft") activate("yes"); });
+      tabs.forEach((tab) => tab.addEventListener("click", () => activate(tab.dataset.audienceTab)));
+      toggle.addEventListener("keydown", (e) => {
+        if (!["ArrowRight", "ArrowLeft", "Home", "End"].includes(e.key)) return;
+        e.preventDefault();
+        const key = e.key === "Home" ? "yes" : e.key === "End" ? "no" : toggle.dataset.active === "no" ? "yes" : "no";
+        activate(key);
+        toggle.querySelector('[aria-selected="true"]').focus();
+      });
     })();
 
     /* ---------- G5: pinned horizontal journey ---------- */
