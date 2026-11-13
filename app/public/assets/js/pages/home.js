@@ -81,10 +81,9 @@
     /* ---------- Problem: scrubbed statement ---------- */
     (function statement() {
       const el = document.querySelector("[data-statement] .problem__statement-text");
-      if (!el) return;
+      if (!el || reduced) return;
       const words = PM.splitWords(el);
-      if (reduced) { gsap.set(words, { color: "#fff" }); return; }
-      gsap.to(words, { color: "#ffffff", stagger: 0.08, ease: "none", scrollTrigger: { trigger: el, start: "top 80%", end: "bottom 45%", scrub: 0.4 } });
+      gsap.from(words, { color: "#8793A3", stagger: 0.08, ease: "none", scrollTrigger: { trigger: el, start: "top 85%", end: "bottom 50%", scrub: 0.35 } });
     })();
 
     /* ---------- Audience toggle ---------- */
