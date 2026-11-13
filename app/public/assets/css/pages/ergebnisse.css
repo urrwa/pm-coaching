@@ -15,7 +15,7 @@
 @media (min-width: 700px) { .er-hero__band-frame { aspect-ratio: 21 / 9; max-height: 70vh; } }
 .er-hero__band-frame img { transform: scale(1.1); }
 /* ---------- Fortschritt messen ---------- */
-.er-measure { background: var(--navy-900); }
+.er-measure { background: var(--navy-950); }
 .er-dims { display: grid; column-gap: clamp(2rem, 6vw, 6rem); }
 .er-dim { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1.25rem; padding: 1.25rem 0; border-top: 1px solid var(--line); }
 .er-dim div { display: grid; gap: .4rem; }

@@ -24,27 +24,27 @@
 @keyframes abScroll { 0% { transform: scaleX(0); transform-origin: left; } 50% { transform: scaleX(1); transform-origin: left; } 51% { transform-origin: right; } 100% { transform: scaleX(0); transform-origin: right; } }
 
 /* ---------- 02 Manifest ---------- */
-.ab-manifest { background: var(--offwhite); }
+.ab-manifest { background: var(--navy-950); }
 .ab-manifest__lines { display: grid; gap: clamp(1.75rem, 4vw, 3.5rem); margin-top: clamp(2rem, 4vw, 3.5rem); padding-block: clamp(2rem, 6vw, 6rem); }
-.ab-manifest__line { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.9rem, 5.2vw, 5.2rem); letter-spacing: -.035em; line-height: 1.02; color: var(--navy-950); max-width: 20ch; text-wrap: balance; }
+.ab-manifest__line { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.9rem, 5.2vw, 5.2rem); letter-spacing: -.035em; line-height: 1.02; color: var(--fg-strong); max-width: 20ch; text-wrap: balance; }
 .ab-manifest__line:nth-child(even) { margin-left: auto; text-align: right; }
 @media (max-width: 767px) { .ab-manifest__line:nth-child(even) { margin-left: 0; text-align: left; } }
 html.js:not(.reduced-motion) .ab-manifest__line .w { color: rgba(7,17,31,.14); }
 
 /* ---------- 03 Gründer ---------- */
-.ab-founder { background: #E6EBF0; overflow: hidden; }
+.ab-founder { background: var(--navy-950); overflow: hidden; }
 .ab-founder__layout { display: grid; gap: 3rem; }
 @media (min-width: 900px) { .ab-founder__layout { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(3rem, 7vw, 8rem); align-items: center; } }
 .ab-founder__media { position: relative; }
 .ab-founder__frame { aspect-ratio: 4 / 5; }
 .ab-founder__frame img { transform: scale(1.1); }
 @media (max-width: 899px) { .ab-founder__frame { aspect-ratio: 4 / 3; } }
-.ab-founder__frame-sm { position: absolute; right: -1rem; bottom: -2rem; width: 42%; aspect-ratio: 16 / 10; border: 6px solid #E6EBF0; box-shadow: 0 30px 60px -30px rgba(7,17,31,.4); }
+.ab-founder__frame-sm { position: absolute; right: -1rem; bottom: -2rem; width: 42%; aspect-ratio: 16 / 10; border: 6px solid var(--navy-950); box-shadow: 0 30px 60px -30px rgba(7,17,31,.4); }
 @media (max-width: 899px) { .ab-founder__frame-sm { right: 0; bottom: -1.5rem; width: 48%; } }
 .ab-founder__content { display: grid; gap: 1.75rem; }
 .ab-founder__content .h2 { max-width: 14ch; }
 .ab-founder__text { max-width: 58ch; }
-.ab-profile { display: grid; gap: 1.25rem; padding: clamp(1.25rem, 2.5vw, 2rem); border: 1px solid var(--line); border-radius: var(--radius-l); background: rgba(255,255,255,.6); }
+.ab-profile { display: grid; gap: 1.25rem; padding: clamp(1.25rem, 2.5vw, 2rem); border: 1px solid var(--line); border-radius: var(--radius-l); background: var(--navy-900); }
 .ab-profile__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .75rem; }
 .ab-profile__dl { display: grid; border-top: 1px solid var(--line); }
 .ab-profile__dl div { display: grid; gap: .25rem; padding: .85rem 0; border-bottom: 1px solid var(--line); }
@@ -70,7 +70,7 @@ html.js:not(.reduced-motion) .ab-manifest__line .w { color: rgba(7,17,31,.14); }
 }
 
 /* ---------- 05 Einblicke: photo wall ---------- */
-.ab-gallery { background: var(--offwhite); overflow: hidden; }
+.ab-gallery { background: var(--navy-950); overflow: hidden; }
 .ab-wall { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(.75rem, 2vw, 1.5rem); align-items: start; }
 .ab-wall__item { display: grid; gap: .6rem; min-width: 0; }
 .ab-wall__item .frame img { transition: transform 1.4s var(--ease-out); }

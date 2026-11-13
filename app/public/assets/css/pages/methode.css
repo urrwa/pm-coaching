@@ -33,7 +33,7 @@ html:not(.js) .me-hero__fill, html.reduced-motion .me-hero__fill { clip-path: no
 }
 
 /* ---------- b) Comparison — plan vs. system ---------- */
-.me-compare { background: var(--offwhite); }
+.me-compare { background: var(--navy-950); }
 .me-compare .section-head--split .h2 { max-width: 20ch; }
 .me-table { display: grid; }
 .me-table__row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }

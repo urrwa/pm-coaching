@@ -3,13 +3,13 @@
    ===================================================================== */
 
 /* ---------- Legal: hero ---------- */
-.lg-hero { background: var(--offwhite); padding-bottom: clamp(2rem, 4vw, 3rem); }
+.lg-hero { background: var(--navy-950); padding-bottom: clamp(2rem, 4vw, 3rem); }
 .lg-hero__inner { display: grid; gap: clamp(1rem, 2vw, 1.5rem); max-width: 960px; }
 .lg-hero__title { max-width: 16ch; overflow-wrap: anywhere; }
 .lg-hero__meta { display: flex; flex-wrap: wrap; gap: .75rem 1.5rem; align-items: center; color: var(--muted); font-size: .9rem; }
 
 /* ---------- Legal: layout with sticky "Inhalt" nav ---------- */
-.lg-main { background: var(--offwhite); padding-top: clamp(1.5rem, 3vw, 2.5rem); }
+.lg-main { background: var(--navy-950); padding-top: clamp(1.5rem, 3vw, 2.5rem); }
 .lg-layout { display: grid; gap: 2.5rem; }
 .lg-toc { display: grid; gap: .9rem; align-content: start; }
 .lg-toc__title { font-family: var(--font-display); font-size: var(--fs-label); letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
@@ -29,10 +29,10 @@
 .lg-body h3 { font-size: var(--fs-h4); font-weight: 600; letter-spacing: -.01em; line-height: 1.25; margin-top: 1.6em; }
 .lg-body .placeholder-note { display: inline-flex; margin-bottom: 1.5rem; }
 .lg-body address { font-style: normal; }
-.lg-card { display: grid; gap: .35rem; margin: 1.25em 0; padding: 1.25rem 1.5rem; border: 1px solid var(--line); border-radius: var(--radius-l); background: var(--white); }
+.lg-card { display: grid; gap: .35rem; margin: 1.25em 0; padding: 1.25rem 1.5rem; border: 1px solid var(--line); border-radius: var(--radius-l); background: var(--navy-900); }
 .lg-card p { margin: 0 !important; }
 .lg-card strong { display: block; margin-bottom: .35rem; }
-.lg-ph { display: inline-block; padding: 0 .35em; border-radius: 3px; background: rgba(39,100,232,.09); color: var(--blue); font-family: var(--font-display); font-size: .92em; font-weight: 500; letter-spacing: .01em; }
+.lg-ph { display: inline-block; padding: 0 .35em; border-radius: 3px; background: rgba(39,100,232,.09); color: var(--blue-200); font-family: var(--font-display); font-size: .92em; font-weight: 500; letter-spacing: .01em; }
 .lg-body .small { font-size: var(--fs-small); }
 .lg-foot { margin-top: clamp(2.5rem, 5vw, 4rem); padding-top: 1.5rem; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 1rem 2rem; justify-content: space-between; align-items: center; color: var(--muted); font-size: .9rem; }
 .lg-foot a { color: var(--fg-strong); }

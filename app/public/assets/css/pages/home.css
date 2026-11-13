@@ -544,7 +544,7 @@
 }
 
 /* ---------- 05 AUDIENCE ---------- */
-.audience { background: var(--offwhite); }
+.audience { background: var(--navy-950); }
 .audience__layout { display: grid; gap: clamp(1.5rem, 5vw, 5rem); align-items: start; }
 .audience__frame { max-width: 30rem; border-radius: 0; }
 .audience__img { position: absolute; inset: 0; opacity: 0; transition: opacity .5s var(--ease-out); }
@@ -555,12 +555,12 @@
   flex-wrap: wrap;
   gap: .2rem;
   padding: .2rem;
-  background: #e6ebf0;
+  background: var(--navy-800);
   border-radius: 999px;
   width: fit-content;
 }
-.audience__tab { min-height: 44px; padding: .55rem .95rem; border-radius: 999px; color: var(--navy-950); font-size: .9rem; transition: background-color .25s, color .25s; }
-.audience__tab.is-active { background: var(--navy-950); color: #fff; }
+.audience__tab { min-height: 44px; padding: .55rem .95rem; border-radius: 999px; color: var(--silver); font-size: .9rem; transition: background-color .25s, color .25s; }
+.audience__tab.is-active { background: var(--blue); color: #fff; }
 .audience__list { display: grid; gap: clamp(.9rem, 2vw, 1.55rem); }
 .audience__list li { display: grid; grid-template-columns: 1.5rem minmax(0, 1fr); gap: .75rem; }
 .audience__icon {
@@ -573,7 +573,7 @@
 }
 .audience__icon--yes { background: var(--blue); color: #fff; }
 .audience__icon--yes::before { content: "✓"; }
-.audience__icon--no { background: #e6ebf0; color: var(--navy-950); }
+.audience__icon--no { background: var(--navy-800); color: var(--silver); }
 .audience__icon--no::before { content: "×"; }
 .audience__list li div { display: grid; gap: .18rem; }
 .audience__list li div > span { color: var(--muted); }
@@ -617,7 +617,7 @@
 }
 
 /* ---------- 06 G5 METHOD ---------- */
-.g5 { background: radial-gradient(ellipse at top right, var(--navy-800), var(--navy-950) 72%); overflow: clip; }
+.g5 { background: var(--navy-950); overflow: clip; }
 .g5__pin { padding-block: clamp(3rem, 7vh, 5rem) 1.5rem; }
 .g5__head { display: grid; gap: 1.25rem; margin-bottom: 1.25rem; }
 .g5__head .h2 { max-width: 17ch; margin-top: .55rem; }

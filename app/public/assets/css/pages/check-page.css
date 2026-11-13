@@ -32,10 +32,10 @@
 }
 
 /* ---------- 03 Was danach passiert (timeline) ---------- */
-.cp-after { background: var(--offwhite); }
+.cp-after { background: var(--navy-950); }
 .cp-timeline { --cp-node: 2.75rem; --cp-gap: clamp(1.5rem, 3.5vw, 4rem); --cp-vgap: 2.5rem; display: grid; gap: var(--cp-vgap); max-width: 560px; }
 .cp-step { position: relative; display: grid; grid-template-columns: var(--cp-node) minmax(0, 1fr); gap: 1rem 1.25rem; align-items: start; }
-.cp-step__node { width: var(--cp-node); height: var(--cp-node); border-radius: 50%; border: 1px solid rgba(7,17,31,.22); background: var(--offwhite); display: grid; place-items: center; font-family: var(--font-display); font-size: .74rem; letter-spacing: .12em; color: var(--grey-600); position: relative; z-index: 1; }
+.cp-step__node { width: var(--cp-node); height: var(--cp-node); border-radius: 50%; border: 1px solid var(--line); background: var(--navy-950); display: grid; place-items: center; font-family: var(--font-display); font-size: .74rem; letter-spacing: .12em; color: var(--silver); position: relative; z-index: 1; }
 .cp-step.is-active .cp-step__node { background: var(--blue); border-color: var(--blue); color: #fff; box-shadow: 0 0 0 8px rgba(39,100,232,.16); }
 .cp-step__body { display: grid; gap: .6rem; padding-top: .5rem; }
 .cp-step__body p { color: var(--muted); max-width: 42ch; font-size: .98rem; }
@@ -50,11 +50,11 @@
 }
 
 /* ---------- 04 Mini-FAQ ---------- */
-.cp-faq { background: var(--white); border-top: 1px solid var(--line); }
+.cp-faq { background: var(--navy-950); border-top: 1px solid var(--line); }
 .cp-faq__layout { display: grid; gap: 3rem; }
 .cp-faq__sticky { display: grid; gap: 1.25rem; align-content: start; }
 .cp-faq__sticky .h2 { max-width: 12ch; }
-.cp-faq__sticky .link-underline { color: var(--navy-950); }
+.cp-faq__sticky .link-underline { color: var(--blue-200); }
 @media (min-width: 1024px) {
   .cp-faq__layout { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: clamp(3rem, 6vw, 7rem); align-items: start; }
   .cp-faq__sticky { position: sticky; top: calc(var(--nav-h) + 1.5rem); }

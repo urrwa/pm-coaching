@@ -31,7 +31,7 @@
 @media (min-width: 1300px) { .co-hero__chip--1 { left: -14%; } .co-hero__chip--2 { right: -8%; } }
 
 /* ---------- b) Leistungen — tabbed product UI ---------- */
-.co-services { background: var(--offwhite); }
+.co-services { background: var(--navy-950); }
 .co-tabs { position: relative; }
 .co-tabs__bar { position: relative; display: flex; gap: clamp(.25rem, 1vw, 1rem); border-bottom: 1px solid var(--line); overflow-x: auto; overflow-y: hidden; scrollbar-width: none; -webkit-overflow-scrolling: touch; scroll-snap-type: x proximity; }
 .co-tabs__bar::-webkit-scrollbar { display: none; }
@@ -105,15 +105,15 @@
 .co-fit__list { display: grid; border-top: 1px solid var(--line); }
 .co-fit__list li { display: grid; grid-template-columns: minmax(3.2rem, auto) minmax(0, 1fr); gap: 1.25rem; align-items: start; padding: clamp(1.25rem, 2vw, 1.75rem) 0; border-bottom: 1px solid var(--line); }
 .co-fit__num { font-family: var(--font-display); font-weight: 700; font-size: clamp(2.4rem, 4vw, 3.6rem); line-height: .85; letter-spacing: -.04em; font-variant-numeric: tabular-nums; color: transparent; -webkit-text-stroke: 1px var(--blue); transition: color .5s var(--ease-out); }
-.co-fit__col--no .co-fit__num { -webkit-text-stroke-color: rgba(7,17,31,.3); }
+.co-fit__col--no .co-fit__num { -webkit-text-stroke-color: var(--grey); }
 .co-fit__list li:hover .co-fit__num { color: var(--blue); }
-.co-fit__col--no .co-fit__list li:hover .co-fit__num { color: rgba(7,17,31,.3); }
+.co-fit__col--no .co-fit__list li:hover .co-fit__num { color: var(--grey); }
 .co-fit__list p { font-size: clamp(1rem, 1.3vw, 1.15rem); line-height: 1.5; color: var(--fg); padding-top: .15em; max-width: 40ch; }
 .co-fit__col--no .co-fit__list p { color: var(--muted); }
 .co-fit__foot { margin-top: clamp(2.5rem, 5vw, 4rem); display: flex; flex-wrap: wrap; gap: 1rem 2rem; align-items: center; justify-content: space-between; padding-top: 1.5rem; border-top: 1px solid var(--line); }
 
 /* ---------- e) Investition — copy + spotlight card ---------- */
-.co-invest { position: relative; background: var(--navy-900); overflow: hidden; }
+.co-invest { position: relative; background: var(--navy-950); overflow: hidden; }
 .co-invest::before { content: ""; position: absolute; inset: 0; background: radial-gradient(50% 60% at 100% 100%, rgba(39,100,232,.18), transparent 70%); pointer-events: none; }
 .co-invest__layout { position: relative; display: grid; gap: 3rem; }
 @media (min-width: 1024px) { .co-invest__layout { grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: clamp(3rem, 7vw, 8rem); align-items: start; } }
@@ -139,7 +139,7 @@
 .co-invest__cta { display: flex; flex-wrap: wrap; gap: 1rem 1.5rem; align-items: center; margin-top: 1.75rem; }
 
 /* ---------- f) Mini-FAQ ---------- */
-.co-faq { background: var(--offwhite); border-top: 1px solid var(--line); }
+.co-faq { background: var(--navy-950); border-top: 1px solid var(--line); }
 .co-faq__head { max-width: none; text-align: center; justify-items: center; }
 .co-faq__head .h2 { max-width: 16ch; }
 .co-faq__more { margin-top: clamp(2rem, 4vw, 3rem); display: flex; justify-content: center; }
