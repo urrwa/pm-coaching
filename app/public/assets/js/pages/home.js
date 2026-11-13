@@ -6,7 +6,7 @@
     if (!gsap || !ST) return;
     const reduced = PM.reduced;
 
-    /* ---------- Hero: one rep follows scroll progress ---------- */
+    /* ---------- Hero: film follows scroll progress ---------- */
     (function hero() {
       const section = document.querySelector("[data-hero]");
       const video = section?.querySelector("[data-hero-video]");

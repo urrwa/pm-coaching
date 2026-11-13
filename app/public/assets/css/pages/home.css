@@ -16,47 +16,24 @@
 .hero.is-scrubbing::after { content: ""; display: block; height: clamp(7rem, 18svh, 10rem); }
 .hero.is-scrubbing .hero__stage { position: sticky; top: 0; }
 .hero__media { position: absolute; inset: 0; z-index: -1; }
-.hero__picture { display: contents; }
-.hero__picture img {
+.hero__media :is(img, video) {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 52% 22%;
-  filter: saturate(.62) brightness(.58);
 }
-.hero__shade {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(0deg, var(--navy-950), transparent 40%),
-    linear-gradient(90deg, rgba(7,17,31,.89) 5%, rgba(7,17,31,.7) 45%, rgba(7,17,31,.25) 80%);
-}
-.hero__training {
-  position: absolute;
-  inset: 0 0 0 auto;
-  width: 57%;
-  mask-image: linear-gradient(90deg, transparent, #000 28%);
-}
-.hero__training::after {
+.hero__media::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(0deg, var(--navy-950), transparent 35%),
-    linear-gradient(180deg, rgba(7,17,31,.42), transparent 32%);
+  background:
+    linear-gradient(0deg, var(--navy-950), transparent 27%),
+    linear-gradient(180deg, rgba(7,17,31,.52), transparent 32%),
+    linear-gradient(90deg, rgba(7,17,31,.93), rgba(7,17,31,.64) 39%, transparent 80%);
 }
-.hero__training :is(img, video) {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 50% 9%;
-  filter: saturate(.76) brightness(.83);
-}
-.hero__training video { opacity: 0; }
-.hero.is-video-ready .hero__training video { opacity: 1; }
+.hero__media video { opacity: 0; }
+.hero.is-video-ready .hero__media video { opacity: 1; }
 .hero__inner {
   padding-block: calc(var(--nav-h) + var(--topbar-h) + 2.5rem) clamp(3rem, 7vh, 6rem);
 }
@@ -78,13 +55,12 @@
 @media (max-width: 767px) {
   .hero__stage { min-height: clamp(35rem, 83svh, 43rem); align-items: end; }
   .hero.is-scrubbing::after { height: clamp(7rem, 16svh, 9rem); }
-  .hero__training { inset: 0 0 auto; width: 100%; height: 72%; mask-image: linear-gradient(#000 62%, transparent); }
-  .hero__training :is(img, video) { object-position: 50% 18%; }
-  .hero__training::after {
-    background: linear-gradient(0deg, var(--navy-950), rgba(7,17,31,.76) 23%, transparent 64%),
-      linear-gradient(180deg, rgba(7,17,31,.53), transparent 26%);
+  .hero__media { inset: 0 0 auto; height: clamp(15rem, 60vw, 22rem); }
+  .hero__media::after {
+    background: linear-gradient(0deg, var(--navy-950), transparent 25%),
+      linear-gradient(180deg, rgba(7,17,31,.48), transparent 28%);
   }
-  .hero__inner { padding-block: max(13rem, 34svh) 1.5rem; }
+  .hero__inner { padding-block: clamp(15rem, 60vw, 22rem) 1.5rem; }
   .hero__title { font-size: clamp(2.3rem, 9.75vw, 4.1rem); }
   .hero__actions { gap: .35rem .75rem; }
 }
