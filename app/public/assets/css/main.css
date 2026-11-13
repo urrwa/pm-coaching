@@ -204,9 +204,9 @@ html.lenis, html.lenis body { height: auto; }
 .btn::before {
   content: "";
   position: absolute; inset: 0; z-index: -1;
-  background: var(--navy-950);
+  background: var(--btn-fill, rgba(255,255,255,0.14));
   transform: translateY(101%);
-  transition: transform .55s var(--ease-out);
+  transition: transform .52s var(--ease-out);
   border-radius: inherit;
 }
 .btn:hover::before, .btn:focus-visible::before { transform: translateY(0); }
@@ -220,15 +220,27 @@ html.lenis, html.lenis body { height: auto; }
 .btn__icon svg { transition: transform .5s var(--ease-out); }
 .btn:hover .btn__icon { background: var(--blue); }
 .btn:hover .btn__icon svg { transform: translateX(2px); }
-.btn--primary { --btn-bg: var(--blue); --btn-fg: #fff; }
-[data-theme="light"] .btn--primary::before, .theme-light .btn--primary::before { background: var(--navy-950); }
-[data-theme="dark"] .btn--primary::before, .theme-dark .btn--primary::before { background: #fff; }
-[data-theme="dark"] .btn--primary:hover, .theme-dark .btn--primary:hover { color: var(--navy-950); }
-.btn--outline { --btn-bg: transparent; --btn-fg: var(--fg-strong); box-shadow: inset 0 0 0 1px var(--line); }
+
+/* Primary — blue bg, white fill from bottom */
+.btn--primary {
+  --btn-bg: var(--blue);
+  --btn-fg: #fff;
+  --btn-fill: rgba(255,255,255,0.18);
+}
+.btn--primary:hover { color: #fff; }
+
+/* Outline — transparent bg, solid fg fill */
+.btn--outline {
+  --btn-bg: transparent;
+  --btn-fg: var(--fg-strong);
+  --btn-fill: var(--fg-strong);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
 .btn--outline .btn__icon { background: var(--card); }
-.btn--outline::before { background: var(--fg-strong); }
 .btn--outline:hover { color: var(--bg); }
-.btn--outline:hover .btn__icon { background: var(--blue); color: #fff; }
+.btn--outline:hover .btn__icon { background: var(--blue); color: #fff; box-shadow: none; }
+
+/* Ghost — no fill animation (uses diagonal sweep instead on hero__secondary) */
 .btn--ghost { --btn-bg: transparent; --btn-fg: var(--fg-strong); padding-left: 0; padding-right: 0; border-radius: 0; gap: .75rem; }
 .btn--ghost::before { display: none; }
 .btn--ghost .btn__icon { background: transparent; box-shadow: inset 0 0 0 1px var(--line); }
