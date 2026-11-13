@@ -308,6 +308,7 @@
 .founder {
   background: var(--navy-950);
   color: #fff;
+  padding-block-end: clamp(2rem, 4vw, 4rem);
 }
 .founder .section-inner { /* override silver theme */
   background: var(--navy-950);
@@ -348,6 +349,7 @@
 .trust {
   background: var(--navy-950);
   overflow: hidden;
+  padding-block-start: 0;
 }
 .trust__head {
   padding-block: clamp(3rem, 6vw, 5rem) 0;
@@ -358,7 +360,7 @@
   padding-block: clamp(1.5rem, 3vw, 2.5rem);
   border-top: 1px solid rgba(255,255,255,0.07);
   border-bottom: 1px solid rgba(255,255,255,0.07);
-  margin-block: clamp(2.5rem, 5vw, 4rem);
+  margin-block: 0 clamp(1.75rem, 3vw, 3rem);
 }
 .trust__marquee-wrap::before,
 .trust__marquee-wrap::after {
