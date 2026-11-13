@@ -401,13 +401,6 @@
     vids.forEach((v) => { v.muted = true; v.playsInline = true; v.loop = true; io.observe(v); });
   }
 
-  // ---------- Footer wordmark ----------
-  function setupFooter() {
-    const w = document.querySelector("[data-footer-word]");
-    if (!w || reduced) return;
-    gsap.fromTo(w, { yPercent: 40, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 1.4, ease: "expo.out", scrollTrigger: { trigger: w, start: "top 95%", once: true } });
-  }
-
   // ---------- Boot ----------
   function init() {
     gsap.registerPlugin(ScrollTrigger);
@@ -420,7 +413,6 @@
     setupCursor();
     setupAccordions();
     setupVideos();
-    setupFooter();
     PM.ready = true;
     html.classList.add("is-ready");
     document.dispatchEvent(new CustomEvent("pm:ready"));
