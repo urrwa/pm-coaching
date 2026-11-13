@@ -831,35 +831,40 @@
 /* ---------- 09 PROCESS (stacking cards) ---------- */
 .process { background: var(--navy-950); }
 .process__stack { display: grid; }
-.pcard { background: var(--navy-950); border-top: 1px solid var(--line); }
+.pcard { background: var(--navy-950); }
 .pcard__inner {
   display: grid;
   align-items: center;
-  gap: clamp(1.5rem, 4vw, 5rem);
-  padding-block: clamp(2.5rem, 7vw, 6rem);
+  gap: clamp(1.5rem, 5vw, 6rem);
+  padding-block: clamp(2rem, 5vw, 4.5rem);
 }
-.pcard__text { display: grid; gap: .9rem; }
-.pcard__text .h3 { font-size: clamp(1.65rem, 3.6vw, 3.25rem); }
+.pcard__text { display: grid; gap: .75rem; }
+.pcard__text .h3 { font-size: clamp(1.65rem, 3vw, 2.85rem); }
 .pcard__num {
   font-family: var(--font-display);
-  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-size: .85rem;
   font-weight: 600;
-  letter-spacing: .06em;
+  letter-spacing: .08em;
   color: var(--blue-200);
 }
 .pcard__text p {
-  max-width: 48ch;
+  max-width: 44ch;
   color: var(--silver);
-  font-size: clamp(1.0625rem, 1.35vw, 1.25rem);
+  font-size: clamp(1rem, 1.25vw, 1.125rem);
   line-height: 1.65;
 }
-.pcard__media { border-radius: 0; }
+.pcard__media {
+  aspect-ratio: 3 / 2;
+  border-radius: 0;
+}
+.pcard__media img { filter: none; }
 @media (min-width: 900px) {
   .pcard__inner {
     min-height: 100svh;
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    padding-top: max(calc(var(--nav-h) + 2rem), 8svh);
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    padding-top: calc(var(--nav-h) + 1rem);
   }
+  .pcard__media { max-height: 70svh; }
 }
 @media (min-width: 900px) and (min-height: 650px) and (prefers-reduced-motion: no-preference) {
   .pcard { position: sticky; top: 0; }
