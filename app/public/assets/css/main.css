@@ -221,7 +221,8 @@ html.lenis, html.lenis body { height: auto; }
     background-color var(--btn-dur) var(--btn-ease);
 }
 .btn:hover .btn__fill,
-.btn:focus-visible .btn__fill {
+.btn:focus-visible .btn__fill,
+.btn:active .btn__fill {
   inset: 0;
 }
 
@@ -245,7 +246,8 @@ html.lenis, html.lenis body { height: auto; }
   white-space: nowrap;
 }
 .btn:hover .btn__mask,
-.btn:focus-visible .btn__mask {
+.btn:focus-visible .btn__mask,
+.btn:active .btn__mask {
   clip-path: inset(0 0 0 0 round 999px);
 }
 
@@ -270,9 +272,11 @@ html.lenis, html.lenis body { height: auto; }
 .btn__icon svg.arrow-exit  { transform: translate(-50%, -50%) scale(1); }
 .btn__icon svg.arrow-enter { transform: translate(-170%, -50%) scale(0); }
 .btn:hover .btn__icon svg.arrow-exit,
-.btn:focus-visible .btn__icon svg.arrow-exit  { transform: translate(70%, -50%) scale(0); }
+.btn:focus-visible .btn__icon svg.arrow-exit,
+.btn:active .btn__icon svg.arrow-exit { transform: translate(70%, -50%) scale(0); }
 .btn:hover .btn__icon svg.arrow-enter,
-.btn:focus-visible .btn__icon svg.arrow-enter { transform: translate(-50%, -50%) scale(1); }
+.btn:focus-visible .btn__icon svg.arrow-enter,
+.btn:active .btn__icon svg.arrow-enter { transform: translate(-50%, -50%) scale(1); }
 
 /* ── Primary: blue bg, white fill, blue fill-text ── */
 .btn--primary {
@@ -298,7 +302,7 @@ html.lenis, html.lenis body { height: auto; }
 .btn--outline:hover .btn__icon { background: var(--blue); color: #fff; box-shadow: none; }
 .btn--outline:hover { color: var(--fg-strong); }
 
-/* ── Ghost: no fill, plain arrow slide ── */
+/* ── Ghost links ── */
 .btn--ghost {
   --btn-bg: transparent; --btn-fg: var(--fg-strong);
   padding-left: 0; padding-right: 0; border-radius: 0; gap: .75rem;
@@ -312,6 +316,20 @@ html.lenis, html.lenis body { height: auto; }
 .btn--ghost .btn__icon svg.arrow-enter { display: none; }
 .btn--ghost:hover .btn__icon svg.arrow-exit { transform: translate(-50%, -50%) translateX(2px) scale(1); }
 
+.btn--ghost:has(> .btn__fill) {
+  --btn-fill-bg: var(--blue);
+  --btn-fill-fg: #fff;
+  padding-inline: 1rem;
+  border-radius: 999px;
+}
+.btn--ghost:has(> .btn__fill) .btn__fill { display: block; }
+.btn--ghost:has(> .btn__fill) .btn__mask { display: inline-flex; }
+.btn--ghost:has(> .btn__fill) .btn__icon { color: #fff; box-shadow: none; }
+.btn--ghost:has(> .btn__fill) .btn__icon svg.arrow-enter { display: block; }
+.btn--ghost:has(> .btn__fill):is(:hover, :focus-visible, :active) .btn__icon svg.arrow-exit {
+  transform: translate(70%, -50%) scale(0);
+}
+
 /* ── Sizes ── */
 .btn--sm {
   padding: .8rem .9rem .8rem 1.2rem; font-size: .85rem;
@@ -323,6 +341,13 @@ html.lenis, html.lenis body { height: auto; }
   --icon-size: 2.5rem; --fill-inset-y: .38rem;
 }
 .btn--lg .btn__mask { padding: 1rem 1.1rem 1rem 1.8rem; font-size: 1rem; }
+.btn .btn__mask {
+  padding: inherit;
+  font-size: inherit;
+  white-space: inherit;
+  text-align: inherit;
+}
+
 .btn[disabled], .btn[aria-disabled="true"] { opacity: .5; pointer-events: none; }
 
 @media (max-width: 520px) {

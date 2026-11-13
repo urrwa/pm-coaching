@@ -93,10 +93,11 @@
         <div class="check__body" data-body aria-live="polite"></div>
         <div class="check__nav">
           <button type="button" class="check__back" data-back disabled>${ARROW}<span>Zurück</span></button>
-          <button type="button" class="btn btn--primary" data-next><span class="btn__label">Weiter</span><span class="btn__icon" aria-hidden="true">${ARROW}</span></button>
+          <button type="button" class="btn btn--primary" data-next><span class="btn__fill" aria-hidden="true"></span><span class="btn__mask" aria-hidden="true">Weiter</span><span class="btn__label">Weiter</span><span class="btn__icon" aria-hidden="true"><svg class="arrow-exit" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg><svg class="arrow-enter" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span></button>
         </div>
       </div>`;
     const body = root.querySelector("[data-body]"), bar = root.querySelector("[data-bar]"), back = root.querySelector("[data-back]"), next = root.querySelector("[data-next]");
+    const nextLabels = next.querySelectorAll(".btn__label, .btn__mask");
     const stepLabel = root.querySelector("[data-step-label]"), stepName = root.querySelector("[data-step-name]");
     const gsapOk = () => window.gsap && !(window.PM && window.PM.reduced);
 
@@ -159,7 +160,7 @@
     function renderResult() {
       const r = evaluate(state.answers);
       const t = FIT_TEXT[r.fit];
-      const booking = C.bookingUrl ? `<a class="btn btn--primary" href="${esc(C.bookingUrl)}" target="_blank" rel="noopener"><span class="btn__label">Strategiegespräch buchen</span><span class="btn__icon" aria-hidden="true">${ARROW}</span></a>` : "";
+      const booking = C.bookingUrl ? `<a class="btn btn--primary" href="${esc(C.bookingUrl)}" target="_blank" rel="noopener"><span class="btn__fill" aria-hidden="true"></span><span class="btn__mask" aria-hidden="true">Strategiegespräch buchen</span><span class="btn__label">Strategiegespräch buchen</span><span class="btn__icon" aria-hidden="true"><svg class="arrow-exit" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg><svg class="arrow-enter" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span></a>` : "";
       return `<div class="check__result">
         <p class="check__result-label">Deine erste Einschätzung</p>
         <p class="check__result-title">${esc(t.title)}</p>
@@ -180,7 +181,7 @@
       return `<div class="check__step is-active" data-qid="done"><div class="check__done">
         <div class="check__done-icon" aria-hidden="true">${mode === "error" ? "!" : '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>'}</div>
         <h3 class="check__q">${headline}</h3>${sub ? `<p class="check__hint">${sub}</p>` : ""}${extra}
-        <a class="btn btn--ghost" href="/wissen/"><span class="btn__label">In der Zwischenzeit: Knowledge Hub</span><span class="btn__icon" aria-hidden="true">${ARROW}</span></a>
+        <a class="btn btn--ghost" href="/wissen/"><span class="btn__fill" aria-hidden="true"></span><span class="btn__mask" aria-hidden="true">In der Zwischenzeit: Knowledge Hub</span><span class="btn__label">In der Zwischenzeit: Knowledge Hub</span><span class="btn__icon" aria-hidden="true"><svg class="arrow-exit" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg><svg class="arrow-enter" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span></a>
       </div></div>`;
     }
 
@@ -192,7 +193,7 @@
       else if (i === QUESTIONS.length) { stepLabel.textContent = "Fast geschafft"; stepName.textContent = "Kontakt"; }
       else { stepLabel.textContent = "Zusammenfassung"; stepName.textContent = "Prüfen & absenden"; }
       back.disabled = i === 0;
-      next.querySelector(".btn__label").textContent = i === QUESTIONS.length + 1 ? "Performance-Check absenden" : "Weiter";
+      nextLabels.forEach((label) => { label.textContent = i === QUESTIONS.length + 1 ? "Performance-Check absenden" : "Weiter"; });
       next.hidden = false;
     }
 
@@ -279,7 +280,7 @@
         assessment: evaluate(state.answers),
         attribution, summary: plainSummary()
       };
-      next.setAttribute("aria-disabled", "true"); next.querySelector(".btn__label").textContent = "Wird gesendet …";
+      next.setAttribute("aria-disabled", "true"); nextLabels.forEach((label) => { label.textContent = "Wird gesendet …"; });
       if (C.formEndpoint) {
         try {
           const res = await fetch(C.formEndpoint, { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify(payload) });

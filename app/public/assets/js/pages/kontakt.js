@@ -8,8 +8,7 @@
   "use strict";
   const C = window.PM_CONFIG || {};
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-  const ARROW = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>';
-  const CHECK = '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>';
+    const CHECK = '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>';
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
   function init() {
@@ -75,7 +74,7 @@
       if (mode === "ok") {
         title = "Danke – deine Nachricht ist angekommen.";
         text = `Du bekommst innerhalb weniger Werktage eine persönliche Antwort an <strong>${esc(d.email)}</strong>. Prüfe bitte auch deinen Spam-Ordner.`;
-        actions = `<a class="btn btn--ghost" href="/wissen/"><span class="btn__label">In der Zwischenzeit: Knowledge Hub</span><span class="btn__icon" aria-hidden="true">${ARROW}</span></a>`;
+        actions = `<a class="btn btn--ghost" href="/wissen/"><span class="btn__fill" aria-hidden="true"></span><span class="btn__mask" aria-hidden="true">In der Zwischenzeit: Knowledge Hub</span><span class="btn__label">In der Zwischenzeit: Knowledge Hub</span><span class="btn__icon" aria-hidden="true"><svg class="arrow-exit" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg><svg class="arrow-enter" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span></a>`;
       } else if (mode === "mailto") {
         title = "Fast fertig – dein E-Mail-Programm übernimmt.";
         text = `Es wurde ein E-Mail-Entwurf mit deiner Nachricht geöffnet. Erst wenn du ihn dort abschickst, ist die Nachricht unterwegs. Falls sich nichts geöffnet hat, kopiere den Text unten und sende ihn an <strong>${email}</strong>.`;
