@@ -92,3 +92,39 @@
 .kt-strip__item { display: grid; gap: .7rem; align-content: start; padding-left: clamp(1.25rem, 2.5vw, 2rem); border-left: 1px solid var(--line); }
 .kt-strip__item p { max-width: 36ch; }
 @media (min-width: 700px) { .kt-strip__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.5rem, 3vw, 3rem); } }
+
+/* Contact footer */
+.kt-footer { background: var(--navy-900); padding-block: clamp(3rem, 6vw, 6rem); }
+.kt-footer__grid { display: grid; gap: 2rem; }
+.kt-footer__brand { display: flex; flex-direction: column; align-items: flex-start; gap: .8rem; }
+.kt-footer .footer__wordmark { font-size: clamp(2.15rem, 4vw, 4rem); letter-spacing: -.05em; line-height: 1; }
+.kt-footer__tagline { font-size: clamp(1.15rem, 2vw, 1.8rem); font-weight: 600; }
+.kt-footer__social { display: flex; flex-wrap: wrap; gap: .75rem; color: var(--silver); }
+.kt-footer__social:has(> a:not([hidden])) { margin-top: .35rem; }
+.kt-footer__copyright { margin-top: auto; padding-top: 1rem; color: var(--grey); font-size: .82rem; }
+.kt-footer__directory { display: grid; gap: 1.5rem; }
+.kt-footer .footer__heading { text-transform: uppercase; letter-spacing: .08em; }
+.kt-footer__next { min-width: 0; color: var(--silver); }
+.kt-footer__next-title { color: #fff; font-weight: 600; }
+.kt-footer__action {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: .75rem;
+  margin-top: .85rem;
+  padding: .75rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: .8rem;
+  color: #fff;
+}
+.kt-footer__action span { color: var(--blue-200); }
+.kt-footer__action:is(:hover, :focus-visible) { border-color: var(--blue-400); }
+@media (min-width: 680px) {
+  .kt-footer__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .kt-footer__brand { grid-column: 1 / -1; }
+}
+@media (min-width: 1024px) {
+  .kt-footer__grid { grid-template-columns: minmax(0, 2fr) minmax(0, .9fr) minmax(0, 1fr); gap: clamp(1.5rem, 3vw, 3.5rem); }
+  .kt-footer__brand { grid-column: auto; }
+  .kt-footer__directory { padding-inline-start: clamp(1rem, 1.8vw, 2rem); border-inline-start: 1px solid var(--line); }
+}
