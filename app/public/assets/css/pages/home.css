@@ -649,10 +649,10 @@
 .g5.is-horizontal .g5__stage-media { max-height: 48svh; width: 100%; }
 .g5.is-horizontal .g5__pin { min-height: 100svh; }
 @media (max-height: 759px) {
-  .g5.is-horizontal .g5__pin { padding-block: clamp(1rem, 4svh, 2rem) 1rem; }
+  .g5.is-horizontal .g5__pin { padding-block: calc(var(--nav-h) + 1rem) 1rem; }
   .g5.is-horizontal .g5__head { margin-bottom: .65rem; }
   .g5.is-horizontal .g5__head .h2 { font-size: clamp(1.75rem, 4.8svh, 2.65rem); }
-  .g5.is-horizontal .g5__stage-media { max-height: 52svh; }
+  .g5.is-horizontal .g5__stage-media { max-height: 43svh; }
   .g5.is-horizontal .g5__stage-body { gap: .45rem; }
   .g5.is-horizontal .g5__big { font-size: 2rem; }
   .g5.is-horizontal .g5__name { font-size: clamp(1.5rem, 4svh, 2rem); }
