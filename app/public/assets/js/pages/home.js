@@ -1,91 +1,80 @@
 /* HOMEPAGE — section choreography */
 (function () {
   "use strict";
+  /* ---------- Hero: play while the video is on screen ---------- */
+  (function hero() {
+    const section = document.querySelector("[data-hero]");
+    const video = section?.querySelector("[data-hero-video]");
+    if (!video) return;
+
+    const button = section.querySelector("[data-hero-playback]");
+    const motion = matchMedia("(prefers-reduced-motion: reduce)");
+    const mobile = matchMedia("(max-width: 767px)");
+    let paused = motion.matches || navigator.connection?.saveData === true;
+    let visible = false;
+    let showResume = paused;
+    let pending = false;
+
+    function updateButton() {
+      button.textContent = video.paused ? "Video abspielen" : "Video pausieren";
+      button.hidden = video.paused && !showResume;
+    }
+
+    function sync() {
+      if (paused || !visible || document.hidden) {
+        video.pause();
+        updateButton();
+        return;
+      }
+      if (!video.paused || pending) return;
+      if (!video.hasAttribute("src")) {
+        video.src = mobile.matches ? video.dataset.heroVideoMobile : video.dataset.heroVideo;
+      }
+      pending = true;
+      video.play().catch((error) => {
+        if (error.name === "NotAllowedError") {
+          paused = true;
+          showResume = true;
+        }
+      }).finally(() => {
+        pending = false;
+        updateButton();
+      });
+    }
+
+    video.addEventListener("playing", () => {
+      section.classList.add("is-video-ready");
+      updateButton();
+    });
+    video.addEventListener("pause", updateButton);
+    video.addEventListener("error", () => {
+      section.classList.remove("is-video-ready");
+      showResume = false;
+      updateButton();
+    });
+    button.addEventListener("click", () => {
+      paused = !video.paused;
+      showResume = paused;
+      sync();
+    });
+    motion.addEventListener("change", () => {
+      if (!motion.matches) return;
+      paused = true;
+      showResume = true;
+      sync();
+    });
+    document.addEventListener("visibilitychange", sync);
+    new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      sync();
+    }, { threshold: .15 }).observe(video);
+    updateButton();
+  })();
+
   function run() {
     const PM = window.PM, gsap = window.gsap, ST = window.ScrollTrigger;
     if (!gsap || !ST) return;
     const reduced = PM.reduced;
-
-    /* ---------- Hero: film follows scroll progress ---------- */
-    (function hero() {
-      const section = document.querySelector("[data-hero]");
-      const video = section?.querySelector("[data-hero-video]");
-      if (!video || navigator.connection?.saveData) return;
-
-      gsap.matchMedia().add("(prefers-reduced-motion: no-preference) and (min-height: 540px)", () => {
-        const stage = section.querySelector(".hero__stage");
-        const request = new AbortController();
-        let target = 0;
-        let failed = false;
-        let loading = false;
-        let mediaUrl;
-
-        async function loadFilm() {
-          loading = true;
-          try {
-            // Buffer the compact film once so seeking does not depend on range requests.
-            const source = matchMedia("(max-width: 767px)").matches ? video.dataset.heroVideoMobile : video.dataset.heroVideo;
-            const response = await fetch(source, { signal: request.signal });
-            if (!response.ok) throw new Error(`Hero video request failed: ${response.status}`);
-            const film = await response.blob();
-            if (request.signal.aborted) return;
-            mediaUrl = URL.createObjectURL(film);
-            video.preload = "auto";
-            video.src = mediaUrl;
-          } catch (error) {
-            if (!request.signal.aborted) onError();
-          }
-        }
-
-        function seek() {
-          if (failed || video.readyState < 2 || video.seeking) return;
-          if (Math.abs(video.currentTime - target) > 1 / 60) {
-            video.currentTime = target;
-          } else {
-            section.classList.add("is-video-ready");
-          }
-        }
-
-        function update({ progress, isActive }) {
-          if (isActive && !loading) loadFilm();
-          target = progress * Math.max(0, (video.duration || 0) - 1 / 24);
-          seek();
-        }
-
-        function onLoaded() { update(trigger); }
-        function onError() {
-          failed = true;
-          section.classList.remove("is-scrubbing", "is-video-ready");
-          trigger.kill();
-          requestAnimationFrame(() => ST.refresh());
-        }
-
-        section.classList.add("is-scrubbing");
-        video.addEventListener("loadeddata", onLoaded);
-        video.addEventListener("seeked", seek);
-        video.addEventListener("error", onError);
-        const trigger = ST.create({
-          trigger: section,
-          start: () => section.offsetTop,
-          end: () => section.offsetTop + section.offsetHeight - stage.offsetHeight,
-          onUpdate: update,
-          onRefresh: update,
-        });
-
-        return () => {
-          request.abort();
-          section.classList.remove("is-scrubbing", "is-video-ready");
-          video.removeEventListener("loadeddata", onLoaded);
-          video.removeEventListener("seeked", seek);
-          video.removeEventListener("error", onError);
-          if (video.hasAttribute("src")) {
-            video.removeAttribute("src");
-            video.load();
-          }
-          if (mediaUrl) URL.revokeObjectURL(mediaUrl);
-        };
-      });
-    })();
 
     if (!reduced) {
       const counterObserver = new IntersectionObserver((entries) => {
