@@ -223,15 +223,15 @@ html.lenis, html.lenis body { height: auto; }
 .btn:hover .btn__icon { background: var(--blue); }
 .btn:hover .btn__icon svg { transform: translateX(2px); }
 
-/* Primary — blue bg, white fill from bottom */
+/* Primary — blue bg, dark navy fill from bottom */
 .btn--primary {
   --btn-bg: var(--blue);
   --btn-fg: #fff;
-  --btn-fill: rgba(255,255,255,0.18);
+  --btn-fill: var(--navy-950);
 }
 .btn--primary:hover { color: #fff; }
 
-/* Outline — transparent bg, solid fg fill */
+/* Outline — transparent bg, solid white/dark fill */
 .btn--outline {
   --btn-bg: transparent;
   --btn-fg: var(--fg-strong);
