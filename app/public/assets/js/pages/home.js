@@ -181,7 +181,9 @@
       });
       navBtns.forEach((button, i) => button.addEventListener("click", () => {
         if (pinned) {
-          PM.scrollTo(pinned.start + (pinned.end - pinned.start) * i / (stages.length - 1), { duration: 1.1 });
+          const target = pinned.start + (pinned.end - pinned.start) * i / (stages.length - 1);
+          if (PM.lenis) PM.scrollTo(target, { offset: 0, duration: 1.1 });
+          else window.scrollTo({ top: target, behavior: "smooth" });
         } else {
           setActive(i);
           PM.scrollTo(stages[i], { offset: -90 });
