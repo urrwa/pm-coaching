@@ -1,0 +1,14 @@
+{
+  "name": "PM Coaching",
+  "short_name": "PM Coaching",
+  "description": "Online Performance Coaching für ambitionierte Männer.",
+  "lang": "de",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#07111F",
+  "theme_color": "#07111F",
+  "icons": [
+    { "src": "/assets/og/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/assets/og/logo-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
