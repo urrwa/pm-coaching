@@ -204,12 +204,12 @@ html.lenis, html.lenis body { height: auto; }
   content: "";
   position: absolute;
   left: 50%; top: 50%;
-  width: 300px; height: 300px;
+  width: 500px; height: 500px;
   z-index: 1;
   background: var(--btn-fill, rgba(255,255,255,0.18));
   border-radius: 50%;
   transform: translate(-50%, -50%) scale(0);
-  transition: transform .6s var(--ease-out);
+  transition: transform .65s var(--ease-out);
   pointer-events: none;
 }
 .btn:hover::before, .btn:focus-visible::before {
@@ -232,7 +232,7 @@ html.lenis, html.lenis body { height: auto; }
 .btn--primary {
   --btn-bg: var(--blue);
   --btn-fg: #fff;
-  --btn-fill: var(--navy-950);
+  --btn-fill: rgba(255,255,255,0.22);
 }
 .btn--primary:hover { color: #fff; }
 
@@ -240,11 +240,11 @@ html.lenis, html.lenis body { height: auto; }
 .btn--outline {
   --btn-bg: transparent;
   --btn-fg: var(--fg-strong);
-  --btn-fill: var(--fg-strong);
+  --btn-fill: var(--navy-950);
   box-shadow: inset 0 0 0 1px var(--line);
 }
 .btn--outline .btn__icon { background: var(--card); }
-.btn--outline:hover { color: var(--bg); }
+.btn--outline:hover { color: #fff; }
 .btn--outline:hover .btn__icon { background: var(--blue); color: #fff; box-shadow: none; }
 
 /* Ghost — no fill animation (uses diagonal sweep instead on hero__secondary) */
