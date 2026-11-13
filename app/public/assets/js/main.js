@@ -185,7 +185,7 @@
         topbar.classList.toggle("topbar--scrolled", hide);
         nav.classList.toggle("nav--topbar-hidden", hide);
       }
-      nav.classList.toggle("nav--solid", true); // always solid
+      nav.classList.toggle("nav--solid", y > 40);
       if (!menuOpen) nav.classList.toggle("nav--hidden", y > lastY && y > 300 && y - lastY > 2);
       lastY = y;
     };
