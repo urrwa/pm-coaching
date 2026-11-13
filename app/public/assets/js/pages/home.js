@@ -66,8 +66,8 @@
         video.addEventListener("error", onError);
         const trigger = ST.create({
           trigger: section,
-          start: "top top",
-          end: () => `+=${section.offsetHeight - stage.offsetHeight}`,
+          start: () => section.offsetTop,
+          end: () => section.offsetTop + section.offsetHeight - stage.offsetHeight,
           onUpdate: update,
           onRefresh: update,
         });
