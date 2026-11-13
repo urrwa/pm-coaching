@@ -779,16 +779,14 @@ html.reduced-motion .marquee__track { animation: none; }
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
 }
 
-/* One continuous page canvas. In-content photos and controls have their own surfaces. */
+/* Keep the page canvas navy beneath section media. */
 main > section,
 main > .kt-scene > section,
 body > footer.footer {
   background-color: var(--navy-950);
 }
 
-main :is(.hero__media, .ab-hero__media, .wi-hero__bg-img, .wi-hero__overlay,
-  .wi-ahero__bg, .cta-band__bg, .final__media, .final__shade, .final__light,
-  .cp-check__bg, .lg-status__bg, .lg-status__glow, .co-hero__glow, .me-hero__glow) {
+main :is(.final__light, .lg-status__glow, .co-hero__glow, .me-hero__glow) {
   display: none;
 }
 

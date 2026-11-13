@@ -6,7 +6,37 @@
 .ab-hero {
   background: var(--navy-950);
   color: #fff;
+}
+.ab-hero__intro {
+  position: relative;
+  isolation: isolate;
   padding-top: calc(var(--nav-h) + var(--topbar-h) + 1.5rem);
+}
+.ab-hero__backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+.ab-hero__backdrop img {
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: min(72%, 70rem);
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 21%;
+  filter: saturate(.72);
+}
+.ab-hero__backdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, var(--navy-950), rgba(7,17,31,.25) 64%),
+    linear-gradient(90deg, var(--navy-950) 27%, rgba(7,17,31,.78) 62%, rgba(7,17,31,.26));
+}
+@media (max-width: 767px) {
+  .ab-hero__backdrop img { width: 100%; object-position: 50% 20%; }
+  .ab-hero__backdrop::after { background: linear-gradient(0deg, var(--navy-950) 5%, rgba(7,17,31,.78) 62%, rgba(7,17,31,.5)); }
 }
 .ab-hero__copy {
   display: grid;

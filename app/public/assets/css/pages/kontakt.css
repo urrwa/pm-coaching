@@ -7,7 +7,9 @@
   background: var(--navy-950);
 }
 .kt-hero {
-  background: var(--navy-950);
+  background: linear-gradient(90deg, rgba(7,17,31,.96), rgba(7,17,31,.75) 55%, rgba(7,17,31,.45)),
+    linear-gradient(0deg, var(--navy-950), transparent 45%),
+    url("/assets/img/trust-gym-1600.jpg") center 38% / cover;
   padding-bottom: clamp(2.5rem, 7vw, 6rem);
 }
 .kt-hero__inner { display: grid; gap: clamp(1.1rem, 2vw, 1.6rem); }
@@ -16,7 +18,8 @@
 
 /* ---------- 02 Contact grid ---------- */
 .kt-contact {
-  background: var(--navy-950);
+  background: linear-gradient(180deg, var(--navy-950), rgba(7,17,31,.86) 38%, var(--navy-950)),
+    url("/assets/img/trust-gym-1600.jpg") center / cover;
   padding-block: clamp(1rem, 3vw, 2rem) clamp(3rem, 7vw, 6rem);
 }
 .kt-grid { display: grid; gap: clamp(1.75rem, 4vw, 4rem); }
