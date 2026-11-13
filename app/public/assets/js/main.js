@@ -163,8 +163,15 @@
     document.body.classList.remove("menu-open");
     burger && burger.setAttribute("aria-expanded", "false");
     burger && burger.setAttribute("aria-label", "Menü öffnen");
-    if (PM.lenis) PM.lenis.start();
-    if (instant || reduced || !menuTl) { menu.classList.remove("is-open"); menu.setAttribute("aria-hidden", "true"); return; }
+    burger && (burger.querySelector(".nav__burger-text").textContent = "Menü");
+    if (menu.contains(document.activeElement)) burger?.focus();
+    menu.inert = true;
+    menu.setAttribute("aria-hidden", "true");
+    if (instant || reduced || !menuTl || menuTl.progress() === 0) {
+      menuTl?.pause(0);
+      menu.classList.remove("is-open");
+      return;
+    }
     menuTl.timeScale(1.5).reverse();
   }
   function setupNav() {
@@ -203,34 +210,37 @@
 
     // menu
     if (menu && burger) {
-      const bg = menu.querySelector(".menu__bg");
       const links = menu.querySelectorAll(".menu__nav a");
-      const visual = menu.querySelector(".menu__col--visual");
-      const foot = menu.querySelector(".menu__footer");
-      const eyebrow = menu.querySelector(".menu__eyebrow");
-      menuTl = gsap.timeline({ paused: true, onReverseComplete: () => { menu.classList.remove("is-open"); menu.setAttribute("aria-hidden", "true"); } })
-        .to(bg, { yPercent: 100, duration: 0.8, ease: "expo.inOut" })
-        .fromTo(eyebrow, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5 }, "-=0.35")
-        .fromTo(links, { yPercent: 60, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.8, ease: "expo.out", stagger: 0.05 }, "-=0.5")
-        .fromTo(visual, { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.8, ease: "expo.out" }, "-=0.8")
-        .fromTo(foot, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6 }, "-=0.6");
+      const label = burger.querySelector(".nav__burger-text");
+      menu.inert = true;
+      menuTl = gsap.timeline({ paused: true, onReverseComplete: () => menu.classList.remove("is-open") })
+        .fromTo(menu, { clipPath: "inset(0 0 100% 0)" }, { clipPath: "inset(0 0 0% 0)", duration: 0.55, ease: "power3.inOut" })
+        .fromTo(links, { y: -10, opacity: 0 }, { y: 0, opacity: 1, duration: 0.38, ease: "power2.out", stagger: 0.028 }, 0.21);
       const open = () => {
         menuOpen = true;
-        menu.classList.add("is-open"); menu.setAttribute("aria-hidden", "false");
+        menu.inert = false;
+        menu.classList.add("is-open");
+        menu.setAttribute("aria-hidden", "false");
         document.body.classList.add("menu-open");
         nav.classList.remove("nav--hidden");
-        burger.setAttribute("aria-expanded", "true"); burger.setAttribute("aria-label", "Menü schließen");
-        if (PM.lenis) PM.lenis.stop();
-        if (reduced) { gsap.set([bg], { yPercent: 100 }); gsap.set([eyebrow, links, visual, foot], { opacity: 1, yPercent: 0, y: 0, scale: 1 }); return; }
-        menuTl.timeScale(1).play();
+        burger.setAttribute("aria-expanded", "true");
+        burger.setAttribute("aria-label", "Menü schließen");
+        label.textContent = "Schließen";
+        if (reduced) menuTl.progress(1).pause();
+        else menuTl.timeScale(1).play();
+        links[0]?.focus({ preventScroll: true });
       };
       burger.addEventListener("click", () => (menuOpen ? closeMenu() : open()));
       document.addEventListener("keydown", (e) => { if (e.key === "Escape" && menuOpen) closeMenu(); });
+      document.addEventListener("click", (e) => {
+        if (menuOpen && !menu.contains(e.target) && !burger.contains(e.target)) closeMenu();
+      });
       // image preview on hover
       const img = menu.querySelector(".menu__img");
       links.forEach((a) => a.addEventListener("mouseenter", () => {
         const src = a.dataset.menuImg; if (!img || !src || img.getAttribute("src") === src) return;
-        gsap.to(img, { opacity: 0, duration: 0.2, onComplete: () => { img.src = src; gsap.to(img, { opacity: 1, duration: 0.4 }); } });
+        if (reduced) { img.src = src; return; }
+        gsap.to(img, { opacity: 0, duration: 0.2, overwrite: true, onComplete: () => { img.src = src; gsap.to(img, { opacity: 1, duration: 0.4 }); } });
       }));
     }
 
