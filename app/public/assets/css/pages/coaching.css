@@ -30,36 +30,77 @@
 }
 @media (min-width: 1300px) { .co-hero__chip--1 { left: -14%; } .co-hero__chip--2 { right: -8%; } }
 
-/* ---------- b) Leistungen — tabbed product UI ---------- */
-.co-services { background: var(--navy-950); }
-.co-tabs { position: relative; }
-.co-tabs__bar { position: relative; display: flex; gap: clamp(.25rem, 1vw, 1rem); border-bottom: 1px solid var(--line); overflow-x: auto; overflow-y: hidden; scrollbar-width: none; -webkit-overflow-scrolling: touch; scroll-snap-type: x proximity; }
-.co-tabs__bar::-webkit-scrollbar { display: none; }
-.co-tabs__tab { position: relative; flex: 0 0 auto; display: inline-flex; align-items: baseline; gap: .65rem; padding: 1rem clamp(.75rem, 1.6vw, 1.6rem) 1.15rem; font-family: var(--font-display); font-weight: 600; font-size: clamp(.95rem, 1.35vw, 1.25rem); letter-spacing: -.01em; color: var(--muted); white-space: nowrap; scroll-snap-align: start; transition: color .35s; border-radius: 4px 4px 0 0; }
-.co-tabs__tab:first-child { padding-left: 0; }
-.co-tabs__tab:focus-visible { outline-offset: -2px; }
-.co-tabs__num { font-size: .72rem; letter-spacing: .14em; color: var(--blue); font-variant-numeric: tabular-nums; }
-@media (max-width: 640px) {
-  .co-tabs__bar { flex-wrap: wrap; gap: 0; overflow: visible; border-bottom: 0; scroll-snap-type: none; }
-  .co-tabs__tab { flex: 1 1 50%; justify-content: flex-start; padding: .95rem .5rem .95rem 0; border-bottom: 1px solid var(--line); white-space: normal; font-size: 1rem; }
-  .co-tabs__tab.is-active { border-bottom-color: var(--blue); box-shadow: inset 0 -1px 0 var(--blue); }
-  .co-tabs__ink { display: none; }
+/* ---------- b) Leistungen — alternating cards ---------- */
+.co-services {
+  --services-offset: calc(var(--topbar-h) + var(--nav-h));
+  background: var(--navy-950);
+  padding-block: clamp(3.5rem, 7vw, 6.5rem);
+  scroll-margin-top: var(--services-offset);
 }
-.co-tabs__tab:hover, .co-tabs__tab.is-active { color: var(--fg-strong); }
-.co-tabs__ink { position: absolute; left: 0; bottom: 0; height: 2px; width: 0; background: var(--blue); border-radius: 2px; pointer-events: none; }
-.co-tabs__panels { position: relative; padding-top: clamp(2.5rem, 5vw, 4.5rem); }
-.co-tabs__panel { display: grid; gap: 2.25rem; }
-@media (min-width: 900px) { .co-tabs__panel { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(2.5rem, 6vw, 7rem); align-items: center; } }
-.co-tabs__frame { aspect-ratio: 16 / 10; }
-@media (min-width: 900px) { .co-tabs__frame { aspect-ratio: 4 / 5; max-width: 560px; } }
-.co-tabs__frame img { will-change: transform; }
-.co-tabs__text { display: grid; gap: clamp(1rem, 1.8vw, 1.5rem); align-content: center; min-width: 0; }
-.co-tabs__text .h3 { max-width: 20ch; }
-.co-tabs__text > p { max-width: 56ch; }
-.co-tabs__list { display: grid; margin-top: .5rem; border-top: 1px solid var(--line); }
-.co-tabs__list li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1rem; align-items: start; padding: .9rem 0; border-bottom: 1px solid var(--line); font-size: .98rem; color: var(--fg); }
-.co-tabs__bullet { width: 1.35rem; height: 1.35rem; margin-top: .15rem; border-radius: 4px; background: rgba(39,100,232,.12); display: grid; place-items: center; color: var(--blue); }
-.co-tabs__bullet svg { width: 12px; height: 12px; }
+.co-services__stage { display: grid; gap: clamp(2rem, 5vw, 4rem); }
+.co-services__intro {
+  display: grid;
+  justify-items: center;
+  gap: 1.15rem;
+  text-align: center;
+}
+.co-services__intro h2 {
+  font-size: clamp(2.6rem, 5vw, 5rem);
+  line-height: .98;
+  letter-spacing: -.06em;
+  text-wrap: balance;
+}
+.co-services__intro h2 em { display: block; color: var(--blue-200); font-style: normal; }
+.co-services__summary { max-width: 48ch; color: var(--silver); text-wrap: pretty; }
+.co-services__cards { display: grid; gap: clamp(1.25rem, 2.5vw, 2rem); }
+.co-service {
+  align-self: start;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: .85rem;
+  overflow: clip;
+  background: var(--navy-900);
+  scroll-margin-top: calc(var(--services-offset) + 1rem);
+}
+.co-service__image { aspect-ratio: 16 / 10; border-radius: 0; }
+.co-service__body { display: grid; gap: .9rem; padding: clamp(1.1rem, 1.7vw, 1.75rem); }
+.co-service__body .eyebrow { color: var(--blue-200); }
+.co-service__body .h4 { font-size: clamp(1.2rem, 1.65vw, 1.65rem); text-wrap: balance; }
+.co-service__body > p:not(.eyebrow), .co-service__list { color: var(--silver); font-size: .925rem; }
+.co-service__list { display: grid; gap: .38rem; padding: .9rem 0 0 1.1rem; border-top: 1px solid var(--line); list-style: disc; }
+.co-service__list li::marker { color: var(--blue-200); }
+
+@media (min-width: 700px) {
+  .co-services__cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1024px) and (min-height: 650px) and (prefers-reduced-motion: no-preference) {
+  .co-services__stage {
+    --services-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+    --services-gap: clamp(1.25rem, 3vw, 3rem);
+    grid-template-columns: var(--services-columns);
+    gap: var(--services-gap);
+  }
+  .co-services__intro {
+    position: sticky;
+    grid-area: 1 / 2;
+    align-self: start;
+    top: calc(var(--services-offset) + (100svh - var(--services-offset)) * .24);
+    z-index: 1;
+  }
+  .co-services__intro h2 { font-size: clamp(2.4rem, 3.85vw, 4.25rem); }
+  .co-services__cards {
+    grid-area: 1 / 1 / 2 / -1;
+    grid-template-columns: var(--services-columns);
+    gap: 1.5rem var(--services-gap);
+    padding-top: clamp(4rem, 17svh, 10rem);
+  }
+  .co-service:nth-child(odd) { grid-column: 1; }
+  .co-service:nth-child(even) { grid-column: 3; }
+  .co-service + .co-service { margin-top: clamp(-12rem, -18svh, -7rem); }
+  .co-service:nth-child(2) { grid-row: 2; }
+  .co-service:nth-child(3) { grid-row: 3; }
+  .co-service:nth-child(4) { grid-row: 4; }
+}
 
 /* ---------- c) Beispielwoche — expanding day strip ---------- */
 .co-week { background: var(--navy-950); overflow: hidden; }

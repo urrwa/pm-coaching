@@ -29,7 +29,7 @@
   <link rel="preload" href="/assets/fonts/Inter-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/css/fonts.css">
   <link rel="stylesheet" href="/assets/css/main.css">
-  <link rel="stylesheet" href="/assets/css/pages/coaching.css">
+  <link rel="stylesheet" href="/assets/css/pages/coaching.css?v=leistungen">
   <script>
     // Prevent reveal flash: mark JS availability before paint
     document.documentElement.classList.add('js');
@@ -40,7 +40,7 @@
   <script src="/assets/vendor/lenis.min.js" defer></script>
   <script src="/assets/js/config.js"></script>
   <script src="/assets/js/main.js" defer></script>
-  <script defer src="/assets/js/pages/coaching.js"></script>
+  <script defer src="/assets/js/pages/coaching.js?v=leistungen"></script>
   <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
@@ -233,103 +233,80 @@
   </div>
 </section>
 
-<!-- ============ b) LEISTUNGEN (TABS) ============ -->
-<section class="co-services section" data-theme="dark" id="leistungen">
-  <div class="container">
-    <div class="section-head section-head--split">
-      <div>
-        <p class="eyebrow" data-reveal="up">Leistungen</p>
-        <h2 class="h2" data-reveal="words">Vier Bausteine. Ein System.</h2>
-      </div>
-      <p class="lead muted" data-reveal="up" data-delay="0.1">Training, Ernährung, Betreuung und Monitoring greifen ineinander. Kein Baustein funktioniert allein – zusammen ergeben sie ein Online Coaching, das auch in vollen Wochen trägt.</p>
-    </div>
+<!-- ============ b) LEISTUNGEN ============ -->
+<section class="co-services section" data-theme="dark" id="leistungen" aria-labelledby="leistungen-title">
+  <div class="co-services__stage container">
+    <header class="co-services__intro">
+      <p class="eyebrow eyebrow--plain">Leistungen</p>
+      <h2 id="leistungen-title">Vier Bausteine. <em>Ein System.</em></h2>
+      <p class="co-services__summary">Training, Ernährung, Betreuung und Monitoring greifen ineinander. Kein Baustein funktioniert allein – zusammen ergeben sie ein Online Coaching, das auch in vollen Wochen trägt.</p>
+    </header>
 
-    <div class="co-tabs" data-co-tabs data-reveal="up">
-      <div class="co-tabs__bar" role="tablist" aria-label="Leistungen im Coaching">
-        <button class="co-tabs__tab is-active" role="tab" type="button" id="co-tab-training" aria-selected="true" aria-controls="co-panel-training" tabindex="0"><span class="co-tabs__num">01</span><span class="co-tabs__label">Training</span></button>
-        <button class="co-tabs__tab" role="tab" type="button" id="co-tab-ernaehrung" aria-selected="false" aria-controls="co-panel-ernaehrung" tabindex="-1"><span class="co-tabs__num">02</span><span class="co-tabs__label">Ernährung</span></button>
-        <button class="co-tabs__tab" role="tab" type="button" id="co-tab-betreuung" aria-selected="false" aria-controls="co-panel-betreuung" tabindex="-1"><span class="co-tabs__num">03</span><span class="co-tabs__label">Betreuung</span></button>
-        <button class="co-tabs__tab" role="tab" type="button" id="co-tab-monitoring" aria-selected="false" aria-controls="co-panel-monitoring" tabindex="-1"><span class="co-tabs__num">04</span><span class="co-tabs__label">Monitoring</span></button>
-        <span class="co-tabs__ink" aria-hidden="true"></span>
-      </div>
-
-      <div class="co-tabs__panels">
-        <!-- 01 Training -->
-        <div class="co-tabs__panel" role="tabpanel" id="co-panel-training" aria-labelledby="co-tab-training" tabindex="0">
-          <div class="frame frame--grade co-tabs__frame" data-co-media>
-            <img src="/assets/img/train-bench-press-1600.webp" srcset="/assets/img/train-bench-press-900.webp 672w, /assets/img/train-bench-press-1600.webp 1195w" sizes="(min-width: 900px) 42vw, 100vw" alt="Mann drückt eine Langhantel auf der Flachbank im Studio" width="1600" height="2143" loading="lazy" decoding="async">
-            <span class="frame__caption">01 · Training</span>
-          </div>
-          <div class="co-tabs__text">
-            <span class="index" data-co-anim>01 / 04 — Training</span>
-            <h3 class="h3" data-co-anim>Training, das in deine Woche passt – nicht umgekehrt.</h3>
-            <p class="muted" data-co-anim>Dein Trainingssystem wird um dein Equipment, deine Zeit und deinen Körper gebaut. Studio, Home-Gym oder Hotel: Der Plan reist mit und hat für jede Woche eine Mindestversion, die den Fortschritt hält.</p>
-            <ul class="co-tabs__list">
-              <li data-co-anim><span class="co-tabs__bullet" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span>Individuelle Trainingsarchitektur statt Vorlage</li>
-              <li data-co-anim><span class="co-tabs__bullet" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span>Zwei bis vier Einheiten pro Woche – abhängig von deinem Kalender</li>
-              <li data-co-anim><span class="co-tabs__bullet" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span>Technikfeedback per Video</li>
-              <li data-co-anim><span class="co-tabs__bullet" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span>Plan B für Reise- und Krisenwochen</li>
-            </ul>
-          </div>
+    <div class="co-services__cards">
+      <article class="co-service" id="co-panel-training" aria-labelledby="co-panel-training-title">
+        <div class="frame frame--grade co-service__image">
+          <img src="/assets/img/train-bench-press-1600.webp" srcset="/assets/img/train-bench-press-900.webp 672w, /assets/img/train-bench-press-1600.webp 1195w" sizes="(min-width: 1600px) 456px, (min-width: 1024px) 30vw, (min-width: 700px) 45vw, 92vw" alt="Mann drückt eine Langhantel auf der Flachbank im Studio" width="1195" height="1600" loading="lazy" decoding="async" style="object-position: 50% 61%">
         </div>
-
-        <!-- 02 Ernährung -->
-        <div class="co-tabs__panel" role="tabpanel" id="co-panel-ernaehrung" aria-labelledby="co-tab-ernaehrung" tabindex="0" hidden>
-          <div class="frame frame--grade co-tabs__frame" data-co-media>
-            <img src="/assets/img/trust-equipment-1600.webp" srcset="/assets/img/trust-equipment-900.webp 900w, /assets/img/trust-equipment-1600.webp 1600w" sizes="(min-width: 900px) 42vw, 100vw" alt="Shaker, Handtuch und Trainingsplan auf einer Hantelbank – Ernährung als Teil des Systems" width="1600" height="893" loading="lazy" decoding="async" style="object-position: 40% 50%">
-            <span class="frame__caption">02 · Ernährung</span>
-          </div>
-          <div class="co-tabs__text">
-            <span class="index" data-co-anim>02 / 04 — Ernährung</span>
-            <h3 class="h3" data-co-anim>Ein Rahmen, der Geschäftsessen aushält.</h3>
-            <p class="muted" data-co-anim>Kein Diätplan, keine Verbote, keine Meal-Prep-Pflicht. Du bekommst ein flexibles Ernährungs-Framework mit klaren Prioritäten – und lernst, Entscheidungen im Restaurant, im Hotel und am Familientisch selbst zu treffen.</p>
-            <ul class="co-tabs__list">
-              <li data-co-anim><span class="co-tabs__bullet" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span>Prioritäten statt Verbote: Protein, Energiemenge, Lebensmittelqualität</li>
-              <li data-co-anim><span class="co-tabs__bullet" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span>Strategien für Geschäftsessen, Reisen und lange Tage</li>
-              <li data-co-anim><span class="co-tabs__bullet" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span>Anpassung an Ziel und Phase – Aufbau oder Fettverlust</li>
-              <li data-co-anim><span class="co-tabs__bullet" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span>Verständnis für das Warum – damit du unabhängig entscheidest</li>
-            </ul>
-          </div>
+        <div class="co-service__body">
+          <p class="eyebrow eyebrow--plain">Training</p>
+          <h3 class="h4" id="co-panel-training-title">Training, das in deine Woche passt – nicht umgekehrt.</h3>
+          <p>Dein Trainingssystem wird um dein Equipment, deine Zeit und deinen Körper gebaut. Studio, Home-Gym oder Hotel: Der Plan reist mit und hat für jede Woche eine Mindestversion, die den Fortschritt hält.</p>
+          <ul class="co-service__list">
+          <li>Individuelle Trainingsarchitektur statt Vorlage</li>
+          <li>Zwei bis vier Einheiten pro Woche – abhängig von deinem Kalender</li>
+          <li>Technikfeedback per Video</li>
+          <li>Plan B für Reise- und Krisenwochen</li>
+          </ul>
         </div>
-
-        <!-- 03 Betreuung -->
-        <div class="co-tabs__panel" role="tabpanel" id="co-panel-betreuung" aria-labelledby="co-tab-betreuung" tabindex="0" hidden>
-          <div class="frame frame--grade co-tabs__frame" data-co-media>
-            <img src="/assets/img/exp-desk-1600.webp" srcset="/assets/img/exp-desk-900.webp 900w, /assets/img/exp-desk-1600.webp 1600w" sizes="(min-width: 900px) 42vw, 100vw" alt="Coach im Poloshirt steht am Schreibtisch im Studio und bereitet ein Feedback vor" width="1600" height="893" loading="lazy" decoding="async">
-            <span class="frame__caption">03 · Betreuung</span>
-          </div>
-          <div class="co-tabs__text">
-            <span class="index" data-co-anim>03 / 04 — Betreuung</span>
-            <h3 class="h3" data-co-anim>Ein Coach, der deine Woche kennt.</h3>
-            <p class="muted" data-co-anim>Betreuung endet nicht nach einer Stunde im Studio. Du hast einen direkten Draht für Fragen, Umplanungen und Entscheidungen – und jemanden, der nachfragt, wenn eine Woche still wird.</p>
-            <ul class="co-tabs__list">
-              <li data-co-anim><span class="co-tabs__bullet" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span>Wöchentlicher Check-in mit persönlichem Feedback</li>
-              <li data-co-anim><span class="co-tabs__bullet" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span>Coaching-Support zwischen den Check-ins</li>
-              <li data-co-anim><span class="co-tabs__bullet" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span>Monatlicher Strategie-Call für den Blick aufs Ganze</li>
-              <li data-co-anim><span class="co-tabs__bullet" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span>Klare Rückmeldung statt Motivationssprüche</li>
-            </ul>
-          </div>
+      </article>
+      <article class="co-service" id="co-panel-ernaehrung" aria-labelledby="co-panel-ernaehrung-title">
+        <div class="frame frame--grade co-service__image">
+          <img src="/assets/img/trust-equipment-1600.webp" srcset="/assets/img/trust-equipment-900.webp 900w, /assets/img/trust-equipment-1600.webp 1600w" sizes="(min-width: 1600px) 456px, (min-width: 1024px) 30vw, (min-width: 700px) 45vw, 92vw" alt="Shaker, Handtuch und Trainingsplan auf einer Hantelbank – Ernährung als Teil des Systems" width="1600" height="893" loading="lazy" decoding="async" style="object-position: 40% 50%">
         </div>
-
-        <!-- 04 Monitoring -->
-        <div class="co-tabs__panel" role="tabpanel" id="co-panel-monitoring" aria-labelledby="co-tab-monitoring" tabindex="0" hidden>
-          <div class="frame frame--grade co-tabs__frame" data-co-media>
-            <img src="/assets/img/exp-office-1600.webp" srcset="/assets/img/exp-office-900.webp 672w, /assets/img/exp-office-1600.webp 1195w" sizes="(min-width: 900px) 42vw, 100vw" alt="Büro mit Körperanalysewaage und Schreibtisch für Fortschrittsgespräche" width="1600" height="2143" loading="lazy" decoding="async">
-            <span class="frame__caption">04 · Monitoring</span>
-          </div>
-          <div class="co-tabs__text">
-            <span class="index" data-co-anim>04 / 04 — Monitoring</span>
-            <h3 class="h3" data-co-anim>Entscheidungen auf Basis von Daten – nicht Bauchgefühl.</h3>
-            <p class="muted" data-co-anim>Leistung im Training, Adhärenz, Körpermaße, Energie und Schlaf werden dokumentiert. Nicht, um dich zu kontrollieren, sondern damit jede Anpassung begründet ist und du Fortschritt siehst, bevor der Spiegel ihn zeigt.</p>
-            <ul class="co-tabs__list">
-              <li data-co-anim><span class="co-tabs__bullet" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span>Transparente Dokumentation deines Fortschritts</li>
-              <li data-co-anim><span class="co-tabs__bullet" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span>Plateaus erkennen, bevor sie frustrieren</li>
-              <li data-co-anim><span class="co-tabs__bullet" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span>Anpassung von Training und Ernährung anhand echter Zahlen</li>
-              <li data-co-anim><span class="co-tabs__bullet" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span>Nachvollziehbare Entscheidungen in jedem Check-in</li>
-            </ul>
-          </div>
+        <div class="co-service__body">
+          <p class="eyebrow eyebrow--plain">Ernährung</p>
+          <h3 class="h4" id="co-panel-ernaehrung-title">Ein Rahmen, der Geschäftsessen aushält.</h3>
+          <p>Kein Diätplan, keine Verbote, keine Meal-Prep-Pflicht. Du bekommst ein flexibles Ernährungs-Framework mit klaren Prioritäten – und lernst, Entscheidungen im Restaurant, im Hotel und am Familientisch selbst zu treffen.</p>
+          <ul class="co-service__list">
+          <li>Prioritäten statt Verbote: Protein, Energiemenge, Lebensmittelqualität</li>
+          <li>Strategien für Geschäftsessen, Reisen und lange Tage</li>
+          <li>Anpassung an Ziel und Phase – Aufbau oder Fettverlust</li>
+          <li>Verständnis für das Warum – damit du unabhängig entscheidest</li>
+          </ul>
         </div>
-      </div>
+      </article>
+      <article class="co-service" id="co-panel-betreuung" aria-labelledby="co-panel-betreuung-title">
+        <div class="frame frame--grade co-service__image">
+          <img src="/assets/img/exp-desk-1600.webp" srcset="/assets/img/exp-desk-900.webp 900w, /assets/img/exp-desk-1600.webp 1600w" sizes="(min-width: 1600px) 456px, (min-width: 1024px) 30vw, (min-width: 700px) 45vw, 92vw" alt="Coach im Poloshirt steht am Schreibtisch im Studio und bereitet ein Feedback vor" width="1600" height="893" loading="lazy" decoding="async">
+        </div>
+        <div class="co-service__body">
+          <p class="eyebrow eyebrow--plain">Betreuung</p>
+          <h3 class="h4" id="co-panel-betreuung-title">Ein Coach, der deine Woche kennt.</h3>
+          <p>Betreuung endet nicht nach einer Stunde im Studio. Du hast einen direkten Draht für Fragen, Umplanungen und Entscheidungen – und jemanden, der nachfragt, wenn eine Woche still wird.</p>
+          <ul class="co-service__list">
+          <li>Wöchentlicher Check-in mit persönlichem Feedback</li>
+          <li>Coaching-Support zwischen den Check-ins</li>
+          <li>Monatlicher Strategie-Call für den Blick aufs Ganze</li>
+          <li>Klare Rückmeldung statt Motivationssprüche</li>
+          </ul>
+        </div>
+      </article>
+      <article class="co-service" id="co-panel-monitoring" aria-labelledby="co-panel-monitoring-title">
+        <div class="frame frame--grade co-service__image">
+          <img src="/assets/img/exp-office-1600.webp" srcset="/assets/img/exp-office-900.webp 672w, /assets/img/exp-office-1600.webp 1195w" sizes="(min-width: 1600px) 456px, (min-width: 1024px) 30vw, (min-width: 700px) 45vw, 92vw" alt="Büro mit Körperanalysewaage und Schreibtisch für Fortschrittsgespräche" width="1195" height="1600" loading="lazy" decoding="async">
+        </div>
+        <div class="co-service__body">
+          <p class="eyebrow eyebrow--plain">Monitoring</p>
+          <h3 class="h4" id="co-panel-monitoring-title">Entscheidungen auf Basis von Daten – nicht Bauchgefühl.</h3>
+          <p>Leistung im Training, Adhärenz, Körpermaße, Energie und Schlaf werden dokumentiert. Nicht, um dich zu kontrollieren, sondern damit jede Anpassung begründet ist und du Fortschritt siehst, bevor der Spiegel ihn zeigt.</p>
+          <ul class="co-service__list">
+          <li>Transparente Dokumentation deines Fortschritts</li>
+          <li>Plateaus erkennen, bevor sie frustrieren</li>
+          <li>Anpassung von Training und Ernährung anhand echter Zahlen</li>
+          <li>Nachvollziehbare Entscheidungen in jedem Check-in</li>
+          </ul>
+        </div>
+      </article>
     </div>
   </div>
 </section>
