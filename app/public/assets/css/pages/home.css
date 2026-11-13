@@ -487,51 +487,48 @@
   .problem__layout {
     grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
     gap: clamp(3rem, 6vw, 6rem);
-    align-items: start;
   }
   .problem__sticky {
+    align-self: start;
     position: sticky;
-    top: calc(var(--nav-h) + 2rem);
+    top: calc(var(--nav-h) + 1rem);
   }
 }
 .problem__sticky { display: grid; gap: 1.25rem; }
 .problem__sticky .h2 { max-width: 12ch; }
 
-.problem__list { display: grid; gap: 0; }
-.problem__item {
+.problem__title { max-width: 12ch; }
+.problem__frame { max-width: 19rem; }
+.problem__img {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity .45s var(--ease-out);
+}
+.problem__img.is-active { opacity: 1; }
+.problem__list { display: grid; }
+.problem__row {
+  position: relative;
   display: grid;
-  gap: 0.75rem;
-  padding-block: clamp(1.75rem, 3vw, 2.5rem);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  transition: opacity 0.3s ease;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: clamp(.75rem, 2vw, 1.75rem);
+  padding-block: clamp(1.35rem, 3vw, 2.5rem);
+  border-bottom: 1px solid var(--line);
 }
-.problem__item:first-child { border-top: 1px solid rgba(255,255,255,0.08); }
-.problem__item.is-active .problem__num {
-  color: var(--blue-400);
+.problem__row::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 -1px;
+  height: 1px;
+  background: var(--blue-400);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .65s var(--ease-out);
 }
-.problem__num {
-  font-family: var(--font-display);
-  font-size: 0.75rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: rgba(197,206,216,0.3);
-  font-weight: 600;
-  transition: color 0.3s ease;
-}
-.problem__q {
-  font-family: var(--font-display);
-  font-size: clamp(1.1rem, 2.2vw, 1.4rem);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-  color: #fff;
-}
-.problem__a {
-  color: rgba(197,206,216,0.65);
-  max-width: 56ch;
-  font-size: 0.95rem;
-  line-height: 1.65;
-}
+.problem__row.is-active::after { transform: scaleX(1); }
+.problem__row.is-active .problem__num { color: var(--blue-400); }
+.problem__num { font-family: var(--font-display); font-size: 1.2rem; color: var(--grey); transition: color .25s; }
+.problem__row-body p { margin-top: .45rem; color: var(--silver); max-width: 56ch; }
 
 /* ---------- 05 AUDIENCE ---------- */
 .audience {
