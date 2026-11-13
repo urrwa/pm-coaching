@@ -14,8 +14,27 @@
 
       gsap.matchMedia().add("(prefers-reduced-motion: no-preference) and (min-height: 540px)", () => {
         const stage = section.querySelector(".hero__stage");
+        const request = new AbortController();
         let target = 0;
         let failed = false;
+        let loading = false;
+        let mediaUrl;
+
+        async function loadFilm() {
+          loading = true;
+          try {
+            // Buffer the compact film once so seeking does not depend on range requests.
+            const response = await fetch(video.dataset.heroVideo, { signal: request.signal });
+            if (!response.ok) throw new Error(`Hero video request failed: ${response.status}`);
+            const film = await response.blob();
+            if (request.signal.aborted) return;
+            mediaUrl = URL.createObjectURL(film);
+            video.preload = "auto";
+            video.src = mediaUrl;
+          } catch (error) {
+            if (!request.signal.aborted) onError();
+          }
+        }
 
         function seek() {
           if (failed || video.readyState < 2 || video.seeking) return;
@@ -27,11 +46,7 @@
         }
 
         function update({ progress, isActive }) {
-          if (!video.hasAttribute("src")) {
-            if (!isActive) return;
-            video.preload = "auto";
-            video.src = video.dataset.heroVideo;
-          }
+          if (isActive && !loading) loadFilm();
           target = progress * Math.max(0, (video.duration || 0) - 1 / 24);
           seek();
         }
@@ -57,6 +72,7 @@
         });
 
         return () => {
+          request.abort();
           section.classList.remove("is-scrubbing", "is-video-ready");
           video.removeEventListener("loadeddata", onLoaded);
           video.removeEventListener("seeked", seek);
@@ -65,6 +81,7 @@
             video.removeAttribute("src");
             video.load();
           }
+          if (mediaUrl) URL.revokeObjectURL(mediaUrl);
         };
       });
     })();
