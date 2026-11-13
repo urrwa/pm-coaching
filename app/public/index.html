@@ -144,7 +144,7 @@
         </nav>
       </div>
       <div class="menu__col menu__col--visual" aria-hidden="true">
-        <div class="menu__video-frame"><video class="menu__video" muted playsinline loop preload="none" poster="/assets/img/hero-portrait-900.jpg" data-menu-video="/assets/video/loop-1.mp4"></video></div>
+        <div class="menu__video-frame"><video class="menu__video" muted playsinline loop preload="none" poster="/assets/img/hero-portrait-900.webp" data-menu-video="/assets/video/loop-1.mp4"></video></div>
       </div>
       <div class="menu__footer">
         <a class="btn btn--primary" href="/performance-check/"><span class="btn__fill" aria-hidden="true"></span><span class="btn__label">Kostenlosen Performance-Check starten</span><span class="btn__icon" aria-hidden="true"><svg class="arrow-exit" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 5l7 7-7 7"/></svg><svg class="arrow-enter" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span></a>
@@ -163,38 +163,31 @@
   <main id="main">
 <!-- ============ 01 HERO ============ -->
 <section class="hero" data-theme="dark" data-hero id="start">
-  <div class="hero__media" aria-hidden="true">
-    <picture class="hero__picture">
-      <source media="(max-width: 767px)" srcset="/assets/img/hero-portrait-900.jpg 900w, /assets/img/hero-portrait-1600.jpg 1600w" sizes="100vw">
-      <img src="/assets/img/hero-wide-2400.jpg" srcset="/assets/img/hero-wide-900.jpg 900w, /assets/img/hero-wide-1600.jpg 1600w, /assets/img/hero-wide-2400.jpg 2400w" sizes="100vw" alt="" width="2400" height="1340" fetchpriority="high" decoding="async">
-    </picture>
-    <div class="hero__shade"></div>
-    <div class="hero__glow"></div>
-    <div class="hero__grain"></div>
-  </div>
-
-  <div class="hero__inner container">
-    <div class="hero__copy">
-      <p class="eyebrow hero__eyebrow" data-hero-el>16 Wochen Online-Coaching<span class="hide-mobile">&nbsp;· DE / AT / CH</span></p>
-      <h1 class="hero__title" data-hero-title>Athletisch.<br><em>Ohne</em> Kompromisse.</h1>
-      <p class="hero__sub lead" data-hero-el>Online-Coaching für Männer, die mit einem vollen Alltag Muskeln aufbauen oder Körperfett reduzieren wollen — systematisch, datenbasiert, dauerhaft.</p>
-      <div class="hero__actions" data-hero-el>
-        <a class="btn btn--primary btn--lg" href="/performance-check/"><span class="btn__fill" aria-hidden="true"></span><span class="btn__label">Performance-Check starten</span><span class="btn__icon" aria-hidden="true"><svg class="arrow-exit" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 5l7 7-7 7"/></svg><svg class="arrow-enter" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span></a>
-        <a class="btn btn--ghost hero__secondary" href="#coaching"><span class="btn__label">Das Coaching entdecken</span><span class="btn__icon" aria-hidden="true"><svg class="arrow-exit" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 5l7 7-7 7"/></svg><svg class="arrow-enter" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span></a>
+  <div class="hero__stage">
+    <div class="hero__media" aria-hidden="true">
+      <picture class="hero__picture">
+        <source media="(max-width: 767px)" srcset="/assets/img/hero-portrait-900.webp 900w, /assets/img/hero-portrait-1600.webp 1600w" sizes="100vw">
+        <img src="/assets/img/hero-wide-2400.webp" srcset="/assets/img/hero-wide-900.webp 900w, /assets/img/hero-wide-1600.webp 1600w, /assets/img/hero-wide-2400.webp 2400w" sizes="100vw" alt="" width="2400" height="1340" fetchpriority="high" decoding="async">
+      </picture>
+      <div class="hero__shade"></div>
+      <div class="hero__training">
+        <img src="/assets/img/hero-press-poster.webp" width="540" height="720" alt="" fetchpriority="high" decoding="async">
+        <video muted playsinline preload="none" data-hero-video="/assets/video/hero-press.mp4"></video>
       </div>
-      <p class="hero__check-note small" data-hero-el>Kostenlos · ca. 3 Minuten · Keine automatische Verkaufsmail</p>
     </div>
 
-    <div class="hero__chips" aria-hidden="true">
-      <div class="chip hero__chip hero__chip--1" data-hero-chip><span class="chip__dot chip__dot--pulse"></span>Individueller Trainingsplan</div>
-      <div class="chip hero__chip hero__chip--2" data-hero-chip><span class="chip__dot"></span>Wöchentlicher Check-in</div>
-      <div class="chip hero__chip hero__chip--3" data-hero-chip><span class="chip__dot"></span>Flexibles Ernährungs-Framework</div>
+    <div class="hero__inner container">
+      <div class="hero__copy">
+        <p class="eyebrow hero__eyebrow">16 Wochen Online-Coaching<span class="hide-mobile">&nbsp;· DE / AT / CH</span></p>
+        <h1 class="hero__title">Athletisch.<br><em>Ohne</em> Kompromisse.</h1>
+        <p class="hero__sub lead">Online-Coaching für Männer, die mit einem vollen Alltag Muskeln aufbauen oder Körperfett reduzieren wollen — systematisch, datenbasiert, dauerhaft.</p>
+        <div class="hero__actions">
+          <a class="btn btn--primary btn--lg" href="/performance-check/"><span class="btn__fill" aria-hidden="true"></span><span class="btn__label">Performance-Check starten</span><span class="btn__icon" aria-hidden="true"><svg class="arrow-exit" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 5l7 7-7 7"/></svg><svg class="arrow-enter" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span></a>
+          <a class="btn btn--ghost hero__secondary" href="#coaching"><span class="btn__label">Das Coaching entdecken</span><span class="btn__icon" aria-hidden="true"><svg class="arrow-exit" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 5l7 7-7 7"/></svg><svg class="arrow-enter" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span></a>
+        </div>
+        <p class="hero__check-note small">Kostenlos · ca. 3 Minuten · Keine automatische Verkaufsmail</p>
+      </div>
     </div>
-  </div>
-
-  <div class="hero__bottom container" data-hero-el>
-    <div class="hero__scroll" aria-hidden="true"><span class="hero__scroll-line"><span></span></span><span class="hero__scroll-text">Scroll</span></div>
-    <p class="hero__method">G5 Performance Method<span class="hero__method-sep"></span>Assess · Architect · Execute · Optimise · Sustain</p>
   </div>
 </section>
 
@@ -231,7 +224,7 @@
     </div>
     <div class="founder__media">
       <div class="frame frame--grade founder__frame" data-reveal="clip">
-        <img src="/assets/img/founder-hoodie-1600.jpg" srcset="/assets/img/founder-hoodie-900.jpg 900w, /assets/img/founder-hoodie-1600.jpg 1600w, /assets/img/founder-hoodie-2000.jpg 2000w" sizes="(min-width: 768px) 36vw, 92vw" alt="Gabriel Vogt, Gründer von PM Coaching, an einer Betonwand im Studio" width="1600" height="2143" loading="lazy" decoding="async">
+        <img src="/assets/img/founder-hoodie-1600.webp" srcset="/assets/img/founder-hoodie-900.webp 900w, /assets/img/founder-hoodie-1600.webp 1600w, /assets/img/founder-hoodie-2000.webp 2000w" sizes="(min-width: 768px) 36vw, 92vw" alt="Gabriel Vogt, Gründer von PM Coaching, an einer Betonwand im Studio" width="1600" height="2143" loading="lazy" decoding="async">
       </div>
     </div>
   </div>
@@ -275,19 +268,19 @@
   <div class="container">
     <div class="trust__grid" data-reveal-children="up" data-stagger="0.12">
       <article class="trust__card">
-        <img class="trust__card-image" src="/assets/img/train-portrait-close-900.jpg" alt="" width="900" height="1205" loading="lazy" decoding="async">
+        <img class="trust__card-image" src="/assets/img/train-portrait-close-900.webp" alt="" width="900" height="1205" loading="lazy" decoding="async">
         <h2 class="trust__card-label">Persönliches Online-Coaching</h2>
         <p class="trust__card-text">Ein Coach, der deine Woche kennt. Für Männer in Deutschland, Österreich und der Schweiz.</p>
         <p class="trust__card-num">1:1</p>
       </article>
       <article class="trust__card">
-        <img class="trust__card-image" src="/assets/img/train-bench-press-900.jpg" alt="" width="900" height="675" loading="lazy" decoding="async">
+        <img class="trust__card-image" src="/assets/img/train-bench-press-900.webp" alt="" width="900" height="675" loading="lazy" decoding="async">
         <h2 class="trust__card-label">Wochen Begleitung</h2>
         <p class="trust__card-text">Langfristiger Aufbau statt kurzfristiger Challenge.</p>
         <p class="trust__card-num"><span class="visually-hidden">16+</span><span aria-hidden="true" data-trust-count="16">16</span><span aria-hidden="true">+</span></p>
       </article>
       <article class="trust__card">
-        <img class="trust__card-image" src="/assets/img/train-cable-side-900.jpg" alt="" width="900" height="675" loading="lazy" decoding="async">
+        <img class="trust__card-image" src="/assets/img/train-cable-side-900.webp" alt="" width="900" height="675" loading="lazy" decoding="async">
         <h2 class="trust__card-label">Phasen der G5-Methode</h2>
         <p class="trust__card-text">Assess · Architect · Execute · Optimise · Sustain.</p>
         <p class="trust__card-num"><span class="visually-hidden">5</span><span aria-hidden="true" data-trust-count="5">5</span></p>
@@ -305,11 +298,11 @@
       <p class="lead muted problem__lead" data-reveal="up" data-delay="0.15">Die meisten ambitionierten Männer scheitern nicht an Disziplin. Sie scheitern an Plänen, die für ein anderes Leben geschrieben wurden.</p>
       <div class="problem__visual" aria-hidden="true">
         <div class="frame frame--4-5 frame--grade problem__frame" data-reveal="clip">
-          <img class="problem__img is-active" src="/assets/img/exp-desk-1600.jpg" alt="" width="1600" height="893" loading="lazy" decoding="async" data-problem-img="1" style="object-position: 22% 50%">
-          <img class="problem__img" src="/assets/img/problem-gym-1-1600.jpg" alt="" width="1600" height="1195" loading="lazy" decoding="async" data-problem-img="2">
-          <img class="problem__img" src="/assets/img/trust-equipment-1600.jpg" alt="" width="1600" height="893" loading="lazy" decoding="async" data-problem-img="3" style="object-position: 38% 50%">
-          <img class="problem__img" src="/assets/img/cta-treadmills-1600.jpg" alt="" width="1600" height="1195" loading="lazy" decoding="async" data-problem-img="4">
-          <img class="problem__img" src="/assets/img/problem-gym-2-1600.jpg" alt="" width="1600" height="1195" loading="lazy" decoding="async" data-problem-img="5">
+          <img class="problem__img is-active" src="/assets/img/exp-desk-1600.webp" alt="" width="1600" height="893" loading="lazy" decoding="async" data-problem-img="1" style="object-position: 22% 50%">
+          <img class="problem__img" src="/assets/img/problem-gym-1-1600.webp" alt="" width="1600" height="1195" loading="lazy" decoding="async" data-problem-img="2">
+          <img class="problem__img" src="/assets/img/trust-equipment-1600.webp" alt="" width="1600" height="893" loading="lazy" decoding="async" data-problem-img="3" style="object-position: 38% 50%">
+          <img class="problem__img" src="/assets/img/cta-treadmills-1600.webp" alt="" width="1600" height="1195" loading="lazy" decoding="async" data-problem-img="4">
+          <img class="problem__img" src="/assets/img/problem-gym-2-1600.webp" alt="" width="1600" height="1195" loading="lazy" decoding="async" data-problem-img="5">
           <span class="frame__caption" data-problem-caption>Volle Agenda</span>
         </div>
       </div>
@@ -373,8 +366,8 @@
     <div class="audience__layout">
       <div class="audience__visual" data-reveal="clip">
         <div class="frame frame--4-5 frame--grade audience__frame" data-parallax="0.12">
-          <img class="audience__img is-active" src="/assets/img/audience-bright-1600.jpg" alt="Athletischer Mann in professioneller Umgebung eines Trainingsstudios" width="1600" height="1195" loading="lazy" decoding="async" data-audience-img="yes" style="object-position: 24% 15%">
-          <img class="audience__img" src="/assets/img/audience-dark-1600.jpg" alt="" width="1600" height="893" loading="lazy" decoding="async" data-audience-img="no" style="object-position: 84% 15%">
+          <img class="audience__img is-active" src="/assets/img/audience-bright-1600.webp" alt="Athletischer Mann in professioneller Umgebung eines Trainingsstudios" width="1600" height="1195" loading="lazy" decoding="async" data-audience-img="yes" style="object-position: 24% 15%">
+          <img class="audience__img" src="/assets/img/audience-dark-1600.webp" alt="" width="1600" height="893" loading="lazy" decoding="async" data-audience-img="no" style="object-position: 84% 15%">
         </div>
       </div>
 
@@ -404,15 +397,15 @@
 
     <div class="audience__profiles" data-reveal-children="scale" data-stagger="0.1">
       <article class="profile">
-        <div class="frame frame--3-4 frame--grade frame--tint"><img src="/assets/img/trust-standing-900.jpg" alt="Mann steht aufrecht in einem Trainingsstudio" width="900" height="1205" loading="lazy" decoding="async"></div>
+        <div class="frame frame--3-4 frame--grade frame--tint"><img src="/assets/img/trust-standing-900.webp" alt="Mann steht aufrecht in einem Trainingsstudio" width="900" height="1205" loading="lazy" decoding="async"></div>
         <div class="profile__body"><span class="index">Profil A</span><h3 class="h4">Der Unternehmer</h3><p class="small muted">Baut Firmen, aber keine Routinen. Will Struktur, die auch dann steht, wenn das Geschäft brennt.</p></div>
       </article>
       <article class="profile">
-        <div class="frame frame--3-4 frame--grade frame--tint"><img src="/assets/img/exp-desk-900.jpg" alt="Mann im Poloshirt steht in einem Studio am Schreibtisch" width="900" height="503" loading="lazy" decoding="async" style="object-position: 20% 50%"></div>
+        <div class="frame frame--3-4 frame--grade frame--tint"><img src="/assets/img/exp-desk-900.webp" alt="Mann im Poloshirt steht in einem Studio am Schreibtisch" width="900" height="503" loading="lazy" decoding="async" style="object-position: 20% 50%"></div>
         <div class="profile__body"><span class="index">Profil B</span><h3 class="h4">Die Führungskraft</h3><p class="small muted">Trägt Verantwortung für andere. Sucht einen Partner, der ihn genauso fordert wie er sein Team.</p></div>
       </article>
       <article class="profile">
-        <div class="frame frame--3-4 frame--grade frame--tint"><img src="/assets/img/process-portrait-900.jpg" alt="Mann im weißen Shirt in einem hellen Trainingsstudio" width="900" height="1205" loading="lazy" decoding="async"></div>
+        <div class="frame frame--3-4 frame--grade frame--tint"><img src="/assets/img/process-portrait-900.webp" alt="Mann im weißen Shirt in einem hellen Trainingsstudio" width="900" height="1205" loading="lazy" decoding="async"></div>
         <div class="profile__body"><span class="index">Profil C</span><h3 class="h4">Der Vater mit Karriere</h3><p class="small muted">Zwischen Kita, Kunden und Kalender. Will Energie, die am Abend noch reicht – und ein Vorbild sein.</p></div>
       </article>
     </div>
@@ -443,7 +436,7 @@
 
     <div class="g5__track" data-g5-track>
       <article class="g5__stage" data-g5-stage>
-        <div class="g5__stage-media frame frame--grade"><img src="/assets/img/g5-assess-1600.jpg" alt="Coach mit Tablet im Trainingsstudio während der Standortbestimmung" width="1600" height="2143" loading="lazy" decoding="async" style="object-position: 50% 14%"></div>
+        <div class="g5__stage-media frame frame--grade"><img src="/assets/img/g5-assess-1600.webp" alt="Coach mit Tablet im Trainingsstudio während der Standortbestimmung" width="1600" height="2143" loading="lazy" decoding="async" style="object-position: 50% 14%"></div>
         <div class="g5__stage-body">
           <span class="g5__big">01</span>
           <p class="g5__name">Assess<span class="g5__name-de">Standortbestimmung</span></p>
@@ -452,7 +445,7 @@
         </div>
       </article>
       <article class="g5__stage" data-g5-stage>
-        <div class="g5__stage-media frame frame--grade"><img src="/assets/img/g5-architect-1600.jpg" alt="Hantelständer mit aufgeschlagenem Notizbuch – Planung des Trainingssystems" width="1600" height="1195" loading="lazy" decoding="async" style="object-position: 58% 50%"></div>
+        <div class="g5__stage-media frame frame--grade"><img src="/assets/img/g5-architect-1600.webp" alt="Hantelständer mit aufgeschlagenem Notizbuch – Planung des Trainingssystems" width="1600" height="1195" loading="lazy" decoding="async" style="object-position: 58% 50%"></div>
         <div class="g5__stage-body">
           <span class="g5__big">02</span>
           <p class="g5__name">Architect<span class="g5__name-de">Systemaufbau</span></p>
@@ -461,7 +454,7 @@
         </div>
       </article>
       <article class="g5__stage" data-g5-stage>
-        <div class="g5__stage-media frame frame--grade"><img src="/assets/img/train-squat-1600.jpg" alt="Mann führt eine Kniebeuge mit der Langhantel aus" width="1600" height="2143" loading="lazy" decoding="async" style="object-position: 50% 22%"></div>
+        <div class="g5__stage-media frame frame--grade"><img src="/assets/img/train-squat-1600.webp" alt="Mann führt eine Kniebeuge mit der Langhantel aus" width="1600" height="2143" loading="lazy" decoding="async" style="object-position: 50% 22%"></div>
         <div class="g5__stage-body">
           <span class="g5__big">03</span>
           <p class="g5__name">Execute<span class="g5__name-de">Umsetzung</span></p>
@@ -470,7 +463,7 @@
         </div>
       </article>
       <article class="g5__stage" data-g5-stage>
-        <div class="g5__stage-media frame frame--grade"><img src="/assets/img/g5-optimise-1600.jpg" alt="Coach steht mit Notizbuch am Schreibtisch im Studio und wertet Fortschritte aus" width="1600" height="893" loading="lazy" decoding="async" style="object-position: 92% 50%"></div>
+        <div class="g5__stage-media frame frame--grade"><img src="/assets/img/g5-optimise-1600.webp" alt="Coach steht mit Notizbuch am Schreibtisch im Studio und wertet Fortschritte aus" width="1600" height="893" loading="lazy" decoding="async" style="object-position: 92% 50%"></div>
         <div class="g5__stage-body">
           <span class="g5__big">04</span>
           <p class="g5__name">Optimise<span class="g5__name-de">Anpassung</span></p>
@@ -479,7 +472,7 @@
         </div>
       </article>
       <article class="g5__stage" data-g5-stage>
-        <div class="g5__stage-media frame frame--grade"><img src="/assets/img/g5-sustain-1600.jpg" alt="Mann sitzt entspannt und souverän auf einer Hantelbank" width="1600" height="893" loading="lazy" decoding="async" style="object-position: 52% 50%"></div>
+        <div class="g5__stage-media frame frame--grade"><img src="/assets/img/g5-sustain-1600.webp" alt="Mann sitzt entspannt und souverän auf einer Hantelbank" width="1600" height="893" loading="lazy" decoding="async" style="object-position: 52% 50%"></div>
         <div class="g5__stage-body">
           <span class="g5__big">05</span>
           <p class="g5__name">Sustain<span class="g5__name-de">Verankerung</span></p>
@@ -511,7 +504,7 @@
         <p class="muted">Programmiert für dein Equipment, deine Zeit und deinen Körper – in deiner Trainings-App, mit Technikvideos und klaren Progressionen. Studio, Home-Gym oder Hotel: Der Plan reist mit.</p>
       </article>
       <article class="bento__tile bento__tile--img bento__tile--b">
-        <img src="/assets/img/train-portrait-db-1600.jpg" srcset="/assets/img/train-portrait-db-900.jpg 900w, /assets/img/train-portrait-db-1600.jpg 1600w" sizes="(min-width: 900px) 20vw, 100vw" alt="Mann steht mit zwei Kurzhanteln im Studio und blickt in die Kamera" width="1600" height="2143" loading="lazy" decoding="async" style="object-position: 50% 20%">
+        <img src="/assets/img/train-portrait-db-1600.webp" srcset="/assets/img/train-portrait-db-900.webp 900w, /assets/img/train-portrait-db-1600.webp 1600w" sizes="(min-width: 900px) 20vw, 100vw" alt="Mann steht mit zwei Kurzhanteln im Studio und blickt in die Kamera" width="1600" height="2143" loading="lazy" decoding="async" style="object-position: 50% 20%">
         <span class="frame__caption">Training</span>
       </article>
       <article class="bento__tile bento__tile--text bento__tile--c" data-speed="0.96">
@@ -519,7 +512,7 @@
         <p class="muted">Keine Verbote, keine Meal-Prep-Pflicht. Ein Rahmen aus Prioritäten, der Geschäftsessen und Familienabende aushält.</p>
       </article>
       <article class="bento__tile bento__tile--img bento__tile--d">
-        <img src="/assets/img/exp-office-1600.jpg" alt="Büro mit Körperanalysewaage und Schreibtisch für Fortschrittsgespräche" width="1600" height="2143" loading="lazy" decoding="async" style="object-position: 45% 62%">
+        <img src="/assets/img/exp-office-1600.webp" alt="Büro mit Körperanalysewaage und Schreibtisch für Fortschrittsgespräche" width="1600" height="2143" loading="lazy" decoding="async" style="object-position: 45% 62%">
         <span class="frame__caption">Monitoring</span>
       </article>
       <article class="bento__tile bento__tile--text bento__tile--e bento__tile--accent" data-speed="1.04">
@@ -527,7 +520,7 @@
         <p>Jede Woche: Zahlen, Fotos, Energie, Schlaf, Stress. Du bekommst Rückmeldung und eine Anpassung – nicht irgendwann, sondern bevor die nächste Woche startet.</p>
       </article>
       <article class="bento__tile bento__tile--video bento__tile--f">
-        <video data-autoplay muted playsinline loop preload="metadata" aria-label="Trainingsvideo: Schulterdrücken mit Kurzhanteln"><source src="/assets/video/loop-2.mp4" type="video/mp4"></video>
+        <video data-autoplay="/assets/video/loop-2.mp4" muted playsinline loop preload="none" poster="/assets/img/hero-press-poster.webp" aria-label="Trainingsvideo: Schulterdrücken mit Kurzhanteln"></video>
         <span class="frame__caption">Execute</span>
       </article>
       <article class="bento__tile bento__tile--text bento__tile--g">
@@ -539,7 +532,7 @@
         <p class="small muted">Leistung, Maße, Fotos, Adhärenz – in der App dokumentiert, damit jede Anpassung auf Daten beruht.</p>
       </article>
       <article class="bento__tile bento__tile--video bento__tile--i">
-        <video data-autoplay muted playsinline loop preload="metadata" aria-label="Trainingsvideo: Kabelzug"><source src="/assets/video/loop-3.mp4" type="video/mp4"></video>
+        <video data-autoplay="/assets/video/loop-3.mp4" muted playsinline loop preload="none" poster="/assets/img/about-reel-cable.webp" aria-label="Trainingsvideo: Kabelzug"></video>
         <span class="frame__caption">Progress</span>
       </article>
       <article class="bento__tile bento__tile--text bento__tile--j" data-speed="0.98">
@@ -551,7 +544,7 @@
         <p class="small muted">Du verstehst das Warum hinter jeder Entscheidung – und hast jemanden, der nachfragt.</p>
       </article>
       <article class="bento__tile bento__tile--video bento__tile--l">
-        <video data-autoplay muted playsinline loop preload="metadata" aria-label="Trainingsvideo: Liegestütze"><source src="/assets/video/loop-4.mp4" type="video/mp4"></video>
+        <video data-autoplay="/assets/video/loop-4.mp4" muted playsinline loop preload="none" poster="/assets/img/about-reel-pushup.webp" aria-label="Trainingsvideo: Liegestütze"></video>
         <span class="frame__caption">Sustain</span>
       </article>
     </div>
@@ -587,7 +580,7 @@
               <h3 class="h3">Performance-Check starten</h3>
               <p class="muted">Drei Minuten, acht Fragen zu Ziel, Training, Alltag, Hürden und Bereitschaft. Du bekommst sofort eine erste Einschätzung – kostenlos, unverbindlich, ohne Verkaufsgespräch.</p>
             </div>
-            <div class="pcard__media frame frame--grade frame--16-10"><img src="/assets/img/check-lounge-1600.jpg" alt="Ruhiger Besprechungsbereich mit Sesseln im Studio" width="1600" height="893" loading="lazy" decoding="async"></div>
+            <div class="pcard__media frame frame--grade frame--16-10"><img src="/assets/img/check-lounge-1600.webp" alt="Ruhiger Besprechungsbereich mit Sesseln im Studio" width="1600" height="893" loading="lazy" decoding="async"></div>
           </div>
         </article>
         <article class="pcard">
@@ -597,7 +590,7 @@
               <h3 class="h3">Strategiegespräch</h3>
               <p class="muted">Deine Antworten werden persönlich gelesen – nicht von einem Algorithmus. Passt es, sprechen wir über Ziele, Rahmenbedingungen und Erwartungen. Passt es nicht, sagen wir das genauso klar.</p>
             </div>
-            <div class="pcard__media frame frame--grade frame--16-10"><img src="/assets/img/exp-desk-1600.jpg" alt="Coach steht am Schreibtisch im Studio – Vorbereitung auf das Strategiegespräch" width="1600" height="893" loading="lazy" decoding="async" style="object-position: 40% 50%"></div>
+            <div class="pcard__media frame frame--grade frame--16-10"><img src="/assets/img/exp-desk-1600.webp" alt="Coach steht am Schreibtisch im Studio – Vorbereitung auf das Strategiegespräch" width="1600" height="893" loading="lazy" decoding="async" style="object-position: 40% 50%"></div>
           </div>
         </article>
         <article class="pcard">
@@ -607,7 +600,7 @@
               <h3 class="h3">Standortbestimmung</h3>
               <p class="muted">Nach dem Start folgt die ausführliche Analyse: Trainingshistorie, Ernährung, Schlaf, Stress und die ehrliche Struktur deiner Woche. Daraus entsteht dein individuelles System.</p>
             </div>
-            <div class="pcard__media frame frame--grade frame--16-10"><img src="/assets/img/process-bench-1600.jpg" alt="Mann stellt den Fuß auf eine Hantelbank – Standortbestimmung zum Start" width="1600" height="1195" loading="lazy" decoding="async" style="object-position: 55% 30%"></div>
+            <div class="pcard__media frame frame--grade frame--16-10"><img src="/assets/img/process-bench-1600.webp" alt="Mann stellt den Fuß auf eine Hantelbank – Standortbestimmung zum Start" width="1600" height="1195" loading="lazy" decoding="async" style="object-position: 55% 30%"></div>
           </div>
         </article>
         <article class="pcard">
@@ -617,7 +610,7 @@
               <h3 class="h3">Dein erster Plan in Woche 1</h3>
               <p class="muted">Trainings- und Ernährungssystem in deiner App, Technikvideos, Mindeststandards für volle Wochen. Die Umsetzung beginnt sofort – mit dem ersten Check-in am Ende von Woche eins.</p>
             </div>
-            <div class="pcard__media frame frame--grade frame--16-10"><img src="/assets/img/g5-architect-1600.jpg" alt="Hantelständer mit aufgeschlagenem Trainingsplan – das erste System steht" width="1600" height="1195" loading="lazy" decoding="async" style="object-position: 58% 50%"></div>
+            <div class="pcard__media frame frame--grade frame--16-10"><img src="/assets/img/g5-architect-1600.webp" alt="Hantelständer mit aufgeschlagenem Trainingsplan – das erste System steht" width="1600" height="1195" loading="lazy" decoding="async" style="object-position: 58% 50%"></div>
           </div>
         </article>
         <article class="pcard">
@@ -627,7 +620,7 @@
               <h3 class="h3">Wöchentlich optimieren</h3>
               <p class="muted">Wöchentliche Check-ins, monatliche Strategie-Calls, 16 Wochen lang. Das System wächst mit dir – bis du es selbst steuern kannst.</p>
             </div>
-            <div class="pcard__media frame frame--grade frame--16-10"><img src="/assets/img/process-seated-1600.jpg" alt="Mann sitzt zufrieden auf einer Hantelbank im Studio" width="1600" height="893" loading="lazy" decoding="async"></div>
+            <div class="pcard__media frame frame--grade frame--16-10"><img src="/assets/img/process-seated-1600.webp" alt="Mann sitzt zufrieden auf einer Hantelbank im Studio" width="1600" height="893" loading="lazy" decoding="async"></div>
           </div>
         </article>
       </div>
@@ -652,7 +645,7 @@
       <div class="check" data-check data-check-source="homepage"></div>
     </div>
     <div class="pc__visual frame frame--grade">
-      <img src="/assets/img/check-lounge-portrait-900.jpg" srcset="/assets/img/check-lounge-portrait-900.jpg 900w, /assets/img/check-lounge-portrait-1600.jpg 1600w" sizes="(min-width: 1024px) 40vw, 90vw" alt="Entspannter Mann sitzt lächelnd im Besprechungsbereich des Studios" width="1600" height="2143" loading="lazy" decoding="async">
+      <img src="/assets/img/check-lounge-portrait-900.webp" srcset="/assets/img/check-lounge-portrait-900.webp 900w, /assets/img/check-lounge-portrait-1600.webp 1600w" sizes="(min-width: 1024px) 40vw, 90vw" alt="Entspannter Mann sitzt lächelnd im Besprechungsbereich des Studios" width="1600" height="2143" loading="lazy" decoding="async">
     </div>
   </div>
 </section>
@@ -705,7 +698,7 @@
 <!-- ============ 12 FINAL CTA ============ -->
 <section class="final" data-theme="dark" id="start-jetzt" data-final>
   <div class="final__media" data-final-media>
-    <img src="/assets/img/cta-wide-2400.jpg" srcset="/assets/img/cta-wide-900.jpg 900w, /assets/img/cta-wide-1600.jpg 1600w, /assets/img/cta-wide-2400.jpg 2400w" sizes="100vw" alt="" width="2400" height="1340" loading="lazy" decoding="async">
+    <img src="/assets/img/cta-wide-2400.webp" srcset="/assets/img/cta-wide-900.webp 900w, /assets/img/cta-wide-1600.webp 1600w, /assets/img/cta-wide-2400.webp 2400w" sizes="100vw" alt="" width="2400" height="1340" loading="lazy" decoding="async">
   </div>
   <div class="final__shade" aria-hidden="true"></div>
   <div class="final__light" aria-hidden="true"></div>

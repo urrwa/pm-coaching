@@ -4,250 +4,94 @@
    ================================================================ */
 
 /* ---------- 01 HERO ---------- */
-.hero {
+.hero { background: var(--navy-950); }
+.hero__stage {
   position: relative;
-  min-height: 100svh;
   display: grid;
-  grid-template-rows: 1fr auto;
-  align-items: end;
+  align-items: center;
+  isolation: isolate;
   overflow: hidden;
-  background: var(--navy-950);
+  min-height: clamp(35rem, 88svh, 60rem);
 }
-
-/* Full-bleed media */
-.hero__media {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-.hero__picture {
-  display: contents;
-}
+.hero.is-scrubbing::after { content: ""; display: block; height: clamp(7rem, 18svh, 10rem); }
+.hero.is-scrubbing .hero__stage { position: sticky; top: 0; }
+.hero__media { position: absolute; inset: 0; z-index: -1; }
+.hero__picture { display: contents; }
 .hero__picture img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 55% 15%;
-  filter: saturate(0.65) contrast(1.15) brightness(0.60);
-  transform: scale(1.04);
-  will-change: transform;
-  transition: transform 0.1s linear;
+  object-position: 52% 22%;
+  filter: saturate(.62) brightness(.58);
 }
-
-/* Strong dramatic shade — editorial cinematic */
 .hero__shade {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(0deg, rgba(7,17,31,0.98) 0%, rgba(7,17,31,0.75) 30%, rgba(7,17,31,0.30) 60%, rgba(7,17,31,0.08) 100%),
-    linear-gradient(100deg, rgba(7,17,31,0.80) 0%, rgba(7,17,31,0.25) 45%, rgba(7,17,31,0) 100%);
+    linear-gradient(0deg, var(--navy-950), transparent 40%),
+    linear-gradient(90deg, rgba(7,17,31,.89) 5%, rgba(7,17,31,.7) 45%, rgba(7,17,31,.25) 80%);
 }
-
-/* Blue glow accent — upper right, more dramatic */
-.hero__glow {
+.hero__training {
   position: absolute;
-  width: 70vw;
-  height: 70vw;
-  right: -15vw;
-  top: -20vw;
-  background: radial-gradient(closest-side, rgba(39,100,232,0.42), transparent);
-  filter: blur(60px);
-  mix-blend-mode: screen;
-  pointer-events: none;
+  inset: 0 0 0 auto;
+  width: 57%;
+  mask-image: linear-gradient(90deg, transparent, #000 28%);
 }
-/* Second subtle glow — bottom left for depth */
-.hero__glow::after {
+.hero__training::after {
   content: "";
   position: absolute;
-  width: 40vw;
-  height: 40vw;
-  left: -20vw;
-  bottom: -10vw;
-  background: radial-gradient(closest-side, rgba(39,100,232,0.15), transparent);
-  filter: blur(80px);
+  inset: 0;
+  background: linear-gradient(0deg, var(--navy-950), transparent 35%),
+    linear-gradient(180deg, rgba(7,17,31,.42), transparent 32%);
 }
-
-/* Grain overlay for cinematic texture */
-.hero__grain {
+.hero__training :is(img, video) {
   position: absolute;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
-  opacity: 0.55;
-  pointer-events: none;
-  mix-blend-mode: overlay;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 9%;
+  filter: saturate(.76) brightness(.83);
 }
-
-/* Inner layout — text anchored to bottom like Ironyx */
+.hero__training video { opacity: 0; }
+.hero.is-video-ready .hero__training video { opacity: 1; }
 .hero__inner {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding-block: clamp(6rem, 12vw, 9rem) clamp(3rem, 5vw, 4.5rem);
-  min-height: calc(100svh - var(--topbar-h, 0px) - 80px);
+  padding-block: calc(var(--nav-h) + var(--topbar-h) + 2.5rem) clamp(3rem, 7vh, 6rem);
 }
-
-.hero__copy {
-  display: grid;
-  gap: 1.6rem;
-  max-width: 860px;
-}
-
-/* Eyebrow — spaced caps with subtle line */
-.hero__eyebrow {
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  font-size: 0.7rem;
-  color: rgba(79,130,240,0.9);
-  font-weight: 600;
-}
-
-/* HERO TITLE — editorial cinematic, Ironyx-level scale */
+.hero__copy { display: grid; justify-items: start; gap: clamp(.95rem, 2.5vh, 1.45rem); }
+.hero__eyebrow { color: var(--blue-200); }
 .hero__title {
   font-family: var(--font-display);
-  font-size: clamp(3.8rem, 11.5vw, 9rem);
-  line-height: 0.88;
-  letter-spacing: -0.045em;
-  color: #fff;
-  text-transform: uppercase;
+  font-size: clamp(2.65rem, 6.25vw, 6.5rem);
   font-weight: 600;
-  margin: 0;
+  line-height: .93;
+  letter-spacing: -.055em;
+  color: #fff;
 }
-
-/* Accent word — electric blue with stronger glow */
-.hero__title em {
-  font-style: normal;
-  color: var(--blue-400);
-  text-shadow: 0 0 60px rgba(79,130,240,0.5), 0 0 120px rgba(39,100,232,0.3);
-}
-
-/* Ghost/outline word — hidden, removed */
-.hero__title-ghost {
-  display: none;
-}
-
-.hero__sub {
-  color: rgba(197,206,216,0.80);
-  max-width: 50ch;
-  font-size: clamp(1rem, 1.5vw, 1.1rem);
-  line-height: 1.7;
-  letter-spacing: 0.01em;
-}
-
-/* CTA row */
-.hero__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem 1.1rem;
-  align-items: center;
-  margin-top: 0.3rem;
-}
-
-.hero__check-note {
-  color: rgba(197,206,216,0.42);
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  margin-top: -0.3rem;
-}
-
-/* Hero secondary button — diagonal sweep transition */
-.hero__secondary {
-  position: relative;
-  overflow: hidden;
-}
-.hero__secondary::before {
-  content: "";
-  position: absolute;
-  top: -60%;
-  left: -120%;
-  width: 60%;
-  height: 220%;
-  background: linear-gradient(
-    105deg,
-    transparent 0%,
-    rgba(255,255,255,0.08) 40%,
-    rgba(255,255,255,0.18) 50%,
-    rgba(255,255,255,0.08) 60%,
-    transparent 100%
-  );
-  transform: skewX(-15deg);
-  transition: left 0.55s var(--ease-out);
-  pointer-events: none;
-}
-.hero__secondary:hover::before {
-  left: 140%;
-}
-
-/* Chips — hidden, Ironyx style doesn't use them */
-.hero__chips {
-  display: none !important;
-}
-
-/* Bottom bar */
-.hero__bottom {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-block: 1.25rem 1.5rem;
-  border-top: 1px solid rgba(255,255,255,0.08);
-}
-
-.hero__scroll {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  color: rgba(197,206,216,0.5);
-  font-size: 0.7rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-.hero__scroll-line {
-  display: block;
-  width: 32px;
-  height: 1px;
-  background: rgba(255,255,255,0.15);
-  overflow: hidden;
-  position: relative;
-}
-.hero__scroll-line span {
-  display: block;
-  position: absolute;
-  inset: 0;
-  background: var(--blue-400);
-  transform: translateX(-100%);
-  animation: scroll-line 2.4s ease-in-out infinite;
-}
-@keyframes scroll-line {
-  0%   { transform: translateX(-100%); }
-  50%  { transform: translateX(0%); }
-  100% { transform: translateX(100%); }
-}
-
-.hero__method {
-  font-size: 0.68rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(197,206,216,0.4);
-}
-.hero__method-sep {
-  display: inline-block;
-  width: 1px;
-  height: 10px;
-  background: rgba(255,255,255,0.2);
-  margin: 0 0.75rem;
-  vertical-align: middle;
-}
+.hero__title em { color: var(--blue-200); font-style: normal; }
+.hero__sub { max-width: 45ch; color: var(--silver); font-size: clamp(.97rem, 1.4vw, 1.12rem); }
+.hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; }
+.hero__check-note { color: var(--silver); font-size: .75rem; }
 
 @media (max-width: 767px) {
-  .hero__inner { padding-bottom: clamp(2rem, 5vw, 3.5rem); }
-  .hero__method { display: none; }
-  .hero__title { font-size: clamp(3.2rem, 14vw, 5.5rem); line-height: 0.9; }
-  .hero__sub { font-size: 0.95rem; }
+  .hero__stage { min-height: clamp(35rem, 83svh, 43rem); align-items: end; }
+  .hero.is-scrubbing::after { height: clamp(7rem, 16svh, 9rem); }
+  .hero__training { inset: 0 0 auto; width: 100%; height: 72%; mask-image: linear-gradient(#000 62%, transparent); }
+  .hero__training :is(img, video) { object-position: 50% 18%; }
+  .hero__training::after {
+    background: linear-gradient(0deg, var(--navy-950), rgba(7,17,31,.76) 23%, transparent 64%),
+      linear-gradient(180deg, rgba(7,17,31,.53), transparent 26%);
+  }
+  .hero__inner { padding-block: max(13rem, 34svh) 1.5rem; }
+  .hero__title { font-size: clamp(2.3rem, 9.75vw, 4.1rem); }
+  .hero__actions { gap: .35rem .75rem; }
+}
+@media (max-width: 360px) {
+  .hero__title { font-size: clamp(1.95rem, 9.5vw, 2.2rem); }
+  .hero__sub { font-size: .91rem; }
+  .hero__actions .btn--lg { padding-inline: .9rem; }
 }
 
 /* ---------- STATS BAR (after hero) ---------- */

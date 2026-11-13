@@ -106,32 +106,13 @@
     else { const el = typeof target === "string" ? document.querySelector(target) : target; if (el) el.scrollIntoView({ behavior: reduced ? "auto" : "smooth" }); }
   };
 
-  // ---------- Page veil: intro + transitions ----------
+  // ---------- Page veil: brief internal navigation transition ----------
   function setupVeil() {
     const veil = document.querySelector(".page-veil");
     const mark = veil && veil.querySelector(".page-veil__mark");
-    const lift = () => {
-      PM.revealed = true;
-      document.dispatchEvent(new CustomEvent("pm:reveal"));
-      if (!veil) return;
-      if (reduced) { veil.classList.add("is-done"); return; }
-      gsap.timeline()
-        .to(mark, { opacity: 0, y: -10, duration: 0.3, ease: "power2.in" }, 0)
-        .to(veil, { scaleY: 0, transformOrigin: "top", duration: 0.9, ease: "expo.inOut" }, 0.05)
-        .add(() => veil.classList.add("is-done"));
-    };
-    let firstVisit = false;
-    try { firstVisit = !sessionStorage.getItem("pm_seen"); sessionStorage.setItem("pm_seen", "1"); } catch (e) {}
-    if (reduced || !veil) { lift(); }
-    else if (firstVisit) {
-      gsap.timeline()
-        .fromTo(mark, { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.6, ease: "expo.out" })
-        .add(lift, "+=0.35");
-    } else {
-      gsap.set(mark, { opacity: 0 });
-      setTimeout(lift, 60);
-    }
-    window.addEventListener("pageshow", (e) => { if (e.persisted && veil) { gsap.set(veil, { scaleY: 0 }); veil.classList.add("is-done"); } });
+    PM.revealed = true;
+    document.dispatchEvent(new CustomEvent("pm:reveal"));
+    window.addEventListener("pageshow", (e) => { if (e.persisted) veil?.classList.remove("is-leaving"); });
 
     // Transitions on internal links
     document.addEventListener("click", (e) => {
@@ -147,10 +128,10 @@
       e.preventDefault();
       if (reduced || !veil) { location.href = url.href; return; }
       closeMenu(true);
-      veil.classList.remove("is-done");
+      veil.classList.add("is-leaving");
       gsap.timeline({ onComplete: () => (location.href = url.href) })
-        .fromTo(veil, { scaleY: 0, transformOrigin: "bottom" }, { scaleY: 1, duration: 0.7, ease: "expo.inOut" })
-        .to(mark, { opacity: 1, y: 0, duration: 0.3 }, "-=0.25");
+        .fromTo(veil, { scaleY: 0, transformOrigin: "bottom" }, { scaleY: 1, duration: 0.2, ease: "power2.out" })
+        .to(mark, { opacity: 1, duration: 0.12 }, 0.08);
     });
   }
 
@@ -393,10 +374,16 @@
   function setupVideos() {
     const vids = document.querySelectorAll("video[data-autoplay]");
     if (!vids.length) return;
-    if (reduced) { vids.forEach((v) => { v.removeAttribute("autoplay"); v.pause(); }); return; }
+    if (reduced || navigator.connection?.saveData) {
+      vids.forEach((v) => { v.removeAttribute("autoplay"); v.pause(); });
+      return;
+    }
     const io = new IntersectionObserver((entries) => entries.forEach((en) => {
       const v = en.target;
-      if (en.isIntersecting) { const p = v.play(); if (p && p.catch) p.catch(() => {}); } else v.pause();
+      if (en.isIntersecting) {
+        if (v.dataset.autoplay && !v.hasAttribute("src")) v.src = v.dataset.autoplay;
+        v.play().catch(() => {});
+      } else v.pause();
     }), { rootMargin: "100px" });
     vids.forEach((v) => { v.muted = true; v.playsInline = true; v.loop = true; io.observe(v); });
   }

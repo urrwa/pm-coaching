@@ -6,33 +6,67 @@
     if (!gsap || !ST) return;
     const reduced = PM.reduced;
 
-    /* ---------- Hero ---------- */
+    /* ---------- Hero: one rep follows scroll progress ---------- */
     (function hero() {
-      const hero = document.querySelector("[data-hero]");
-      if (!hero || reduced || window.matchMedia("(max-width: 767px)").matches) return;
-      const img = hero.querySelector(".hero__picture img");
-      const title = hero.querySelector("[data-hero-title]");
-      const els = hero.querySelectorAll("[data-hero-el]");
-      const chips = hero.querySelectorAll("[data-hero-chip]");
-      const glow = hero.querySelector(".hero__glow");
-      const words = PM.splitWords(title);
-      gsap.set(img, { scale: 1.18, opacity: 0 });
-      gsap.set(words, { yPercent: 115 });
-      gsap.set(els, { opacity: 0, y: 28 });
-      gsap.set(chips, { opacity: 0, y: 20, scale: 0.9 });
-      const tl = gsap.timeline({ paused: true, defaults: { ease: "expo.out" } })
-        .to(img, { opacity: 1, duration: 1.6, ease: "power2.out" }, 0)
-        .to(img, { scale: 1, duration: 2.6, ease: "expo.out" }, 0)
-        .to(words, { yPercent: 0, duration: 1.3, stagger: 0.045 }, 0.25)
-        .to(els, { opacity: 1, y: 0, duration: 1.1, stagger: 0.12 }, 0.75)
-        .to(chips, { opacity: 1, y: 0, scale: 1, duration: 1, stagger: 0.12 }, 1.1);
-      const play = () => tl.play();
-      if (PM.revealed) play(); else document.addEventListener("pm:reveal", play, { once: true });
-      // scroll parallax & fade
-      gsap.to(img, { yPercent: 14, ease: "none", scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: true } });
-      gsap.to(hero.querySelector(".hero__copy"), { y: -80, opacity: 0, ease: "none", scrollTrigger: { trigger: hero, start: "40% top", end: "bottom top", scrub: true } });
-      gsap.to(glow, { x: 60, y: 40, duration: 9, yoyo: true, repeat: -1, ease: "sine.inOut" });
-      chips.forEach((c, i) => gsap.to(c, { y: "+=" + (8 + i * 4), duration: 3 + i * 0.6, yoyo: true, repeat: -1, ease: "sine.inOut", delay: 2 }));
+      const section = document.querySelector("[data-hero]");
+      const video = section?.querySelector("[data-hero-video]");
+      if (!video || navigator.connection?.saveData) return;
+
+      gsap.matchMedia().add("(prefers-reduced-motion: no-preference) and (min-height: 540px)", () => {
+        const stage = section.querySelector(".hero__stage");
+        let target = 0;
+        let failed = false;
+
+        function seek() {
+          if (failed || video.readyState < 2 || video.seeking) return;
+          if (Math.abs(video.currentTime - target) > 1 / 60) {
+            video.currentTime = target;
+          } else {
+            section.classList.add("is-video-ready");
+          }
+        }
+
+        function update({ progress, isActive }) {
+          if (!video.hasAttribute("src")) {
+            if (!isActive) return;
+            video.preload = "auto";
+            video.src = video.dataset.heroVideo;
+          }
+          target = progress * Math.max(0, (video.duration || 0) - 1 / 24);
+          seek();
+        }
+
+        function onLoaded() { update(trigger); }
+        function onError() {
+          failed = true;
+          section.classList.remove("is-scrubbing", "is-video-ready");
+          trigger.kill();
+          requestAnimationFrame(() => ST.refresh());
+        }
+
+        section.classList.add("is-scrubbing");
+        video.addEventListener("loadeddata", onLoaded);
+        video.addEventListener("seeked", seek);
+        video.addEventListener("error", onError);
+        const trigger = ST.create({
+          trigger: section,
+          start: "top top",
+          end: () => `+=${section.offsetHeight - stage.offsetHeight}`,
+          onUpdate: update,
+          onRefresh: update,
+        });
+
+        return () => {
+          section.classList.remove("is-scrubbing", "is-video-ready");
+          video.removeEventListener("loadeddata", onLoaded);
+          video.removeEventListener("seeked", seek);
+          video.removeEventListener("error", onError);
+          if (video.hasAttribute("src")) {
+            video.removeAttribute("src");
+            video.load();
+          }
+        };
+      });
     })();
 
     if (!reduced) {

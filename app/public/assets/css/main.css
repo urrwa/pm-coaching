@@ -579,7 +579,8 @@ html.js:not(.reduced-motion) [data-reveal-children]:not(.is-revealed) > * { opac
 }
 
 /* Page veil (transitions + intro) */
-.page-veil { position: fixed; inset: 0; z-index: 200; background: var(--navy-950); display: grid; place-items: center; pointer-events: none; transform-origin: top; }
+.page-veil { position: fixed; inset: 0; z-index: 200; background: var(--navy-950); display: grid; place-items: center; pointer-events: none; transform-origin: top; visibility: hidden; }
+.page-veil.is-leaving { visibility: visible; }
 html:not(.js) .page-veil { display: none; }
 .page-veil__mark { color: #fff; opacity: 0; }
 .page-veil__mark .logo-mark { width: clamp(140px, 18vw, 220px); }
