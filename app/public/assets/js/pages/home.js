@@ -24,7 +24,8 @@
           loading = true;
           try {
             // Buffer the compact film once so seeking does not depend on range requests.
-            const response = await fetch(video.dataset.heroVideo, { signal: request.signal });
+            const source = matchMedia("(max-width: 767px)").matches ? video.dataset.heroVideoMobile : video.dataset.heroVideo;
+            const response = await fetch(source, { signal: request.signal });
             if (!response.ok) throw new Error(`Hero video request failed: ${response.status}`);
             const film = await response.blob();
             if (request.signal.aborted) return;
