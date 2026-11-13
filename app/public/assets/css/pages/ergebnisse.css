@@ -10,10 +10,52 @@
 .er-hero__title { max-width: 12ch; }
 .er-hero__aside { display: grid; gap: 1.25rem; justify-items: start; }
 .er-hero__aside .lead { max-width: 46ch; }
-.er-hero__band { margin-top: clamp(3rem, 7vw, 6rem); display: grid; gap: 1.5rem; }
-.er-hero__band-frame { aspect-ratio: 4 / 3; }
-@media (min-width: 700px) { .er-hero__band-frame { aspect-ratio: 21 / 9; max-height: 70vh; } }
-.er-hero__band-frame img { transform: scale(1.1); }
+.er-loop {
+  --er-loop-gap: clamp(.65rem, 1.6vw, 1.5rem);
+  margin-top: clamp(2rem, 5vw, 4rem);
+  padding-bottom: clamp(2rem, 5vw, 4rem);
+}
+.er-loop__controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: .5rem;
+  margin-bottom: 1rem;
+  color: var(--silver);
+  font-size: .875rem;
+}
+.er-loop__controls input { accent-color: var(--blue); }
+.er-loop__controls label { cursor: pointer; }
+.er-loop__viewport {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.er-loop__track {
+  display: flex;
+  width: max-content;
+  animation: er-photo-loop 38s linear infinite;
+}
+.er-loop__group { display: flex; gap: var(--er-loop-gap); padding-inline-end: var(--er-loop-gap); }
+.er-loop__group img {
+  width: clamp(8.5rem, 16vw, 16rem);
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: center 32%;
+  border-radius: .35rem;
+  background: var(--navy-900);
+}
+.er-loop__group img:nth-child(odd) { filter: grayscale(.85); }
+.er-loop:has(#er-loop-pause:checked) .er-loop__track { animation-play-state: paused; }
+@media (hover: hover) {
+  .er-loop__viewport:hover .er-loop__track { animation-play-state: paused; }
+}
+@keyframes er-photo-loop { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .er-loop__controls, .er-loop__group + .er-loop__group { display: none; }
+  .er-loop__viewport { overflow-x: auto; mask-image: none; padding-inline: var(--gutter); }
+  .er-loop__track { animation: none; }
+}
+
 /* ---------- Fortschritt messen ---------- */
 .er-measure { background: var(--navy-950); }
 .er-dims { display: grid; column-gap: clamp(2rem, 6vw, 6rem); }
