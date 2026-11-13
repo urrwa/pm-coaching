@@ -139,6 +139,34 @@
   letter-spacing: 0.06em;
 }
 
+/* Hero secondary button — diagonal sweep transition */
+.hero__secondary {
+  position: relative;
+  overflow: hidden;
+}
+.hero__secondary::before {
+  content: "";
+  position: absolute;
+  top: -60%;
+  left: -120%;
+  width: 60%;
+  height: 220%;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(255,255,255,0.08) 40%,
+    rgba(255,255,255,0.18) 50%,
+    rgba(255,255,255,0.08) 60%,
+    transparent 100%
+  );
+  transform: skewX(-15deg);
+  transition: left 0.55s var(--ease-out);
+  pointer-events: none;
+}
+.hero__secondary:hover::before {
+  left: 140%;
+}
+
 /* Chips — hidden, Ironyx style doesn't use them */
 .hero__chips {
   display: none !important;
