@@ -182,6 +182,8 @@ html.lenis, html.lenis body { height: auto; }
 .btn {
   --btn-bg: var(--blue);
   --btn-fg: #fff;
+  --btn-dur: 480ms;
+  --btn-ease: cubic-bezier(0.785, 0.135, 0.15, 0.86);
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -196,67 +198,131 @@ html.lenis, html.lenis body { height: auto; }
   color: var(--btn-fg);
   background: var(--btn-bg);
   overflow: hidden;
-  transition: color .4s var(--ease-out), border-color .4s var(--ease-out), transform .5s var(--ease-out);
+  transition: color var(--btn-dur) var(--btn-ease), border-color .4s var(--ease-out), transform .5s var(--ease-out);
   white-space: nowrap;
   will-change: transform;
+  text-decoration: none;
 }
-.btn::before {
-  content: "";
-  position: absolute;
-  left: 50%; top: 50%;
-  width: 500px; height: 500px;
-  z-index: 1;
-  background: var(--btn-fill, rgba(255,255,255,0.18));
-  border-radius: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  transition: transform .65s var(--ease-out);
-  pointer-events: none;
-}
-.btn:hover::before, .btn:focus-visible::before {
-  transform: translate(-50%, -50%) scale(1);
-}
-.btn__label { position: relative; z-index: 2; }
-.btn__icon { position: relative; z-index: 2; flex-shrink: 0; }
-.btn__icon {
-  display: grid; place-items: center;
-  width: 2.25rem; height: 2.25rem; border-radius: 50%;
-  background: rgba(255,255,255,.16);
-  transition: background .4s var(--ease-out), transform .5s var(--ease-out);
-  overflow: hidden;
-}
-.btn__icon svg { transition: transform .5s var(--ease-out); }
-.btn:hover .btn__icon { background: var(--blue); }
-.btn:hover .btn__icon svg { transform: translateX(2px); }
 
-/* Primary — blue bg, dark navy fill from bottom */
+/* ── Fill circle (starts as icon-sized pill on the right, expands to cover button) ── */
+.btn__fill {
+  pointer-events: none;
+  position: absolute;
+  z-index: 1;
+  border-radius: 9999px;
+  background: var(--btn-fill-bg, rgba(255,255,255,.18));
+  /* matches icon position: right edge, vertically centered, same size as icon */
+  top: var(--fill-inset-y, .35rem);
+  bottom: var(--fill-inset-y, .35rem);
+  right: .5rem;
+  left: calc(100% - .5rem - var(--icon-size, 2.25rem));
+  transition:
+    inset var(--btn-dur) var(--btn-ease),
+    background-color var(--btn-dur) var(--btn-ease);
+}
+.btn:hover .btn__fill,
+.btn:focus-visible .btn__fill {
+  inset: 0;
+}
+
+/* ── Mask layer: duplicate label with fill-text color, clipped to match the fill pill ── */
+.btn__mask {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  padding: .85rem 1rem .85rem 1.5rem;
+  color: var(--btn-fill-fg, var(--btn-bg));
+  clip-path: inset(var(--fill-inset-y, .35rem) .5rem var(--fill-inset-y, .35rem) calc(100% - .5rem - var(--icon-size, 2.25rem)) round 999px);
+  transition: clip-path var(--btn-dur) var(--btn-ease), color var(--btn-dur) var(--btn-ease);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: .95rem;
+  letter-spacing: .01em;
+  line-height: 1;
+  white-space: nowrap;
+}
+.btn:hover .btn__mask,
+.btn:focus-visible .btn__mask {
+  clip-path: inset(0 0 0 0 round 999px);
+}
+
+/* ── Label & icon sit above fill ── */
+.btn__label { position: relative; z-index: 3; }
+.btn__icon {
+  position: relative; z-index: 3; flex-shrink: 0;
+  display: grid; place-items: center;
+  width: var(--icon-size, 2.25rem); height: var(--icon-size, 2.25rem);
+  border-radius: 50%;
+  background: rgba(255,255,255,.16);
+  overflow: hidden;
+  transition: background var(--btn-dur) var(--btn-ease), color var(--btn-dur) var(--btn-ease);
+}
+
+/* ── Arrow swap: two arrows stacked, one exits right, one enters from left ── */
+.btn__icon svg {
+  position: absolute;
+  top: 50%; left: 50%;
+  transition: transform var(--btn-dur) var(--btn-ease);
+}
+.btn__icon svg.arrow-exit  { transform: translate(-50%, -50%) scale(1); }
+.btn__icon svg.arrow-enter { transform: translate(-170%, -50%) scale(0); }
+.btn:hover .btn__icon svg.arrow-exit,
+.btn:focus-visible .btn__icon svg.arrow-exit  { transform: translate(70%, -50%) scale(0); }
+.btn:hover .btn__icon svg.arrow-enter,
+.btn:focus-visible .btn__icon svg.arrow-enter { transform: translate(-50%, -50%) scale(1); }
+
+/* ── Primary: blue bg, white fill, blue fill-text ── */
 .btn--primary {
   --btn-bg: var(--blue);
   --btn-fg: #fff;
-  --btn-fill: rgba(255,255,255,0.22);
+  --btn-fill-bg: rgba(255,255,255,0.95);
+  --btn-fill-fg: var(--blue);
 }
-.btn--primary:hover { color: #fff; }
+.btn--primary .btn__fill { background: rgba(255,255,255,0.95); }
+.btn--primary .btn__icon { background: rgba(255,255,255,.16); color: #fff; }
+.btn--primary:hover .btn__icon { background: var(--blue); color: #fff; }
 
-/* Outline — transparent bg, solid white/dark fill */
+/* ── Outline: bordered, navy fill, white fill-text ── */
 .btn--outline {
   --btn-bg: transparent;
   --btn-fg: var(--fg-strong);
-  --btn-fill: var(--navy-950);
+  --btn-fill-bg: var(--navy-950);
+  --btn-fill-fg: #fff;
   box-shadow: inset 0 0 0 1px var(--line);
 }
-.btn--outline .btn__icon { background: var(--card); }
-.btn--outline:hover { color: #fff; }
+.btn--outline .btn__fill { background: var(--navy-950); }
+.btn--outline .btn__icon { background: var(--card); color: var(--fg-strong); }
 .btn--outline:hover .btn__icon { background: var(--blue); color: #fff; box-shadow: none; }
+.btn--outline:hover { color: var(--fg-strong); }
 
-/* Ghost — no fill animation (uses diagonal sweep instead on hero__secondary) */
-.btn--ghost { --btn-bg: transparent; --btn-fg: var(--fg-strong); padding-left: 0; padding-right: 0; border-radius: 0; gap: .75rem; }
-.btn--ghost::before { display: none; }
+/* ── Ghost: no fill, plain arrow slide ── */
+.btn--ghost {
+  --btn-bg: transparent; --btn-fg: var(--fg-strong);
+  padding-left: 0; padding-right: 0; border-radius: 0; gap: .75rem;
+}
+.btn--ghost .btn__fill { display: none; }
+.btn--ghost .btn__mask { display: none; }
 .btn--ghost .btn__icon { background: transparent; box-shadow: inset 0 0 0 1px var(--line); }
 .btn--ghost:hover .btn__icon { background: var(--blue); color: #fff; box-shadow: none; }
-.btn--sm { padding: .8rem .9rem .8rem 1.2rem; font-size: .85rem; }
-.btn--sm .btn__icon { width: 1.85rem; height: 1.85rem; }
-.btn--sm .btn__icon svg { width: 15px; height: 15px; }
-.btn--lg { padding: 1rem 1.1rem 1rem 1.8rem; font-size: 1rem; }
-.btn--lg .btn__icon { width: 2.5rem; height: 2.5rem; }
+/* ghost arrow: simple slide right, no swap */
+.btn--ghost .btn__icon svg.arrow-exit  { transform: translate(-50%, -50%) scale(1); }
+.btn--ghost .btn__icon svg.arrow-enter { display: none; }
+.btn--ghost:hover .btn__icon svg.arrow-exit { transform: translate(-50%, -50%) translateX(2px) scale(1); }
+
+/* ── Sizes ── */
+.btn--sm {
+  padding: .8rem .9rem .8rem 1.2rem; font-size: .85rem;
+  --icon-size: 1.85rem; --fill-inset-y: .3rem;
+}
+.btn--sm .btn__mask { padding: .8rem .9rem .8rem 1.2rem; font-size: .85rem; }
+.btn--lg {
+  padding: 1rem 1.1rem 1rem 1.8rem; font-size: 1rem;
+  --icon-size: 2.5rem; --fill-inset-y: .38rem;
+}
+.btn--lg .btn__mask { padding: 1rem 1.1rem 1rem 1.8rem; font-size: 1rem; }
 .btn[disabled], .btn[aria-disabled="true"] { opacity: .5; pointer-events: none; }
 
 @media (max-width: 520px) {
