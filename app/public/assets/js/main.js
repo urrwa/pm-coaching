@@ -160,7 +160,6 @@
     if (!menuOpen) return;
     menuOpen = false;
     const menu = document.querySelector("[data-menu]"), burger = document.querySelector("[data-menu-toggle]");
-    document.body.classList.remove("menu-open");
     burger && burger.setAttribute("aria-expanded", "false");
     burger && burger.setAttribute("aria-label", "Menü öffnen");
     burger && (burger.querySelector(".nav__burger-text").textContent = "Menü");
@@ -171,9 +170,10 @@
     if (instant || reduced || !menuTl || menuTl.progress() === 0) {
       menuTl?.pause(0);
       menu.classList.remove("is-open");
+      document.body.classList.remove("menu-open");
       return;
     }
-    menuTl.timeScale(1.5).reverse();
+    menuTl.timeScale(1.15).reverse();
   }
   function setupNav() {
     const nav = document.getElementById("nav");
@@ -215,7 +215,10 @@
       const label = burger.querySelector(".nav__burger-text");
       const video = menu.querySelector("[data-menu-video]");
       menu.inert = true;
-      menuTl = gsap.timeline({ paused: true, onReverseComplete: () => menu.classList.remove("is-open") })
+      menuTl = gsap.timeline({ paused: true, onReverseComplete: () => {
+        menu.classList.remove("is-open");
+        document.body.classList.remove("menu-open");
+      } })
         .fromTo(menu, { clipPath: "inset(0 0 100% 0)" }, { clipPath: "inset(0 0 0% 0)", duration: 0.55, ease: "power3.inOut" })
         .fromTo(links, { y: -10, opacity: 0 }, { y: 0, opacity: 1, duration: 0.38, ease: "power2.out", stagger: 0.028 }, 0.21);
       const open = () => {
