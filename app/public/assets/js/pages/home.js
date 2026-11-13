@@ -148,8 +148,8 @@
       };
       setActive(0);
       gsap.matchMedia().add({
-        horizontal: "(min-width: 1024px) and (min-height: 760px) and (prefers-reduced-motion: no-preference)",
-        vertical: "(max-width: 1023px), (max-height: 759px), (prefers-reduced-motion: reduce)",
+        horizontal: "(min-width: 1024px) and (min-height: 540px) and (prefers-reduced-motion: no-preference)",
+        vertical: "(width < 1024px), (height < 540px), (prefers-reduced-motion: reduce)",
       }, ({ conditions }) => {
         if (!conditions.horizontal) {
           stages.forEach((stage, i) => ST.create({
