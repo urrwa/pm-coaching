@@ -3,24 +3,36 @@
    ===================================================================== */
 
 /* ---------- 01 Hero ---------- */
-.kt-hero { background: var(--offwhite); padding-bottom: clamp(2rem, 4vw, 3rem); }
-.kt-hero__inner { display: grid; gap: clamp(1.1rem, 2vw, 1.6rem); max-width: 1040px; }
+.kt-scene {
+  background: var(--navy-950);
+}
+.kt-hero {
+  background: linear-gradient(90deg, rgba(7,17,31,.96), rgba(7,17,31,.75) 55%, rgba(7,17,31,.45)),
+    linear-gradient(0deg, var(--navy-950), transparent 45%),
+    url("/assets/img/trust-gym-1600.jpg") center 38% / cover;
+  padding-bottom: clamp(2.5rem, 7vw, 6rem);
+}
+.kt-hero__inner { display: grid; gap: clamp(1.1rem, 2vw, 1.6rem); }
 .kt-hero__title { max-width: 14ch; }
-.kt-hero__lead { max-width: 58ch; }
+.kt-hero__lead { max-width: 54ch; color: var(--silver); }
 
 /* ---------- 02 Contact grid ---------- */
-.kt-contact { background: var(--offwhite); padding-top: clamp(2rem, 4vw, 3.5rem); }
-.kt-grid { display: grid; gap: 3rem; }
+.kt-contact {
+  background: linear-gradient(180deg, var(--navy-950), rgba(7,17,31,.86) 38%, var(--navy-950)),
+    url("/assets/img/trust-gym-1600.jpg") center / cover;
+  padding-block: clamp(1rem, 3vw, 2rem) clamp(3rem, 7vw, 6rem);
+}
+.kt-grid { display: grid; gap: clamp(1.75rem, 4vw, 4rem); }
 @media (min-width: 1024px) {
-  .kt-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(2.5rem, 5vw, 6rem); align-items: start; }
+  .kt-grid { grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); align-items: start; }
   .kt-options { position: sticky; top: calc(var(--nav-h) + 1.5rem); }
 }
 .kt-options { display: grid; gap: 1.25rem; align-content: start; }
 .kt-options__label { margin-bottom: .25rem; }
 .kt-tiles { display: grid; gap: .85rem; }
-.kt-tile { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1rem 1.15rem; align-items: center; padding: 1.2rem 1.3rem; border: 1px solid var(--line); border-radius: var(--radius-l); background: var(--white); transition: transform .55s var(--ease-out), border-color .4s, box-shadow .55s var(--ease-out); }
+.kt-tile { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1rem 1.15rem; align-items: center; padding: 1.2rem 1.3rem; border: 1px solid var(--line); border-radius: var(--radius-l); background: var(--navy-900); transition: transform .55s var(--ease-out), border-color .4s, box-shadow .55s var(--ease-out); }
 .kt-tile:hover { transform: translateY(-3px); border-color: rgba(39,100,232,.45); box-shadow: 0 26px 50px -32px rgba(7,17,31,.4); }
-.kt-tile__icon { width: 2.75rem; height: 2.75rem; border-radius: 50%; display: grid; place-items: center; background: rgba(39,100,232,.1); color: var(--blue); flex-shrink: 0; }
+.kt-tile__icon { width: 2.75rem; height: 2.75rem; border-radius: 50%; display: grid; place-items: center; background: rgba(39,100,232,.18); color: var(--blue-200); flex-shrink: 0; }
 .kt-tile__text { display: grid; gap: .15rem; min-width: 0; }
 .kt-tile__label { font-family: var(--font-display); font-size: .7rem; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
 .kt-tile__value { font-family: var(--font-display); font-weight: 600; font-size: 1.08rem; letter-spacing: -.01em; line-height: 1.25; color: var(--fg-strong); overflow-wrap: anywhere; }
@@ -29,7 +41,7 @@
 .kt-tile__arrow svg { width: 16px; height: 16px; }
 .kt-tile:hover .kt-tile__arrow { background: var(--blue); border-color: var(--blue); color: #fff; }
 @media (min-width: 480px) { .kt-tile { grid-template-columns: auto minmax(0, 1fr) auto; } .kt-tile__arrow { display: grid; } }
-.kt-tile--accent { background: var(--navy-950); color: #fff; border-color: transparent; position: relative; overflow: hidden; }
+.kt-tile--accent { background: var(--navy-800); color: #fff; border-color: var(--line); position: relative; overflow: hidden; }
 .kt-tile--accent::after { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 80% at 100% 0%, rgba(39,100,232,.4), transparent 70%); pointer-events: none; }
 .kt-tile--accent > * { position: relative; z-index: 1; }
 .kt-tile--accent .kt-tile__icon { background: var(--blue); color: #fff; }
@@ -41,12 +53,12 @@
 .kt-options__note { max-width: 44ch; }
 
 /* Dark form panel (shares the Performance-Check shell treatment) */
-.kt-panel { position: relative; border-radius: 14px; background: var(--navy-900); color: #fff; border: 1px solid rgba(255,255,255,.08); overflow: hidden; box-shadow: 0 40px 120px -40px rgba(7,17,31,.6); padding: clamp(1.5rem, 3.5vw, 2.75rem); }
+.kt-panel { position: relative; border-radius: 14px; background: var(--navy-900); color: #fff; border: 1px solid rgba(255,255,255,.08); overflow: hidden; box-shadow: 0 28px 80px -35px rgba(0,0,0,.65); padding: clamp(1.5rem, 3.5vw, 2.75rem); }
 .kt-panel::before { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 40% at 100% 0%, rgba(39,100,232,.25), transparent 70%); pointer-events: none; }
 .kt-panel > * { position: relative; }
 .kt-panel__head { display: grid; gap: .5rem; margin-bottom: 1.75rem; padding-bottom: 1.25rem; border-bottom: 1px solid rgba(255,255,255,.08); }
-.kt-panel__title { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.3rem, 2vw, 1.7rem); letter-spacing: -.02em; line-height: 1.15; color: #fff; }
-.kt-panel__sub { color: var(--grey); font-size: .92rem; }
+.kt-panel__title { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.6rem, 3vw, 2.5rem); letter-spacing: -.02em; line-height: 1.15; color: #fff; }
+.kt-panel__sub { color: var(--silver); font-size: .92rem; }
 .kt-panel textarea { resize: vertical; min-height: 150px; line-height: 1.55; }
 .kt-panel select { appearance: none; -webkit-appearance: none; padding-right: 2.75rem; cursor: pointer; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238793A3' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='m6 9 6 6 6-6'/></svg>"); background-repeat: no-repeat; background-position: right 1rem center; background-size: 14px; }
 .kt-panel select:invalid { color: rgba(255,255,255,.4); }
