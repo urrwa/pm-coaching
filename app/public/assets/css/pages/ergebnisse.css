@@ -10,51 +10,35 @@
 .er-hero__title { max-width: 12ch; }
 .er-hero__aside { display: grid; gap: 1.25rem; justify-items: start; }
 .er-hero__aside .lead { max-width: 46ch; }
-.er-loop {
-  --er-loop-gap: clamp(.65rem, 1.6vw, 1.5rem);
-  margin-top: clamp(2rem, 5vw, 4rem);
-  padding-bottom: clamp(2rem, 5vw, 4rem);
-}
-.er-loop__controls {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: .5rem;
-  margin-bottom: 1rem;
-  color: var(--silver);
-  font-size: .875rem;
-}
-.er-loop__controls input { accent-color: var(--blue); }
-.er-loop__controls label { cursor: pointer; }
+.er-loop { padding-block: clamp(3rem, 7vw, 6rem); }
+.er-loop__head { display: grid; justify-items: center; gap: 1rem; text-align: center; }
+.er-loop__head h2 { overflow-wrap: anywhere; }
+.er-loop__head p { max-width: 57ch; }
 .er-loop__viewport {
-  overflow: hidden;
-  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  --tile-width: clamp(7rem, 15vw, 15rem);
+  margin: clamp(1.25rem, 4vw, 3rem) auto 0;
+  width: min(92%, 100rem);
+  overflow: auto;
 }
-.er-loop__track {
-  display: flex;
-  width: max-content;
-  animation: er-photo-loop 38s linear infinite;
-}
-.er-loop__group { display: flex; gap: var(--er-loop-gap); padding-inline-end: var(--er-loop-gap); }
-.er-loop__group img {
-  width: clamp(8.5rem, 16vw, 16rem);
+.er-loop__track { display: flex; gap: 1rem; }
+.er-loop__track img {
+  flex: 0 0 var(--tile-width);
+  width: var(--tile-width);
   aspect-ratio: 3 / 4;
   object-fit: cover;
   object-position: center 32%;
-  border-radius: .35rem;
-  background: var(--navy-900);
+  border-radius: .65rem;
 }
-.er-loop__group img:nth-child(odd) { filter: grayscale(.85); }
-.er-loop:has(#er-loop-pause:checked) .er-loop__track { animation-play-state: paused; }
-@media (hover: hover) {
-  .er-loop__viewport:hover .er-loop__track { animation-play-state: paused; }
+.er-loop.is-curved .er-loop__viewport {
+  position: relative;
+  height: clamp(15rem, 32vw, 33rem);
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
-@keyframes er-photo-loop { to { transform: translateX(-50%); } }
-@media (prefers-reduced-motion: reduce) {
-  .er-loop__controls, .er-loop__group + .er-loop__group { display: none; }
-  .er-loop__viewport { overflow-x: auto; mask-image: none; padding-inline: var(--gutter); }
-  .er-loop__track { animation: none; }
-}
+.er-loop.is-curved .er-loop__track { height: 100%; }
+.er-loop.is-curved img { position: absolute; left: 50%; top: 50%; }
+.er-loop__controls { text-align: center; margin-top: .75rem; }
+.er-loop__controls button { color: var(--silver); padding: .55rem .75rem; text-decoration: underline; }
 
 /* ---------- Fortschritt messen ---------- */
 .er-measure { background: var(--navy-950); }

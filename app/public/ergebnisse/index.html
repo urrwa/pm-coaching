@@ -41,6 +41,7 @@
   <script src="/assets/js/config.js"></script>
   <script src="/assets/js/main.js" defer></script>
   
+  <script src="/assets/js/pages/ergebnisse.js" defer></script>
 </head>
 <body class="page-ergebnisse">
   <a class="skip-link" href="#main">Zum Inhalt springen</a>
@@ -124,33 +125,28 @@
     </div>
   </div>
 
-  <div class="er-loop">
-    <div class="container er-loop__controls">
-      <input type="checkbox" id="er-loop-pause">
-      <label for="er-loop-pause">Bildlauf pausieren</label>
+</section>
+
+<section class="er-loop section" data-theme="dark" aria-labelledby="transformationen" data-er-loop>
+  <div class="container er-loop__head">
+    <h2 class="display-l" id="transformationen">Transformationen</h2>
+    <p class="muted">Die Galerie zeigt Trainingsmotive. Bestätigte Vorher-Nachher-Fotos werden mit Zustimmung der Kunden veröffentlicht.</p>
+  </div>
+  <div class="er-loop__viewport" aria-hidden="true">
+    <div class="er-loop__track">
+      <img src="/assets/img/train-portrait-close-900.jpg" alt="" decoding="async">
+      <img src="/assets/img/train-squat-900.jpg" alt="" decoding="async">
+      <img src="/assets/img/train-cable-side-900.jpg" alt="" decoding="async">
+      <img src="/assets/img/train-bench-press-900.jpg" alt="" decoding="async">
+      <img src="/assets/img/train-farmers-900.jpg" alt="" decoding="async">
+      <img src="/assets/img/train-incline-900.jpg" alt="" decoding="async">
+      <img src="/assets/img/train-lunge-900.jpg" alt="" decoding="async">
+      <img src="/assets/img/train-calf-900.jpg" alt="" decoding="async">
+      <img src="/assets/img/train-lateral-900.jpg" alt="" decoding="async">
     </div>
-    <div class="er-loop__viewport" aria-hidden="true">
-      <div class="er-loop__track">
-        <div class="er-loop__group">
-          <img src="/assets/img/train-portrait-close-900.jpg" alt="" decoding="async">
-          <img src="/assets/img/train-squat-900.jpg" alt="" decoding="async">
-          <img src="/assets/img/train-cable-side-900.jpg" alt="" decoding="async">
-          <img src="/assets/img/train-bench-press-900.jpg" alt="" decoding="async">
-          <img src="/assets/img/train-farmers-900.jpg" alt="" decoding="async">
-          <img src="/assets/img/train-incline-900.jpg" alt="" decoding="async">
-          <img src="/assets/img/train-lunge-900.jpg" alt="" decoding="async">
-        </div>
-        <div class="er-loop__group">
-          <img src="/assets/img/train-portrait-close-900.jpg" alt="" decoding="async">
-          <img src="/assets/img/train-squat-900.jpg" alt="" decoding="async">
-          <img src="/assets/img/train-cable-side-900.jpg" alt="" decoding="async">
-          <img src="/assets/img/train-bench-press-900.jpg" alt="" decoding="async">
-          <img src="/assets/img/train-farmers-900.jpg" alt="" decoding="async">
-          <img src="/assets/img/train-incline-900.jpg" alt="" decoding="async">
-          <img src="/assets/img/train-lunge-900.jpg" alt="" decoding="async">
-        </div>
-      </div>
-    </div>
+  </div>
+  <div class="container er-loop__controls" hidden>
+    <button type="button" data-er-pause>Bildlauf pausieren</button>
   </div>
 </section>
 
