@@ -202,7 +202,7 @@ html.lenis, html.lenis body { height: auto; }
 }
 .btn::before {
   content: "";
-  position: absolute; inset: 0; z-index: 0;
+  position: absolute; inset: 0; z-index: 1;
   background: var(--btn-fill, rgba(255,255,255,0.18));
   transform: translateY(102%);
   transition: transform .52s var(--ease-out);
@@ -210,8 +210,8 @@ html.lenis, html.lenis body { height: auto; }
   pointer-events: none;
 }
 .btn:hover::before, .btn:focus-visible::before { transform: translateY(0); }
-.btn__label { position: relative; z-index: 1; }
-.btn__icon { position: relative; z-index: 1; }
+.btn__label { position: relative; z-index: 2; }
+.btn__icon { position: relative; z-index: 2; flex-shrink: 0; }
 .btn__icon {
   display: grid; place-items: center;
   width: 2.25rem; height: 2.25rem; border-radius: 50%;
@@ -253,7 +253,7 @@ html.lenis, html.lenis body { height: auto; }
 .btn--lg { padding: 1rem 1.1rem 1rem 1.8rem; font-size: 1rem; }
 .btn--lg .btn__icon { width: 2.5rem; height: 2.5rem; }
 .btn[disabled], .btn[aria-disabled="true"] { opacity: .5; pointer-events: none; }
-.btn__icon { flex-shrink: 0; }
+
 @media (max-width: 520px) {
   .btn { white-space: normal; text-align: left; max-width: 100%; }
   .btn--lg { padding: 1.05rem 1.05rem 1.05rem 1.4rem; font-size: .95rem; }
