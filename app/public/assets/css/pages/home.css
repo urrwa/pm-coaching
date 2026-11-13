@@ -412,64 +412,64 @@
   to   { transform: translateX(-50%); }
 }
 
-/* Trust grid: 4 dark cards */
 .trust__grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1px;
-  background: rgba(255,255,255,0.06);
-  margin-bottom: clamp(2rem, 4vw, 3rem);
-}
-@media (min-width: 768px) {
-  .trust__grid { grid-template-columns: repeat(4, 1fr); }
+  gap: clamp(.85rem, 1.5vw, 1.5rem);
 }
 .trust__card {
-  background: var(--navy-950);
-  padding: clamp(1.5rem, 3vw, 2.5rem);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   display: grid;
-  gap: 0.75rem;
+  grid-template-rows: auto 1fr auto;
+  align-content: start;
+  gap: .65rem;
+  min-height: clamp(16rem, 26vw, 23rem);
+  padding: clamp(1.1rem, 2.6vw, 2rem);
+  background: var(--navy-900);
+  border: 1px solid var(--line);
+}
+.trust__card-image, .trust__card::before {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.trust__card-image {
+  z-index: -2;
+  object-fit: cover;
+  object-position: center 37%;
+}
+.trust__card::before {
+  content: "";
+  z-index: -1;
+  background: linear-gradient(155deg, rgba(7,17,31,.94), rgba(7,17,31,.56) 51%, rgba(7,17,31,.88));
+}
+.trust__card-label {
+  font-family: var(--font-display);
+  font-size: clamp(.86rem, 1.3vw, 1.1rem);
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: #fff;
+}
+.trust__card-text {
+  max-width: 34ch;
+  color: var(--offwhite);
+  font-size: .9rem;
+  line-height: 1.5;
 }
 .trust__card-num {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.055em;
   line-height: 1;
-  letter-spacing: -0.04em;
-  color: #fff;
-  font-weight: 600;
+  color: var(--blue-200);
 }
-.trust__card-num span { color: var(--blue-400); }
-.trust__card-label {
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(197,206,216,0.5);
-  line-height: 1.4;
-}
-.trust__card-text {
-  color: var(--silver);
-  font-size: 0.9rem;
-  line-height: 1.5;
-}
-
-/* Wide full-bleed image band */
-.trust__band {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  border-radius: 0;
-}
-.trust__band img {
-  width: 100%;
-  height: clamp(240px, 35vw, 540px);
-  object-fit: cover;
-  object-position: 50% 35%;
-  filter: saturate(0.75) contrast(1.08) brightness(0.75);
-  display: block;
-}
-.trust__band-shade {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(0deg, rgba(7,17,31,0.85) 0%, rgba(7,17,31,0) 55%);
+@media (min-width: 768px) {
+  .trust__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
 /* ---------- 04 PROBLEM SECTION ---------- */

@@ -36,6 +36,21 @@
       chips.forEach((c, i) => gsap.to(c, { y: "+=" + (8 + i * 4), duration: 3 + i * 0.6, yoyo: true, repeat: -1, ease: "sine.inOut", delay: 2 }));
     })();
 
+    if (!reduced) {
+      document.querySelectorAll("[data-trust-count]").forEach((number) => {
+        const count = Number(number.dataset.trustCount);
+        const value = { current: 0 };
+        gsap.to(value, {
+          current: count,
+          duration: 1.05,
+          ease: "power2.out",
+          scrollTrigger: { trigger: number.closest(".trust__card"), start: "top 85%", once: true },
+          onStart: () => { number.textContent = "0"; },
+          onUpdate: () => { number.textContent = Math.round(value.current); },
+        });
+      });
+    }
+
     /* ---------- Problem: image swap ---------- */
     (function problem() {
       const rows = document.querySelectorAll("[data-problem]");
