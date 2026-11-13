@@ -617,42 +617,39 @@
 }
 
 /* ---------- 06 G5 METHOD ---------- */
-.g5 {
-  background: var(--navy-950);
-  overflow: hidden;
-}
-.g5__head { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
-.g5__overflow {
-  position: relative;
-  overflow: hidden;
-}
-/* Horizontal scroll track */
-.g5__track {
-  display: flex;
-  gap: 1.25rem;
-  padding-inline: var(--gutter);
-  padding-bottom: 2rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-.g5__track::-webkit-scrollbar { display: none; }
-
+.g5 { background: radial-gradient(ellipse at top right, var(--navy-800), var(--navy-950) 72%); overflow: clip; }
+.g5__pin { padding-block: clamp(3rem, 7vh, 5rem) 1.5rem; }
+.g5__head { display: grid; gap: 1.25rem; margin-bottom: 1.25rem; }
+.g5__head .h2 { max-width: 17ch; margin-top: .55rem; }
+.g5__path { display: none; position: relative; height: 24px; margin-bottom: 1rem; }
+.g5__svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.g5__line-bg { stroke: var(--line); }
+.g5__line { stroke: var(--blue-400); stroke-dasharray: 1000; stroke-dashoffset: 1000; }
+.g5__track { display: grid; gap: 2rem; }
 .g5__stage {
-  flex-shrink: 0;
-  width: min(80vw, 400px);
-  scroll-snap-align: start;
   display: grid;
-  gap: 1.25rem;
+  align-items: center;
+  gap: clamp(1.5rem, 5vw, 5rem);
+  width: min(100% - 2 * var(--gutter), var(--container));
+  margin-inline: auto;
+  scroll-margin-top: var(--nav-h);
 }
-@media (min-width: 1200px) {
-  .g5__track {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    overflow-x: visible;
-  }
-  .g5__stage { width: auto; }
+@media (min-width: 768px) {
+  .g5__stage { grid-template-columns: minmax(0, 4fr) minmax(0, 6fr); }
+}
+.g5.is-horizontal .g5__head { grid-template-columns: 1fr auto; align-items: end; }
+.g5.is-horizontal .g5__path { display: block; }
+.g5.is-horizontal .g5__track { display: flex; gap: 0; }
+.g5.is-horizontal .g5__stage {
+  flex: 0 0 100%;
+  width: auto;
+  margin: 0;
+  padding-inline: max(var(--gutter), calc((100% - var(--container)) / 2));
+}
+.g5.is-horizontal .g5__stage-media { max-height: 48svh; width: 100%; }
+.g5.is-horizontal .g5__pin { min-height: 100svh; }
+@media (max-width: 767px) {
+  .g5__stage-media { max-height: 24rem; }
 }
 
 .g5__stage-media {
@@ -691,7 +688,7 @@
 }
 .g5__name {
   font-family: var(--font-display);
-  font-size: 1.1rem;
+  font-size: clamp(1.65rem, 3vw, 2.6rem);
   font-weight: 600;
   color: #fff;
   letter-spacing: -0.02em;
@@ -707,8 +704,8 @@
   text-transform: uppercase;
 }
 .g5__text {
-  font-size: 0.85rem;
-  color: rgba(197,206,216,0.6);
+  font-size: 1rem;
+  color: var(--silver);
   line-height: 1.55;
 }
 .g5__points {
@@ -716,8 +713,8 @@
   gap: 0.4rem;
 }
 .g5__points li {
-  font-size: 0.78rem;
-  color: rgba(197,206,216,0.45);
+  font-size: .9rem;
+  color: var(--silver);
   padding-left: 1rem;
   position: relative;
   line-height: 1.4;
@@ -734,21 +731,13 @@
   opacity: 0.5;
 }
 
-/* Nav nodes */
-.g5__nav { padding-inline: var(--gutter); display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
-.g5__nodes { display: flex; gap: 0.5rem; }
-.g5__node {
-  width: 24px;
-  height: 2px;
-  background: rgba(255,255,255,0.15);
-  border-radius: 2px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-.g5__node.is-active {
-  background: var(--blue-400);
-  width: 36px;
-}
+.g5__nav { display: flex; flex-wrap: wrap; gap: .4rem; }
+.g5__nav-btn { min-height: 44px; padding: .45rem .7rem; border-radius: 999px; color: var(--silver); font-size: .85rem; }
+.g5__nav-btn span { margin-right: .35rem; color: var(--blue-200); }
+.g5__nav-btn:is(:hover, .is-active) { background: var(--navy-700); color: #fff; }
+.g5__nodes { position: absolute; inset: 0; display: flex; align-items: center; justify-content: space-between; }
+.g5__node { width: .5rem; height: .5rem; border-radius: 50%; background: var(--navy-700); }
+.g5__node.is-active { background: var(--blue-400); box-shadow: 0 0 12px var(--blue); }
 .g5__cta {
   margin-top: clamp(2.5rem, 5vw, 4rem);
   display: flex;

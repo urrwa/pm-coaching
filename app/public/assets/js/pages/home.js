@@ -5,7 +5,6 @@
     const PM = window.PM, gsap = window.gsap, ST = window.ScrollTrigger;
     if (!gsap || !ST) return;
     const reduced = PM.reduced;
-    const desktop = () => window.matchMedia("(min-width: 1024px)").matches;
 
     /* ---------- Hero ---------- */
     (function hero() {
@@ -136,42 +135,57 @@
       const nodes = section.querySelectorAll(".g5__node");
       const line = section.querySelector("[data-g5-line]");
       let active = -1;
-      const setActive = (i) => {
-        i = Math.max(0, Math.min(stages.length - 1, i));
-        if (i === active) return; active = i;
-        navBtns.forEach((b, k) => b.classList.toggle("is-active", k === i));
-        nodes.forEach((n, k) => n.classList.toggle("is-active", k <= i));
+      let pinned = null;
+      const setActive = (index) => {
+        if (index === active) return;
+        active = index;
+        navBtns.forEach((button, i) => {
+          button.classList.toggle("is-active", i === index);
+          if (i === index) button.setAttribute("aria-current", "step");
+          else button.removeAttribute("aria-current");
+        });
+        nodes.forEach((node, i) => node.classList.toggle("is-active", i <= index));
       };
       setActive(0);
-      let st = null;
-      const build = () => {
-        if (st) { st.kill(); st = null; gsap.set(track, { clearProps: "x" }); }
-        if (!desktop() || reduced) {
-          // vertical mode: activate by scroll position
-          stages.forEach((s, i) => ST.create({ trigger: s, start: "top 60%", end: "bottom 60%", onEnter: () => setActive(i), onEnterBack: () => setActive(i) }));
+      gsap.matchMedia().add({
+        horizontal: "(min-width: 1024px) and (min-height: 760px) and (prefers-reduced-motion: no-preference)",
+        vertical: "(max-width: 1023px), (max-height: 759px), (prefers-reduced-motion: reduce)",
+      }, ({ conditions }) => {
+        if (!conditions.horizontal) {
+          stages.forEach((stage, i) => ST.create({
+            trigger: stage, start: "top 60%", end: "bottom 60%",
+            onEnter: () => setActive(i), onEnterBack: () => setActive(i),
+          }));
           return;
         }
-        const dist = () => track.scrollWidth - window.innerWidth;
+        section.classList.add("is-horizontal");
+        const distance = () => track.clientWidth * (stages.length - 1);
         const tween = gsap.to(track, {
-          x: () => -dist(), ease: "none",
+          x: () => -distance(), ease: "none",
+          onUpdate() {
+            const progress = this.progress();
+            setActive(Math.round(progress * (stages.length - 1)));
+            line.style.strokeDashoffset = String(1000 * (1 - progress));
+          },
           scrollTrigger: {
-            trigger: pin, start: "top top", end: () => "+=" + dist(), pin: true, scrub: 0.7, anticipatePin: 1, invalidateOnRefresh: true,
-            onUpdate: (self) => { setActive(Math.round(self.progress * (stages.length - 1))); if (line) line.style.strokeDashoffset = String(1000 * (1 - self.progress)); }
-          }
+            trigger: pin, start: "top top", end: () => "+=" + distance(),
+            pin: true, scrub: 0.5, anticipatePin: 1, invalidateOnRefresh: true,
+          },
         });
-        st = tween.scrollTrigger;
-        // depth: subtle scale settle per stage (no horizontal shift, so the subject framing stays exact)
-        stages.forEach((s) => {
-          const media = s.querySelector(".g5__stage-media img");
-          gsap.fromTo(media, { scale: 1.06 }, { scale: 1, ease: "none", scrollTrigger: { trigger: s, containerAnimation: tween, start: "left right", end: "center center", scrub: true } });
-        });
-      };
-      build();
-      let mode = desktop();
-      window.addEventListener("resize", () => { const d = desktop(); if (d !== mode) { mode = d; ST.getAll().forEach((t) => { if (t.trigger && section.contains(t.trigger)) t.kill(); }); build(); ST.refresh(); } });
-      navBtns.forEach((b, i) => b.addEventListener("click", () => {
-        if (st && desktop() && !reduced) { const y = st.start + (st.end - st.start) * (i / (stages.length - 1)); PM.scrollTo(y, { offset: 0, duration: 1.4 }); }
-        else PM.scrollTo(stages[i], { offset: -90 });
+        pinned = tween.scrollTrigger;
+        return () => {
+          pinned = null;
+          section.classList.remove("is-horizontal");
+          line.style.removeProperty("stroke-dashoffset");
+        };
+      });
+      navBtns.forEach((button, i) => button.addEventListener("click", () => {
+        if (pinned) {
+          PM.scrollTo(pinned.start + (pinned.end - pinned.start) * i / (stages.length - 1), { duration: 1.1 });
+        } else {
+          setActive(i);
+          PM.scrollTo(stages[i], { offset: -90 });
+        }
       }));
     })();
 
