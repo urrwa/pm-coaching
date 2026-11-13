@@ -191,6 +191,63 @@
       }));
     })();
 
+    /* ---------- Process: pinned step transitions ---------- */
+    (function process() {
+      const section = document.getElementById("ablauf");
+      if (!section) return;
+      const scroll = section.querySelector(".process__scroll");
+      const stage = section.querySelector(".process__stage");
+      const status = section.querySelector(".process__status");
+      const current = status.querySelector("[data-process-current]");
+      const total = status.querySelector("[data-process-total]");
+      const cards = [...stage.querySelectorAll(".pcard")];
+      const format = (number) => String(number).padStart(2, "0");
+
+      gsap.matchMedia().add("(prefers-reduced-motion: no-preference) and (min-height: 570px)", () => {
+        let active = -1;
+        function render(progress) {
+          const phase = Math.max(.5, Math.min(cards.length - .5, progress * cards.length));
+          const step = Math.floor(phase);
+          cards.forEach((card, index) => {
+            const offset = index + .5 - phase;
+            const blend = Math.max(0, Math.min(1, (Math.abs(offset) - .32) / .36));
+            const fade = blend * blend * (3 - 2 * blend);
+            card.style.setProperty("--process-opacity", String(1 - fade));
+            card.style.setProperty("--process-shift", `${Math.sign(offset) * fade * 22}px`);
+          });
+          if (active === step) return;
+          cards[active]?.classList.remove("is-current");
+          cards[step].classList.add("is-current");
+          current.textContent = format(step + 1);
+          active = step;
+        }
+
+        section.classList.add("is-scroll-driven");
+        scroll.style.setProperty("--process-steps", cards.length);
+        total.textContent = format(cards.length);
+        status.hidden = false;
+        render(0);
+        ST.create({
+          trigger: scroll,
+          start: () => `top ${getComputedStyle(stage).top}`,
+          end: () => `+=${scroll.offsetHeight - stage.offsetHeight}`,
+          onUpdate: ({ progress }) => render(progress),
+          onRefresh: ({ progress }) => render(progress),
+        });
+
+        return () => {
+          section.classList.remove("is-scroll-driven");
+          status.hidden = true;
+          scroll.style.removeProperty("--process-steps");
+          cards.forEach((card) => {
+            card.classList.remove("is-current");
+            card.style.removeProperty("--process-opacity");
+            card.style.removeProperty("--process-shift");
+          });
+        };
+      });
+    })();
+
     /* ---------- Final CTA: mask reveal ---------- */
     (function finalCta() {
       const sec = document.querySelector("[data-final]");
