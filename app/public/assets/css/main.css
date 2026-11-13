@@ -204,7 +204,7 @@ html.lenis, html.lenis body { height: auto; }
   content: "";
   position: absolute;
   left: 50%; top: 50%;
-  width: 200%; padding-top: 200%;
+  width: 300px; height: 300px;
   z-index: 1;
   background: var(--btn-fill, rgba(255,255,255,0.18));
   border-radius: 50%;
