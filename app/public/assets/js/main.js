@@ -173,11 +173,19 @@
     const burger = document.querySelector("[data-menu-toggle]");
     if (!nav) return;
 
-    // solid + hide on scroll down
+    // topbar hide + nav shift on scroll
+    const topbar = document.getElementById("topbar");
     let lastY = window.scrollY;
+    const TOPBAR_THRESHOLD = 60;
     const onScroll = () => {
       const y = window.scrollY;
-      nav.classList.toggle("nav--solid", y > 40);
+      // hide topbar after scrolling past threshold
+      if (topbar) {
+        const hide = y > TOPBAR_THRESHOLD;
+        topbar.classList.toggle("topbar--scrolled", hide);
+        nav.classList.toggle("nav--topbar-hidden", hide);
+      }
+      nav.classList.toggle("nav--solid", true); // always solid
       if (!menuOpen) nav.classList.toggle("nav--hidden", y > lastY && y > 300 && y - lastY > 2);
       lastY = y;
     };
