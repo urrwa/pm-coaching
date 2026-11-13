@@ -165,6 +165,7 @@
     burger && burger.setAttribute("aria-label", "Menü öffnen");
     burger && (burger.querySelector(".nav__burger-text").textContent = "Menü");
     if (menu.contains(document.activeElement)) burger?.focus();
+    menu.querySelector(".menu__video")?.pause();
     menu.inert = true;
     menu.setAttribute("aria-hidden", "true");
     if (instant || reduced || !menuTl || menuTl.progress() === 0) {
@@ -212,6 +213,7 @@
     if (menu && burger) {
       const links = menu.querySelectorAll(".menu__nav a");
       const label = burger.querySelector(".nav__burger-text");
+      const video = menu.querySelector("[data-menu-video]");
       menu.inert = true;
       menuTl = gsap.timeline({ paused: true, onReverseComplete: () => menu.classList.remove("is-open") })
         .fromTo(menu, { clipPath: "inset(0 0 100% 0)" }, { clipPath: "inset(0 0 0% 0)", duration: 0.55, ease: "power3.inOut" })
@@ -228,6 +230,10 @@
         label.textContent = "Schließen";
         if (reduced) menuTl.progress(1).pause();
         else menuTl.timeScale(1).play();
+        if (video && !reduced && window.matchMedia("(min-width: 1024px)").matches) {
+          if (!video.getAttribute("src")) video.src = video.dataset.menuVideo;
+          video.play().catch(() => {});
+        }
         links[0]?.focus({ preventScroll: true });
       };
       burger.addEventListener("click", () => (menuOpen ? closeMenu() : open()));
@@ -235,13 +241,7 @@
       document.addEventListener("click", (e) => {
         if (menuOpen && !menu.contains(e.target) && !burger.contains(e.target)) closeMenu();
       });
-      // image preview on hover
-      const img = menu.querySelector(".menu__img");
-      links.forEach((a) => a.addEventListener("mouseenter", () => {
-        const src = a.dataset.menuImg; if (!img || !src || img.getAttribute("src") === src) return;
-        if (reduced) { img.src = src; return; }
-        gsap.to(img, { opacity: 0, duration: 0.2, overwrite: true, onComplete: () => { img.src = src; gsap.to(img, { opacity: 1, duration: 0.4 }); } });
-      }));
+
     }
 
     // smooth anchors
