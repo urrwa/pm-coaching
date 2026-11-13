@@ -443,7 +443,10 @@
 .trust__card::before {
   content: "";
   z-index: -1;
-  background: linear-gradient(155deg, rgba(7,17,31,.94), rgba(7,17,31,.56) 51%, rgba(7,17,31,.88));
+  background:
+    linear-gradient(0deg, var(--navy-900) 0%, rgba(11,23,40,0) 31%, rgba(11,23,40,0) 72%, var(--navy-900) 100%),
+    linear-gradient(90deg, var(--navy-900) 0%, rgba(11,23,40,0) 23%, rgba(11,23,40,0) 77%, var(--navy-900) 100%),
+    radial-gradient(ellipse at 50% 48%, rgba(7,17,31,.12) 24%, rgba(7,17,31,.7) 84%);
 }
 .trust__card-label {
   font-family: var(--font-display);

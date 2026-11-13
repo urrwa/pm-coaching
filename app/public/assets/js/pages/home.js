@@ -37,17 +37,24 @@
     })();
 
     if (!reduced) {
-      document.querySelectorAll("[data-trust-count]").forEach((number) => {
-        const count = Number(number.dataset.trustCount);
-        const value = { current: 0 };
-        gsap.to(value, {
-          current: count,
-          duration: 1.05,
-          ease: "power2.out",
-          scrollTrigger: { trigger: number.closest(".trust__card"), start: "top 85%", once: true },
-          onStart: () => { number.textContent = "0"; },
-          onUpdate: () => { number.textContent = Math.round(value.current); },
+      const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(({ target, intersectionRatio }) => {
+          if (intersectionRatio < 0.6) return;
+          counterObserver.unobserve(target);
+          const count = Number(target.dataset.trustCount);
+          const value = { current: 0 };
+          gsap.to(value, {
+            current: count,
+            duration: 2.2,
+            ease: "none",
+            onUpdate: () => { target.textContent = Math.floor(value.current); },
+            onComplete: () => { target.textContent = count; },
+          });
         });
+      }, { threshold: 0.6 });
+      document.querySelectorAll("[data-trust-count]").forEach((number) => {
+        number.textContent = "0";
+        counterObserver.observe(number);
       });
     }
 
