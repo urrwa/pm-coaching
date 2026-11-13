@@ -11,7 +11,7 @@
   grid-template-rows: 1fr auto;
   align-items: end;
   overflow: hidden;
-  background: #000;
+  background: var(--navy-950);
 }
 
 /* Full-bleed media */
@@ -209,7 +209,7 @@
 
 /* ---------- STATS BAR (after hero) ---------- */
 .stats-bar {
-  background: #000;
+  background: var(--navy-950);
   border-top: 1px solid rgba(255,255,255,0.06);
   border-bottom: 1px solid rgba(255,255,255,0.06);
   padding-block: clamp(1.5rem, 3vw, 2.5rem);
@@ -224,7 +224,7 @@
   .stats-bar__grid { grid-template-columns: repeat(4, 1fr); }
 }
 .stat-item {
-  background: #000;
+  background: var(--navy-950);
   padding: clamp(1.25rem, 3vw, 2rem) clamp(1.5rem, 3vw, 2.5rem);
   display: grid;
   gap: 0.3rem;
@@ -417,7 +417,7 @@
 
 /* ---------- 04 PROBLEM SECTION ---------- */
 .problem {
-  background: #000;
+  background: var(--navy-950);
 }
 .problem__layout {
   display: grid;
@@ -595,7 +595,7 @@
 
 /* ---------- 06 G5 METHOD ---------- */
 .g5 {
-  background: #000;
+  background: var(--navy-950);
   overflow: hidden;
 }
 .g5__head { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
@@ -808,7 +808,7 @@
 .exp__cta { margin-top: clamp(2.5rem, 5vw, 4rem); display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
 
 /* ---------- 09 PROCESS (stacking cards) ---------- */
-.process { background: #000; }
+.process { background: var(--navy-950); }
 .process__stack { position: relative; display: grid; gap: 1.5rem; }
 .pcard { position: sticky; top: calc(var(--nav-h) + .75rem + var(--i, 0) * .75rem); }
 .pcard__inner {
@@ -893,7 +893,7 @@
   display: grid;
   align-items: center;
   overflow: hidden;
-  background: #000;
+  background: var(--navy-950);
   color: #fff;
   padding-block: clamp(6rem, 12vw, 10rem);
 }
