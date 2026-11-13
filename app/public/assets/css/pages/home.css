@@ -76,7 +76,7 @@
   flex-direction: column;
   justify-content: flex-end;
   padding-block: clamp(6rem, 12vw, 9rem) clamp(3rem, 5vw, 4.5rem);
-  min-height: calc(100svh - 80px);
+  min-height: calc(100svh - var(--topbar-h, 0px) - 80px);
 }
 
 .hero__copy {
