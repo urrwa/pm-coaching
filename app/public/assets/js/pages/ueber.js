@@ -93,14 +93,15 @@
       });
     })();
 
-    /* ---------- Manifest: each line fills grey -> navy across the viewport centre ---------- */
+    /* ---------- Manifest: readable blue text brightens as it scrolls into view ---------- */
     (function manifest() {
-      const lines = document.querySelectorAll("[data-ab-line]");
-      if (!lines.length) return;
-      lines.forEach((line) => {
+      if (reduced) return;
+      const manifest = document.querySelector("[data-ab-manifest]");
+      if (!manifest) return;
+      const blue = getComputedStyle(manifest).getPropertyValue("--blue-200").trim();
+      manifest.querySelectorAll("[data-ab-line]").forEach((line) => {
         const words = PM.splitWords(line);
-        if (reduced) { gsap.set(words, { color: "#07111F" }); return; }
-        gsap.to(words, { color: "#07111F", stagger: 0.06, ease: "none", scrollTrigger: { trigger: line, start: "top 75%", end: "bottom 45%", scrub: 0.4 } });
+        gsap.from(words, { color: blue, stagger: 0.06, ease: "none", scrollTrigger: { trigger: line, start: "top 75%", end: "bottom 45%", scrub: 0.4 } });
       });
     })();
 

@@ -154,7 +154,6 @@
 .ab-manifest__line { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.9rem, 5.2vw, 5.2rem); letter-spacing: -.035em; line-height: 1.02; color: var(--fg-strong); max-width: 20ch; text-wrap: balance; }
 .ab-manifest__line:nth-child(even) { margin-left: auto; text-align: right; }
 @media (max-width: 767px) { .ab-manifest__line:nth-child(even) { margin-left: 0; text-align: left; } }
-html.js:not(.reduced-motion) .ab-manifest__line .w { color: rgba(7,17,31,.14); }
 
 /* ---------- 03 Gründer ---------- */
 .ab-founder { background: var(--navy-950); overflow: hidden; }
