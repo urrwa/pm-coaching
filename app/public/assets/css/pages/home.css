@@ -133,6 +133,22 @@
   align-items: center;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .hero__actions .btn--primary .btn__icon {
+    transition: background .4s var(--ease-out), translate .35s var(--ease-out);
+  }
+
+  .hero__actions .btn--primary:is(:focus-visible, :active) .btn__icon {
+    translate: 4px;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) and (hover: hover) {
+  .hero__actions .btn--primary:hover .btn__icon {
+    translate: 4px;
+  }
+}
+
 .hero__check-note {
   color: rgba(197,206,216,0.5);
   font-size: 0.75rem;
