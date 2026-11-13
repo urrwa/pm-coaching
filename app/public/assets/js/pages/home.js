@@ -166,21 +166,6 @@
       }));
     })();
 
-    /* ---------- Process: stacking depth ---------- */
-    (function process() {
-      const cards = document.querySelectorAll("[data-pcard]");
-      if (!cards.length) return;
-      cards.forEach((c, i) => c.style.setProperty("--i", i));
-      if (reduced) return;
-      cards.forEach((c, i) => {
-        const inner = c.querySelector(".pcard__inner");
-        gsap.fromTo(inner, { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: "expo.out", scrollTrigger: { trigger: c, start: "top 85%", once: true } });
-        const next = cards[i + 1];
-        if (!next) return;
-        gsap.to(inner, { scale: 0.94, filter: "brightness(.55)", ease: "none", scrollTrigger: { trigger: next, start: "top 70%", end: "top top+=120", scrub: true } });
-      });
-    })();
-
     /* ---------- Final CTA: mask reveal ---------- */
     (function finalCta() {
       const sec = document.querySelector("[data-final]");

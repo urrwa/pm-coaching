@@ -866,47 +866,40 @@
 
 /* ---------- 09 PROCESS (stacking cards) ---------- */
 .process { background: var(--navy-950); }
-.process__stack { position: relative; display: grid; gap: 1.5rem; }
-.pcard { position: sticky; top: calc(var(--nav-h) + .75rem + var(--i, 0) * .75rem); }
+.process__stack { display: grid; }
+.pcard { background: var(--navy-950); border-top: 1px solid var(--line); }
 .pcard__inner {
-  position: relative;
-  background: linear-gradient(160deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 2px;
-  padding: clamp(1.5rem, 3.5vw, 3.5rem);
   display: grid;
-  gap: 2rem;
-  min-height: min(72vh, 600px);
   align-items: center;
-  overflow: hidden;
-  transform-origin: top center;
-  box-shadow: 0 -20px 60px -30px rgba(0,0,0,0.6);
+  gap: clamp(1.5rem, 4vw, 5rem);
+  padding-block: clamp(2.5rem, 7vw, 6rem);
 }
-.pcard__inner::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(40% 50% at 100% 0%, rgba(39,100,232,0.18), transparent 70%);
-  pointer-events: none;
-}
-.pcard:nth-child(even) .pcard__inner {
-  background: linear-gradient(160deg, rgba(39,100,232,0.04), rgba(0,0,0,0.3));
-}
-@media (min-width: 900px) {
-  .pcard__inner { grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: clamp(2rem, 5vw, 5rem); }
-}
-.pcard__text { position: relative; display: grid; gap: 1rem; z-index: 1; }
+.pcard__text { display: grid; gap: .9rem; }
+.pcard__text .h3 { font-size: clamp(1.65rem, 3.6vw, 3.25rem); }
 .pcard__num {
   font-family: var(--font-display);
-  font-size: clamp(3rem, 6vw, 5.5rem);
-  line-height: 0.8;
-  letter-spacing: -0.04em;
-  color: transparent;
-  -webkit-text-stroke: 1px var(--blue-400);
-  margin-bottom: 0.5rem;
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-weight: 600;
+  letter-spacing: .06em;
+  color: var(--blue-200);
 }
-.pcard__text p { max-width: 46ch; color: rgba(197,206,216,0.65); }
-.pcard__media { position: relative; z-index: 1; max-height: 440px; }
+.pcard__text p {
+  max-width: 48ch;
+  color: var(--silver);
+  font-size: clamp(1.0625rem, 1.35vw, 1.25rem);
+  line-height: 1.65;
+}
+.pcard__media { border-radius: 0; }
+@media (min-width: 900px) {
+  .pcard__inner {
+    min-height: 100svh;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    padding-top: max(calc(var(--nav-h) + 2rem), 8svh);
+  }
+}
+@media (min-width: 900px) and (min-height: 650px) and (prefers-reduced-motion: no-preference) {
+  .pcard { position: sticky; top: 0; }
+}
 
 /* ---------- 10 PERFORMANCE CHECK ---------- */
 .pc { background: var(--navy-950); }
