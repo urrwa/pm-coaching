@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de" data-theme="light">
+<html lang="de" data-theme="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -158,9 +158,13 @@
   </div>
 
   <main id="main">
-<!-- ============ a) HUB HERO ============ -->
-<section class="wi-hero page-hero" data-theme="light" id="wissen">
-  <span class="wi-hero__bg" aria-hidden="true">Wissen</span>
+
+<!-- ============ a) HUB HERO — dark, cinematic ============ -->
+<section class="wi-hero" data-theme="dark" id="wissen">
+  <div class="wi-hero__bg-img" aria-hidden="true">
+    <img src="/assets/img/hero-wide-1600.jpg" srcset="/assets/img/hero-wide-900.jpg 900w, /assets/img/hero-wide-1600.jpg 1600w, /assets/img/hero-wide-2400.jpg 2400w" sizes="100vw" alt="" width="2400" height="1350" loading="eager" decoding="async">
+    <div class="wi-hero__overlay" aria-hidden="true"></div>
+  </div>
   <div class="container wi-hero__inner">
     <nav aria-label="Brotkrumen" data-reveal="fade">
       <ol class="breadcrumb">
@@ -168,9 +172,11 @@
         <li aria-current="page">Wissen</li>
       </ol>
     </nav>
-    <p class="eyebrow" data-reveal="up">Knowledge Hub</p>
-    <h1 class="display-l wi-hero__title" data-reveal="words">Wissen, das in deinen Alltag passt.</h1>
-    <p class="lead muted wi-hero__lead" data-reveal="up" data-delay="0.15">Keine Hype-Artikel, keine 30-Tage-Versprechen. Hier findest du das, was im Coaching täglich angewendet wird: Training, Ernährung und Entscheidungen für Männer, deren Kalender nicht nach dem Trainingsplan fragt.</p>
+    <div class="wi-hero__content">
+      <p class="eyebrow wi-hero__eyebrow" data-reveal="up">Knowledge Hub</p>
+      <h1 class="wi-hero__title" data-reveal="words">Wissen,<br>das in deinen<br>Alltag passt.</h1>
+      <p class="lead wi-hero__lead" data-reveal="up" data-delay="0.15">Keine Hype-Artikel, keine 30-Tage-Versprechen. Hier findest du das, was im Coaching täglich angewendet wird: Training, Ernährung und Entscheidungen für Männer, deren Kalender nicht nach dem Trainingsplan fragt.</p>
+    </div>
     <div class="wi-filter" role="group" aria-label="Artikel nach Kategorie filtern" data-reveal-children="up" data-stagger="0.06">
       <button class="wi-chip" type="button" aria-pressed="true" data-wi-filter="alle">Alle <span class="wi-chip__count" aria-hidden="true">6</span></button>
       <button class="wi-chip" type="button" aria-pressed="false" data-wi-filter="training">Training <span class="wi-chip__count" aria-hidden="true">2</span></button>
@@ -179,21 +185,24 @@
       <button class="wi-chip" type="button" aria-pressed="false" data-wi-filter="mindset">Mindset <span class="wi-chip__count" aria-hidden="true">1</span></button>
     </div>
   </div>
+  <div class="wi-hero__scroll" aria-hidden="true">
+    <span class="wi-hero__scroll-line"></span>
+  </div>
 </section>
 
-<!-- ============ b) FEATURED ============ -->
-<section class="wi-featured section" data-theme="light" id="featured">
+<!-- ============ b) FEATURED — dark card ============ -->
+<section class="wi-featured section" data-theme="dark" id="featured">
   <div class="container">
     <article class="wi-feat">
       <div class="wi-feat__media">
         <div class="frame frame--grade wi-feat__frame" data-reveal="clip" data-parallax="0.12">
           <img src="/assets/img/train-row-1600.jpg" srcset="/assets/img/train-row-900.jpg 900w, /assets/img/train-row-1600.jpg 1600w" sizes="(min-width: 1024px) 58vw, 92vw" alt="Mann führt ein vorgebeugtes Rudern mit der Langhantel im Studio aus" width="1600" height="2143" loading="eager" decoding="async">
         </div>
-        <div class="chip chip--light wi-feat__badge" data-reveal="up" data-delay="0.5"><span class="chip__dot chip__dot--pulse"></span>Neu · Featured</div>
+        <div class="chip chip--dark wi-feat__badge" data-reveal="up" data-delay="0.5"><span class="chip__dot chip__dot--pulse"></span>Neu · Featured</div>
       </div>
       <div class="wi-feat__body">
         <div class="wi-feat__head" data-reveal="up">
-          <span class="index">01</span>
+          <span class="index wi-feat__index">01</span>
           <span class="tag tag--blue">Training</span>
         </div>
         <h2 class="h2 wi-feat__title" data-reveal="words"><a href="/wissen/muskelaufbau-fuer-berufstaetige/">Muskelaufbau für Berufstätige: Wie du mit 3 Einheiten pro Woche wirklich vorankommst</a></h2>
@@ -203,15 +212,15 @@
           <li><time datetime="2026-11-09">9. November 2026</time></li>
         </ul>
         <div data-reveal="up" data-delay="0.2">
-          <a class="btn btn--outline" href="/wissen/muskelaufbau-fuer-berufstaetige/" data-magnetic><span class="btn__label">Lesen</span><span class="btn__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span></a>
+          <a class="btn btn--primary" href="/wissen/muskelaufbau-fuer-berufstaetige/" data-magnetic><span class="btn__label">Artikel lesen</span><span class="btn__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span></a>
         </div>
       </div>
     </article>
   </div>
 </section>
 
-<!-- ============ c) ARTIKEL-INDEX ============ -->
-<section class="wi-index section" data-theme="silver" id="artikel">
+<!-- ============ c) ARTIKEL-INDEX — dark ============ -->
+<section class="wi-index section" data-theme="dark" id="artikel">
   <div class="container">
     <div class="section-head section-head--split">
       <div>
