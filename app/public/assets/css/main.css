@@ -183,12 +183,13 @@ html.lenis, html.lenis body { height: auto; }
   --btn-bg: var(--blue);
   --btn-fg: #fff;
   --btn-dur: 420ms;
+  --btn-end-padding: 1rem;
   --btn-ease: cubic-bezier(0.785, 0.135, 0.15, 0.86);
   position: relative;
   display: inline-flex;
   align-items: center;
   gap: .9rem;
-  padding: .85rem 1rem .85rem 1.5rem;
+  padding: .85rem var(--btn-end-padding) .85rem 1.5rem;
   border-radius: 999px;
   font-family: var(--font-display);
   font-weight: 600;
@@ -208,6 +209,7 @@ html.lenis, html.lenis body { height: auto; }
 .btn:has(> .btn__fill) {
   --fill-center: calc(100% - var(--btn-end-padding, 1rem) - var(--icon-size, 2.25rem) / 2);
   --fill-radius: calc(var(--icon-size, 2.25rem) / 2);
+  isolation: isolate;
 }
 .btn__fill {
   position: absolute;
@@ -215,7 +217,7 @@ html.lenis, html.lenis body { height: auto; }
   z-index: 1;
   background: var(--btn-fill-bg, #fff);
   clip-path: circle(var(--fill-radius) at var(--fill-center) 50%);
-  transition: clip-path var(--btn-dur) var(--ease-out);
+  transition: clip-path var(--btn-dur) var(--btn-ease);
   pointer-events: none;
 }
 .btn:is(:hover, :focus-visible, :active) > .btn__fill {
@@ -254,10 +256,9 @@ html.lenis, html.lenis body { height: auto; }
 .btn--primary {
   --btn-bg: var(--blue);
   --btn-fg: #fff;
-  --btn-fill-bg: rgba(255,255,255,0.95);
-  --btn-fill-fg: var(--blue);
+  --btn-fill-bg: #fff;
+  --btn-fill-fg: var(--navy-950);
 }
-.btn--primary .btn__fill { background: rgba(255,255,255,0.95); }
 .btn--primary .btn__icon { background: rgba(255,255,255,.16); color: #fff; }
 .btn--primary:hover .btn__icon { background: var(--blue); color: #fff; }
 
@@ -265,11 +266,10 @@ html.lenis, html.lenis body { height: auto; }
 .btn--outline {
   --btn-bg: transparent;
   --btn-fg: var(--fg-strong);
-  --btn-fill-bg: var(--navy-950);
-  --btn-fill-fg: #fff;
+  --btn-fill-bg: #fff;
+  --btn-fill-fg: var(--navy-950);
   box-shadow: inset 0 0 0 1px var(--line);
 }
-.btn--outline .btn__fill { background: var(--navy-950); }
 .btn--outline .btn__icon { background: var(--card); color: var(--fg-strong); }
 .btn--outline:hover .btn__icon { background: var(--blue); color: #fff; box-shadow: none; }
 .btn--outline:hover { color: var(--fg-strong); }
@@ -289,31 +289,35 @@ html.lenis, html.lenis body { height: auto; }
 
 .btn--ghost:has(> .btn__fill) {
   --btn-end-padding: 1rem;
-  --btn-fill-bg: var(--blue);
-  --btn-fill-fg: #fff;
+  --btn-fill-bg: #fff;
+  --btn-fill-fg: var(--navy-950);
   padding-inline: 1rem;
   border-radius: 999px;
 }
 .btn--ghost:has(> .btn__fill) .btn__fill { display: block; }
 .btn--ghost:has(> .btn__fill) .btn__icon { color: #fff; box-shadow: none; }
 .btn--ghost:has(> .btn__fill) .btn__icon svg.arrow-enter { display: block; }
-.btn--ghost:has(> .btn__fill):is(:hover, :focus-visible, :active) .btn__icon svg.arrow-exit {
-  transform: translate(70%, -50%) scale(0);
-}
 
 .btn:has(> .btn__fill) > .btn__icon {
+  margin-inline-start: auto;
   background: transparent;
   box-shadow: none;
   color: var(--btn-fill-fg, var(--navy-950));
 }
-.btn:has(> .btn__fill) .arrow-exit { transform: translate(-50%, -50%) rotate(-45deg); }
-.btn:has(> .btn__fill) .arrow-enter { transform: translate(-130%, 30%) rotate(-45deg); }
-.btn:has(> .btn__fill):is(:hover, :focus-visible, :active) .arrow-exit {
-  transform: translate(45%, -145%) rotate(-45deg);
+.btn:has(> .btn__fill) .btn__icon svg {
+  transition: transform var(--btn-dur) var(--btn-ease), opacity var(--btn-dur) var(--btn-ease);
 }
-.btn:has(> .btn__fill):is(:hover, :focus-visible, :active) .arrow-enter {
+.btn:has(> .btn__fill) .btn__icon .arrow-exit { transform: translate(-50%, -50%) rotate(-45deg); opacity: 1; }
+.btn:has(> .btn__fill) .btn__icon .arrow-enter { transform: translate(-130%, 30%) rotate(-45deg); opacity: 0; }
+.btn:has(> .btn__fill):is(:hover, :focus-visible, :active) .btn__icon .arrow-exit {
+  transform: translate(30%, -130%) rotate(-45deg);
+  opacity: 0;
+}
+.btn:has(> .btn__fill):is(:hover, :focus-visible, :active) .btn__icon .arrow-enter {
   transform: translate(-50%, -50%) rotate(-45deg);
+  opacity: 1;
 }
+.btn:has(> .btn__fill):focus-visible { outline-offset: 3px; border-radius: 999px; }
 
 /* ── Sizes ── */
 .btn--sm {

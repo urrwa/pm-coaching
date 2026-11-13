@@ -328,22 +328,6 @@
     });
   }
 
-  // ---------- Magnetic buttons ----------
-  function setupMagnetic() {
-    if (isTouch || reduced) return;
-    document.querySelectorAll("[data-magnetic]").forEach((el) => {
-      const strength = parseFloat(el.dataset.magnetic) || 0.35;
-      const xTo = gsap.quickTo(el, "x", { duration: 0.6, ease: "expo.out" });
-      const yTo = gsap.quickTo(el, "y", { duration: 0.6, ease: "expo.out" });
-      el.addEventListener("mousemove", (e) => {
-        const r = el.getBoundingClientRect();
-        xTo((e.clientX - (r.left + r.width / 2)) * strength);
-        yTo((e.clientY - (r.top + r.height / 2)) * strength);
-      });
-      el.addEventListener("mouseleave", () => { xTo(0); yTo(0); });
-    });
-  }
-
   // ---------- Cursor ----------
   function setupCursor() {
     const cur = document.querySelector(".cursor");
@@ -433,7 +417,6 @@
     setupNav();
     setupMarquees();
     setupReveals();
-    setupMagnetic();
     setupCursor();
     setupAccordions();
     setupVideos();
