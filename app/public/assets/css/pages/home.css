@@ -485,19 +485,23 @@
 
 /* ---- Begleitung — split-panel: text left, photo right ---- */
 .services-bento__card--begleitung {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: minmax(0, 48fr) minmax(0, 52fr);
+  container-type: inline-size;
+  justify-content: normal;
   align-items: stretch;
+  min-width: 0;
+  gap: 0;
   overflow: hidden;
   padding: 0;
   /* no ::after pseudo overlay — gradient is on the photo panel */
 }
 
-/* Text panel — navy background, left 38% */
+/* Text panel — a shrinkable grid track that keeps translated copy inside the card. */
 .services-bento__begleitung-text {
   position: relative;
   z-index: 2;
-  flex: 0 0 38%;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -506,10 +510,26 @@
   /* Subtle right-edge feather so text side blends into photo */
 }
 
-/* Photo panel — right 62%, portrait image fills it */
+.services-bento__begleitung-text .services-bento__card-title,
+.services-bento__begleitung-text .services-bento__card-desc {
+  min-width: 0;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+}
+
+.services-bento__begleitung-text .services-bento__card-title {
+  font-size: clamp(1.25rem, 3.5cqi, 1.75rem);
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+/* Photo panel — remaining 56%, portrait image fills it. */
 .services-bento__begleitung-photo {
   position: relative;
-  flex: 0 0 62%;
+  min-width: 0;
   overflow: hidden;
 }
 
@@ -544,14 +564,12 @@
 /* Mobile: stack vertically — photo on top, text below */
 @media (max-width: 699px) {
   .services-bento__card--begleitung {
-    flex-direction: column;
+    grid-template-columns: minmax(0, 1fr);
   }
   .services-bento__begleitung-photo {
-    flex: 0 0 auto;
     height: 300px;
   }
   .services-bento__begleitung-text {
-    flex: 0 0 auto;
     justify-content: flex-start;
   }
 }
@@ -1221,117 +1239,46 @@
    ─────────────────────────────────────────────────────────────
    Structure:
      .alltag                      ← full section wrapper
-       .alltag__ks-stage          ← tall scroll canvas for KEEP SCROLLING
-         .alltag__ks-sticky       ← sticky container
-       .alltag__reveal-stage      ← tall canvas for video reveal
-         .alltag__reveal-sticky   ← sticky container
+       .alltag__merge-stage       ← shared scroll canvas
+         .alltag__merge-scene     ← letters and opposing video halves
        .alltag__cards-stage       ← normal flow, staircase cards
    ═══════════════════════════════════════════════════════════════ */
 
-.alltag {
-  background: var(--site-bg);
-  overflow: clip;
-}
-
-/* ── KEEP SCROLLING stage ── */
-.alltag__ks-stage {
-  /* 2× viewport height gives enough scroll range for the letter exit */
-  height: 200vh;
-  position: relative;
-}
-
-.alltag__ks-sticky {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-}
-
-.alltag__ks-text {
-  display: flex;
-  align-items: baseline;
-  gap: 0;
-  font-family: var(--font-display, "GV Display", "Impact", "Arial Narrow", sans-serif);
-  font-size: clamp(2.8rem, 7vw, 7.5rem);
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #fff;
-  line-height: 1;
-  overflow: visible;
-}
-
-.ks-word {
-  display: inline-block;
-  /* clip-path removes each letter downward; JS sets scaleY via translateY + clip */
-  transform-origin: top center;
-  will-change: transform, opacity, filter;
-  transition: none; /* driven by scroll, not CSS transition */
-}
-
-.ks-gap {
-  display: inline-block;
-  width: 0.4em;
-}
-
-/* ── VIDEO REVEAL stage ── */
-.alltag__reveal-stage {
-  height: 250vh; /* scroll canvas for the mask reveal */
-  position: relative;
-}
-
-.alltag__reveal-sticky {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  overflow: hidden; /* clips the cover panels during animation */
-}
-
-.alltag__video-wrap {
-  position: relative;
-  width: 100%;
-  height: 100%; /* fills entire sticky = full viewport */
-  overflow: hidden;
-}
-
-.alltag__video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-}
-
-/* Cover panels — both navy, split top/bottom to reveal like a curtain */
-.alltag__cover {
-  position: absolute;
-  width: 100%;
-  height: 50%;
-  background: var(--site-bg);
-  transition: none; /* driven by JS scroll, not CSS */
-  will-change: transform;
-  z-index: 2;
-}
-
-/* Top cover: anchored to top, retreats upward → translateY(-100%) */
-.alltag__cover--left {
-  left: 0;
-  top: 0;
-  transform-origin: top center;
-  transform: translateY(0%);
-}
-
-/* Bottom cover: anchored to bottom, retreats downward → translateY(100%) */
-.alltag__cover--right {
-  left: 0;
-  bottom: 0;
-  transform-origin: bottom center;
-  transform: translateY(0%);
+/* One shared scene keeps the letter exit and video entrance on the same timeline. */
+.alltag { background: var(--site-bg, #07111f); overflow: clip; }
+.alltag__merge-stage { position: relative; }
+.alltag__merge-scene { --alltag-video-scale: 1.14; position: relative; isolation: isolate; overflow: hidden; background: var(--site-bg, #07111f); }
+.alltag__merge-copy { display: flex; align-items: center; justify-content: center; padding: 4rem 1rem; pointer-events: none; }
+.alltag__ks-text { display: flex; align-items: baseline; margin: 0; padding-block: .04em; overflow: hidden; font-family: var(--font-display); font-size: clamp(1.5rem, 6.2vw, 6rem); font-weight: 900; letter-spacing: .06em; text-transform: uppercase; color: #fff; line-height: 1; white-space: nowrap; }
+.ks-word { display: inline-block; transform-origin: 50% 100%; }
+.ks-gap { display: inline-block; width: .4em; }
+.alltag__merge-scene .alltag__video-wrap { position: relative; width: 100%; height: min(80svh, 56.25vw); min-height: 240px; overflow: hidden; background: var(--site-bg, #07111f); }
+.alltag__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+.alltag__half { display: none; position: absolute; z-index: 2; top: 0; width: calc(50% + .5px); height: 100%; overflow: hidden; pointer-events: none; }
+.alltag__half--left { left: 0; transform: translate3d(0, calc(100% + 2px), 0); }
+.alltag__half--right { right: 0; transform: translate3d(0, calc(-100% - 2px), 0); }
+.alltag__half canvas { position: absolute; top: 0; width: 200%; height: 100%; max-width: none; }
+.alltag__half--left canvas { left: 0; }
+.alltag__half--right canvas { right: 0; }
+.has-merge-motion.alltag__merge-stage { height: 320svh; }
+.has-merge-motion .alltag__merge-scene { position: sticky; top: 0; height: 100svh; }
+.has-merge-motion .alltag__video-wrap { position: absolute; inset: 0; height: 100%; min-height: 0; }
+.has-merge-motion .alltag__video { opacity: 0; }
+.has-merge-motion.is-frame-ready .alltag__half { display: block; visibility: hidden; will-change: transform; }
+.has-merge-motion.is-frame-ready.is-video-entering:not(.is-joined) .alltag__half { visibility: visible; }
+.has-merge-motion .alltag__merge-copy { position: absolute; z-index: 3; inset: 0; padding: 0 1rem; }
+.has-merge-motion .ks-word { will-change: transform, opacity; }
+.has-merge-motion.is-joined .alltag__video { opacity: 1; }
+.has-merge-motion.is-joined .alltag__half { visibility: hidden; will-change: auto; }
+@media (max-width: 700px) { .has-merge-motion.alltag__merge-stage { height: 280svh; } }
+@media (prefers-reduced-motion: reduce), (max-height: 499px) {
+  .has-merge-motion.alltag__merge-stage { height: auto; }
+  .has-merge-motion .alltag__merge-scene { position: relative; height: auto; }
+  .has-merge-motion .alltag__video-wrap { position: relative; height: min(80svh, 56.25vw); min-height: 240px; }
+  .has-merge-motion .alltag__video { opacity: 1; }
+  .has-merge-motion .alltag__half { display: none; }
+  .has-merge-motion .alltag__merge-copy { position: relative; padding: 3rem 1rem; }
+  .has-merge-motion .ks-word { opacity: 1 !important; transform: none !important; will-change: auto; }
 }
 
 /* ── Play / pause button ── */
@@ -1528,32 +1475,15 @@
 
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
-  .alltag__ks-stage,
-  .alltag__reveal-stage {
-    height: auto;
-  }
-  .alltag__ks-sticky,
-  .alltag__reveal-sticky {
-    position: relative;
-    height: auto;
-    padding-block: 4rem;
-  }
-  .alltag__reveal-sticky { min-height: 56vw; }
-  .alltag__cover { display: none; }
   .alltag__play-btn { opacity: 1; pointer-events: auto; }
   .alltag__cards-stage { height: auto; }
   .alltag__cards-sticky { position: static; height: auto; padding-block: clamp(4rem, 8vw, 7rem); }
-  .alltag__step--1,
-  .alltag__step--2,
-  .alltag__step--3 { opacity: 1; transform: none; }
+  .alltag__step { opacity: 1; transform: none; }
   .alltag__play-ring { animation: none; }
 }
 
 /* ── Mobile ── */
 @media (max-width: 700px) {
-  .alltag__ks-stage  { height: 160vh; }
-  .alltag__reveal-stage { height: 200vh; }
-  .alltag__ks-text { font-size: clamp(2rem, 10vw, 3.5rem); letter-spacing: 0.05em; }
 
   .alltag__cards-stage { height: auto; }
   .alltag__cards-sticky { position: static; height: auto; padding-block: clamp(3rem, 6vw, 5rem); }
@@ -2709,3 +2639,4 @@
 @media (max-width: 600px) {
   .how-it-works__payoff p { font-size: clamp(1.5rem, 8vw, 2.5rem); }
 }
+
