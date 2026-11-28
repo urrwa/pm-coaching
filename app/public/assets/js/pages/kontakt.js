@@ -18,7 +18,7 @@
     const errBox = form.querySelector("[data-kt-error]");
     const submitBtn = form.querySelector("[data-kt-submit]");
     const submitLabel = submitBtn.querySelector(".btn__label");
-    const defaultLabel = C.formEndpoint ? "Nachricht senden" : C.contactEmail ? "E-Mail-Entwurf öffnen" : "Nachricht vorbereiten";
+    const defaultLabel = C.formEndpoint ? "Nachricht senden" : C.contactEmail ? "E-Mail öffnen" : "Nachricht vorbereiten";
     submitLabel.textContent = defaultLabel;
     const gsapOk = () => window.gsap && !(window.PM && window.PM.reduced);
     const $ = (name) => form.elements[name];
@@ -77,14 +77,14 @@
         text = `Ich melde mich über deine angegebene Kontaktadresse: <strong>${esc(d.email)}</strong>.`;
         actions = `<a class="btn btn--ghost" href="#faq"><span class="btn__fill" aria-hidden="true"></span><span class="btn__label">Antworten auf häufige Fragen</span><span class="btn__icon" aria-hidden="true"><svg class="arrow-exit" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg><svg class="arrow-enter" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span></a>`;
       } else if (mode === "mailto") {
-        title = "Dein E-Mail-Entwurf ist vorbereitet.";
-        text = `Dein E-Mail-Programm sollte sich mit einem vorbereiteten Entwurf öffnen. Bitte sende ihn dort selbst ab, damit ich deine Nachricht erhalte. Falls sich kein Entwurf öffnet, kopiere den Text unten und schreibe an <strong>${email}</strong>.`;
+        title = "Sende deine Nachricht per E-Mail.";
+        text = `Dein E-Mail-Programm sollte sich öffnen. Sende deine Nachricht dort ab, damit sie mich erreicht. Falls es sich nicht öffnet, kopiere den Text unten und schreibe an <strong>${email}</strong>.`;
         extra = `<textarea class="kt-result__raw" readonly aria-label="Deine Nachricht als Text">${esc(raw)}</textarea>`;
         actions = `<button type="button" class="btn btn--outline btn--sm" data-kt-copy><span class="btn__label">Nachricht kopieren</span></button><button type="button" class="link-underline small muted" data-kt-retry>Zurück zum Formular</button>`;
       } else if (mode === "setup") {
         warn = true;
         title = "Noch nicht gesendet.";
-        text = "Eine Übermittlung ist aktuell nicht eingerichtet. Deine Nachricht bleibt hier erhalten. Du kannst den Text kopieren oder zum Formular zurückgehen.";
+        text = "Der direkte Versand ist momentan nicht verfügbar. Deine Nachricht bleibt hier erhalten. Du kannst den Text kopieren oder es später erneut versuchen.";
         extra = `<textarea class="kt-result__raw" readonly aria-label="Deine Nachricht als Text">${esc(raw)}</textarea>`;
         actions = `<button type="button" class="btn btn--outline btn--sm" data-kt-copy><span class="btn__label">Nachricht kopieren</span></button><button type="button" class="link-underline small muted" data-kt-retry>Zurück zum Formular</button>`;
       } else {
@@ -192,3 +192,4 @@
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
 })();
+

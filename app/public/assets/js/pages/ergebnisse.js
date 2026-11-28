@@ -1,5 +1,6 @@
 (() => {
   const gallery = document.querySelector("[data-er-loop]");
+  if (!gallery) return;
   const viewport = gallery.querySelector(".er-loop__viewport");
   const track = viewport.querySelector(".er-loop__track");
   const originals = Array.from(track.children);
@@ -10,9 +11,8 @@
   });
   track.append(...repeats);
   const cards = [...originals, ...repeats];
-  const pause = gallery.querySelector("[data-er-pause]");
   const motion = matchMedia("(prefers-reduced-motion: reduce)");
-  let frame = 0, previous = null, position = 0, paused = false, visible = false;
+  let frame = 0, previous = null, position = 0, visible = false;
   let step = 0, cardWidth = 0;
 
   function render() {
@@ -45,7 +45,6 @@
     previous = null;
     const curved = !motion.matches;
     gallery.classList.toggle("is-curved", curved);
-    pause.parentElement.hidden = !curved;
     if (!curved) {
       cards.forEach((card) => card.removeAttribute("style"));
       return;
@@ -53,14 +52,9 @@
     cardWidth = cards[0].offsetWidth;
     step = Math.max(cardWidth * 1.24, viewport.clientWidth / 7);
     render();
-    if (visible && !paused) frame = requestAnimationFrame(tick);
+    if (visible) frame = requestAnimationFrame(tick);
   }
 
-  pause.addEventListener("click", () => {
-    paused = !paused;
-    pause.textContent = paused ? "Bildlauf fortsetzen" : "Bildlauf pausieren";
-    sync();
-  });
   motion.addEventListener("change", sync);
   new ResizeObserver(sync).observe(viewport);
   new IntersectionObserver(([entry]) => {
@@ -69,3 +63,4 @@
   }).observe(viewport);
   sync();
 })();
+

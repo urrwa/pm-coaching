@@ -2,73 +2,48 @@
 (function () {
   "use strict";
   /* ---------- Hero: play while the video is on screen ---------- */
+  /* Decorative background video: automatic playback without an overlay button. */
   (function hero() {
-    const section = document.querySelector("[data-hero]");
-    const video = section?.querySelector("[data-hero-video]");
+    const section = document.querySelector('[data-hero]');
+    const video = section?.querySelector('[data-hero-video]');
     if (!video) return;
-
-    const button = section.querySelector("[data-hero-playback]");
-    const motion = matchMedia("(prefers-reduced-motion: reduce)");
-    const mobile = matchMedia("(max-width: 767px)");
-    let paused = motion.matches || navigator.connection?.saveData === true;
+    const motion = matchMedia('(prefers-reduced-motion: reduce)');
+    const mobile = matchMedia('(max-width: 767px)');
     let visible = false;
-    let showResume = paused;
     let pending = false;
+    let blocked = false;
+    video.controls = false;
 
-    function updateButton() {
-      button.textContent = video.paused ? "Video abspielen" : "Video pausieren";
-      button.hidden = video.paused && !showResume;
+    function shouldPlay() {
+      return visible && !document.hidden && !motion.matches && navigator.connection?.saveData !== true && !blocked;
     }
-
     function sync() {
-      if (paused || !visible || document.hidden) {
+      if (!shouldPlay()) {
         video.pause();
-        updateButton();
         return;
       }
       if (!video.paused || pending) return;
-      if (!video.hasAttribute("src")) {
-        video.src = mobile.matches ? video.dataset.heroVideoMobile : video.dataset.heroVideo;
-      }
+      if (!video.hasAttribute('src')) video.src = mobile.matches ? video.dataset.heroVideoMobile : video.dataset.heroVideo;
       pending = true;
-      video.play().catch((error) => {
-        if (error.name === "NotAllowedError") {
-          paused = true;
-          showResume = true;
-        }
+      video.play().catch(error => {
+        if (error.name === 'NotAllowedError' || error.name === 'NotSupportedError') blocked = true;
       }).finally(() => {
         pending = false;
-        updateButton();
+        if (!shouldPlay()) video.pause();
       });
     }
-
-    video.addEventListener("playing", () => {
-      section.classList.add("is-video-ready");
-      updateButton();
+    video.addEventListener('playing', () => section.classList.add('is-video-ready'));
+    video.addEventListener('error', () => {
+      blocked = true;
+      section.classList.remove('is-video-ready');
     });
-    video.addEventListener("pause", updateButton);
-    video.addEventListener("error", () => {
-      section.classList.remove("is-video-ready");
-      showResume = false;
-      updateButton();
-    });
-    button.addEventListener("click", () => {
-      paused = !video.paused;
-      showResume = paused;
-      sync();
-    });
-    motion.addEventListener("change", () => {
-      if (!motion.matches) return;
-      paused = true;
-      showResume = true;
-      sync();
-    });
-    document.addEventListener("visibilitychange", sync);
+    motion.addEventListener('change', () => { blocked = false; sync(); });
+    document.addEventListener('visibilitychange', sync);
     new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting;
       sync();
     }, { threshold: .15 }).observe(video);
-    updateButton();
+    sync();
   })();
 
   function run() {
@@ -972,167 +947,262 @@
   /* ═══════════════════════════════════════════════════════════════
      04  ALLTAG SCROLL SEQUENCE
      ─────────────────────────────────────────────────────────────
-     Stage 1 – KEEP SCROLLING letter exit (scroll-linked)
-     Stage 2 – Opposing mask video reveal (scroll-linked)
+     Stage 1 – Shared letter exit and opposing video-half merge
+     Stage 2 – Playback after the halves meet
      Stage 3 – Staircase cards (IntersectionObserver)
      ═══════════════════════════════════════════════════════════════ */
+  /* One scroll scene: staggered letter exit, opposing video halves, then playback. */
+  /* One scroll scene: staggered letter exit, opposing video halves, then playback. */
+  /* One scroll scene: staggered letter exit, opposing video halves, then playback. */
+  /* One scroll scene: staggered letter exit, opposing video halves, then playback. */
+  /* One scroll scene: staggered letter exit, opposing video halves, then playback. */
+  /* One scroll scene: staggered letter exit, opposing video halves, then playback. */
+  /* One scroll scene: staggered letter exit, opposing video halves, then playback. */
   (function alltagSequence() {
-    const section   = document.querySelector('.alltag');
-    if (!section) return;
+    const section = document.querySelector('.alltag');
+    const stage = section?.querySelector('[data-alltag-merge]');
+    const scene = stage?.querySelector('.alltag__merge-scene');
+    const video = section?.querySelector('#alltagVideo');
+    if (!stage || !scene || !video) return;
 
-    const reduced   = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    /* ── DOM refs ── */
-    const ksStage       = section.querySelector('.alltag__ks-stage');
-    const ksWords       = section.querySelectorAll('.ks-word');
-    const revealStage   = section.querySelector('.alltag__reveal-stage');
-    const coverLeft     = section.querySelector('.alltag__cover--left');
-    const coverRight    = section.querySelector('.alltag__cover--right');
-    const video         = section.querySelector('#alltagVideo');
-    const playBtn       = section.querySelector('#alltagPlayBtn');
-    const playIcon      = section.querySelector('.icon-play');
-    const pauseIcon     = section.querySelector('.icon-pause');
-    const steps         = section.querySelectorAll('.alltag__step--2, .alltag__step--3');
-
-    /* ── Reduced motion: show everything immediately ── */
-    if (reduced) {
-      if (coverLeft)  coverLeft.style.transform  = 'translateY(-100%)';
-      if (coverRight) coverRight.style.transform = 'translateY(100%)';
-      if (playBtn)  { playBtn.classList.add('is-visible'); }
-      // Reveal all 3 steps immediately
-      section.querySelectorAll('.alltag__step').forEach(s => s.classList.add('is-revealed'));
-      if (video) {
-        video.play().catch(() => {});
-      }
-      return;
-    }
-
-    /* ── Utility: clamp a value 0…1 ── */
-    function progress(value, start, end) {
-      return Math.min(1, Math.max(0, (value - start) / (end - start)));
-    }
-
-    /* ═══════════ Stage 1 – KEEP SCROLLING letter exit ═══════════ */
-    const totalWords = ksWords.length;
-    let videoRevealed = false;
-
-    function updateKs() {
-      if (!ksStage) return;
-      const rect   = ksStage.getBoundingClientRect();
-      const stageH = ksStage.offsetHeight;
-      const scrolled = -rect.top;
-
-      // Letters start exiting at 55% through the KS stage, fully gone at 88%
-      const exitStart = stageH * 0.55;
-      const exitEnd   = stageH * 0.88;
-      const p = progress(scrolled, exitStart, exitEnd); // 0→1
-
-      ksWords.forEach((word, i) => {
-        // Each letter exits left-to-right: K first, G last
-        const wordP = progress(p, i / totalWords, (i + 1) / totalWords);
-        // Slide DOWN and blur out — positive = downward
-        const translateY = wordP * 60;
-        const blur       = wordP * 10;
-        const opacity    = 1 - wordP;
-        word.style.transform = `translateY(${translateY}px)`;
-        word.style.filter    = `blur(${blur}px)`;
-        word.style.opacity   = opacity;
-      });
-
-    }
-
-    /* ═══════════ Stage 2 – video curtain reveal (driven by reveal stage scroll) ═══════════ */
-    function updateReveal() {
-      if (!revealStage) return;
-      const rect    = revealStage.getBoundingClientRect();
-      const stageH  = revealStage.offsetHeight;
-      const scrolled = -rect.top;
-
-      // Covers open during first 40% of the reveal stage scroll
-      const revP = progress(scrolled, 0, stageH * 0.40);
-
-      if (coverLeft)  coverLeft.style.transform  = `translateY(${-revP * 100}%)`;
-      if (coverRight) coverRight.style.transform = `translateY(${revP * 100}%)`;
-
-      if (revP >= 1 && !videoRevealed) {
-        videoRevealed = true;
-        if (playBtn) playBtn.classList.add('is-visible');
-        if (video) video.play().catch(() => {});
-      } else if (revP < 1 && videoRevealed) {
-        videoRevealed = false;
-        if (playBtn) playBtn.classList.remove('is-visible');
-      }
-    }
-
-    /* ═══════════ Stage 3 – Scroll-sequential card reveals ═══════════ */
+    const letters = [...stage.querySelectorAll('.ks-word')];
+    const panels = [...stage.querySelectorAll('.alltag__half')];
+    const canvases = panels.map(panel => panel.querySelector('canvas'));
+    const contexts = canvases.map(canvas => canvas?.getContext('2d', { alpha: false }));
     const cardsStage = section.querySelector('.alltag__cards-stage');
-    const allSteps   = section.querySelectorAll('.alltag__step');  // all 3
+    const steps = [...section.querySelectorAll('.alltag__step')];
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+    const shortScreen = matchMedia('(max-height: 499px)');
+    const clamp = value => Math.max(0, Math.min(1, value));
+    const smooth = value => value * value * (3 - 2 * value);
+    // Start the video only once the first L of the double-L is the leading letter.
+    // Read the real letters so the cue remains aligned with the visible wording.
+    const firstL = letters.findIndex((letter, index) =>
+      letter.textContent?.trim().toUpperCase() === 'L' &&
+      letters[index + 1]?.textContent?.trim().toUpperCase() === 'L');
+    const leadingIndex = firstL >= 0 ? firstL : Math.max(0, letters.length - 4);
+    const videoStart = .30;
+    const letterDuration = .10;
+    const supported = contexts.length === 2 && contexts.every(Boolean) && CSS.supports('position', 'sticky');
+    let enabled = false;
+    let frameReady = false;
+    let joined = false;
+    let visible = false;
+    let pending = false;
+    let frame = 0;
+    let autoplayBlocked = false;
+    let sourceLoaded = video.hasAttribute('src');
+    let near = !('IntersectionObserver' in window);
+    let previousProgress = NaN;
+    let previousMerge = NaN;
+    let settleTimer = 0;
+    let completion = null;
+    let paintedWidth = 0;
+    let paintedHeight = 0;
+
+    video.removeAttribute('autoplay');
+    video.muted = true;
+    video.defaultMuted = true;
+    video.pause();
+
+    function prepareVideo() {
+      if (sourceLoaded || reduced.matches || navigator.connection?.saveData === true) return;
+      const mobile = matchMedia('(max-width: 700px)').matches;
+      const source = mobile ? video.dataset.alltagVideoMobile : video.dataset.alltagVideoDesktop;
+      if (!source) return;
+      sourceLoaded = true;
+      video.preload = 'auto';
+      video.src = source;
+      video.load();
+    }
+
+    function shouldPlay() {
+      return joined && visible && !autoplayBlocked && !reduced.matches && navigator.connection?.saveData !== true && !document.hidden;
+    }
+
+    function syncPlayback() {
+      if (!shouldPlay()) {
+        if (!video.paused) video.pause();
+      } else if (video.paused && !pending) {
+        pending = true;
+        video.play().catch(error => {
+          if (error.name === 'NotAllowedError' || error.name === 'NotSupportedError') autoplayBlocked = true;
+        }).finally(() => {
+          pending = false;
+          if (!shouldPlay()) video.pause();
+        });
+      }
+    }
+
+    // Both halves copy one decoded frame, so they join without a time mismatch.
+    // This also matches the existing overscan that crops the clip's black borders.
+    function paintFrame(force = false) {
+      if (!supported || video.readyState < 2 || !video.videoWidth) return false;
+      const width = scene.clientWidth;
+      const height = scene.clientHeight;
+      if (!width || !height) return false;
+      if (!force && frameReady && width === paintedWidth && height === paintedHeight) return true;
+      const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.5);
+      const overscan = Number.parseFloat(getComputedStyle(scene).getPropertyValue('--alltag-video-scale')) || 1.14;
+      const scale = Math.max(width / video.videoWidth, height / video.videoHeight) * overscan;
+      try {
+        canvases.forEach((canvas, index) => {
+          const bitmapWidth = Math.round(width * pixelRatio);
+          const bitmapHeight = Math.round(height * pixelRatio);
+          if (canvas.width !== bitmapWidth) canvas.width = bitmapWidth;
+          if (canvas.height !== bitmapHeight) canvas.height = bitmapHeight;
+          canvas.style.width = width + 'px';
+          canvas.style.height = height + 'px';
+          const ctx = contexts[index];
+          ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+          ctx.fillStyle = '#07111f';
+          ctx.fillRect(0, 0, width, height);
+          ctx.drawImage(video, (width - video.videoWidth * scale) / 2,
+            (height - video.videoHeight * scale) / 2,
+            video.videoWidth * scale, video.videoHeight * scale);
+        });
+        paintedWidth = width;
+        paintedHeight = height;
+        return true;
+      } catch (_) {
+        return false;
+      }
+    }
 
     function updateCards() {
-      if (!cardsStage || !allSteps.length) return;
-      const rect   = cardsStage.getBoundingClientRect();
-      const stageH = cardsStage.offsetHeight;
-      const scrolled = -rect.top;
-
-      // 350vh stage: each card gets ~100vh of scroll, first card at 0–1/3, etc.
-      // thresholds: card 1 at 0%, card 2 at 25%, card 3 at 50% of stage
-      const thresholds = [0.0, 0.25, 0.50];
-
-      allSteps.forEach((step, i) => {
-        const start = stageH * thresholds[i];
-        const p = Math.min(1, Math.max(0, (scrolled - start) / (stageH * 0.08)));
-        if (p > 0) {
-          step.classList.add('is-revealed');
-        } else {
-          step.classList.remove('is-revealed');
-        }
+      if (!cardsStage) return;
+      const rect = cardsStage.getBoundingClientRect();
+      const distance = cardsStage.offsetHeight;
+      steps.forEach((step, index) => {
+        const readable = reduced.matches || window.innerWidth <= 700;
+        step.classList.toggle('is-revealed', readable || -rect.top > distance * [0, .25, .5][index]);
       });
     }
 
-    /* ═══════════ Scroll handler ═══════════ */
-    function onScroll() {
-      updateKs();
-      updateReveal();
+    function render() {
+      frame = 0;
+      const rect = scene.getBoundingClientRect();
+      visible = rect.bottom > 0 && rect.top < window.innerHeight;
+      // Read card geometry before writing animated styles to avoid forced layout.
       updateCards();
-    }
-
-    // Lenis intercepts native scroll events — hook into Lenis when available
-    if (window.PM && window.PM.lenis) {
-      window.PM.lenis.on('scroll', onScroll);
-    } else {
-      window.addEventListener('scroll', onScroll, { passive: true });
-    }
-    onScroll(); // run once on load
-
-    /* ═══════════ Video play/pause button ═══════════ */
-    if (playBtn && video) {
-      function setPlayState(playing) {
-        if (pauseIcon) pauseIcon.style.display = playing ? '' : 'none';
-        if (playIcon)  playIcon.style.display  = playing ? 'none' : '';
-        playBtn.setAttribute('aria-label', playing ? 'Video pausieren' : 'Video abspielen');
-      }
-
-      // Sync icon to actual video state
-      video.addEventListener('play',  () => setPlayState(true));
-      video.addEventListener('pause', () => setPlayState(false));
-
-      playBtn.addEventListener('click', () => {
-        if (video.paused) {
-          video.play().catch(() => {});
-        } else {
-          video.pause();
+      if (enabled) {
+        const distance = Math.max(1, stage.offsetHeight - scene.offsetHeight);
+        const progress = frameReady ? clamp(-stage.getBoundingClientRect().top / distance) : 0;
+        const mergeProgress = clamp((progress - videoStart) / .42);
+        if (completion && progress < completion.at - .012) completion = null;
+        let merge = smooth(mergeProgress);
+        let finishing = false;
+        if (completion) {
+          const elapsed = clamp((performance.now() - completion.started) / 260);
+          merge = Math.max(merge, completion.from + (1 - completion.from) * smooth(elapsed));
+          finishing = elapsed < 1;
         }
-      });
-
-      // Pause when scrolled fully out of view
-      const videoObs = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (!e.isIntersecting && !video.paused) video.pause();
+        // A nearly completed join must not leave a frozen image when scrolling stops.
+        clearTimeout(settleTimer);
+        if (!completion && progress >= .64 && progress < .72) {
+          settleTimer = setTimeout(() => {
+            completion = { at: progress, from: merge, started: performance.now() };
+            requestRender();
+          }, 180);
+        }
+        if (progress !== previousProgress || merge !== previousMerge) {
+        previousProgress = progress;
+        previousMerge = merge;
+        const nextJoined = merge >= 1;
+        if (joined && !nextJoined) {
+          video.pause();
+          paintFrame(true);
+        }
+        joined = nextJoined;
+        stage.classList.toggle('is-video-entering', frameReady && mergeProgress > 0 && !joined);
+        stage.classList.toggle('is-joined', joined);
+        const offset = (1 - merge) * (scene.offsetHeight + 2);
+        panels[0].style.transform = `translate3d(0, ${offset.toFixed(3)}px, 0)`;
+        panels[1].style.transform = `translate3d(0, ${(-offset).toFixed(3)}px, 0)`;
+        letters.forEach((letter, index) => {
+          const tail = index >= leadingIndex;
+          const localIndex = tail ? index - leadingIndex : index;
+          const count = tail ? letters.length - leadingIndex : leadingIndex;
+          const first = tail ? videoStart : .04;
+          const last = tail ? videoStart + .15 : videoStart - letterDuration;
+          const start = first + localIndex / Math.max(1, count - 1) * (last - first);
+          const exit = smooth(clamp((progress - start) / letterDuration));
+          letter.style.transform = `translate3d(0, ${(115 * exit).toFixed(2)}%, 0)`;
+          letter.style.opacity = String(1 - exit);
         });
-      }, { threshold: 0 });
-      videoObs.observe(revealStage || section);
+        }
+        if (finishing) requestRender();
+      }
+      syncPlayback();
     }
 
+    function requestRender() {
+      if (!frame) frame = requestAnimationFrame(render);
+    }
+
+    function syncLayout() {
+      const next = supported && !reduced.matches && !shortScreen.matches && navigator.connection?.saveData !== true;
+      const changed = enabled !== next;
+      enabled = next;
+      previousProgress = NaN;
+      previousMerge = NaN;
+      completion = null;
+      clearTimeout(settleTimer);
+      stage.classList.toggle('has-merge-motion', enabled);
+      if (!enabled) {
+        joined = true;
+        stage.classList.add('is-joined');
+        letters.forEach(letter => {
+          letter.style.removeProperty('transform');
+          letter.style.removeProperty('opacity');
+        });
+      }
+      if (near) prepareVideo();
+      // Do not redraw two large frozen canvases while the joined video is playing.
+      if (!joined || !frameReady) frameReady = paintFrame();
+      stage.classList.toggle('is-frame-ready', frameReady);
+      requestRender();
+      if (changed && window.ScrollTrigger) requestAnimationFrame(() => window.ScrollTrigger.refresh());
+    }
+
+    video.controls = false;
+    video.addEventListener('loadeddata', () => {
+      frameReady = paintFrame();
+      stage.classList.toggle('is-frame-ready', frameReady);
+      requestRender();
+    });
+    video.addEventListener('canplay', () => {
+      autoplayBlocked = false;
+      requestRender();
+    });
+    video.addEventListener('pause', () => {
+      if (shouldPlay()) requestRender();
+    });
+    video.addEventListener('error', () => {
+      enabled = false;
+      autoplayBlocked = true;
+      joined = true;
+      stage.classList.remove('has-merge-motion');
+      stage.classList.add('is-joined');
+    });
+    window.addEventListener('scroll', requestRender, { passive: true });
+    window.addEventListener('resize', syncLayout, { passive: true });
+    window.addEventListener('pageshow', requestRender);
+    document.addEventListener('visibilitychange', syncPlayback);
+    document.addEventListener('pointerdown', () => {
+      if (joined && visible) { autoplayBlocked = false; requestRender(); }
+    }, { passive: true });
+    reduced.addEventListener('change', syncLayout);
+    shortScreen.addEventListener('change', syncLayout);
+    if ('IntersectionObserver' in window) {
+      const preloadObserver = new IntersectionObserver(entries => {
+        near = entries.some(entry => entry.isIntersecting);
+        if (near) { prepareVideo(); preloadObserver.disconnect(); }
+      }, { rootMargin: '150% 0px', threshold: 0 });
+      preloadObserver.observe(stage);
+    }
+    syncLayout();
   })();
 
 })();
+

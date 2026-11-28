@@ -16,14 +16,12 @@
       const tiles = [...section.querySelectorAll("[data-ab-reveal]")];
       const captions = feature.querySelectorAll("[data-ab-caption]");
       const videos = [...section.querySelectorAll("[data-ab-video]")];
-      const button = section.querySelector("[data-ab-playback]");
       const motion = matchMedia("(prefers-reduced-motion: reduce)");
       const visible = new Set();
       let paused = motion.matches;
       let collageVisible = true;
 
       function syncVideos() {
-        button.textContent = paused ? "Videos abspielen" : "Videos pausieren";
         videos.forEach((video) => {
           const canPlay = !paused && !document.hidden && visible.has(video) && (collageVisible || feature.contains(video));
           if (!canPlay) {
@@ -42,12 +40,10 @@
         });
         syncVideos();
       }, { threshold: .18 });
-      videos.forEach((video) => observer.observe(video));
-      button.addEventListener("click", () => { paused = !paused; syncVideos(); });
+      videos.forEach((video) => { video.controls = false; observer.observe(video); });
       motion.addEventListener("change", () => { paused = motion.matches; syncVideos(); });
       document.addEventListener("visibilitychange", syncVideos);
       syncVideos();
-      button.hidden = false;
 
       gsap.matchMedia().add("(prefers-reduced-motion: no-preference) and (min-height: 540px)", () => {
         section.classList.add("is-animated");
@@ -124,3 +120,4 @@
   }
   if (window.PM && window.PM.ready) run(); else document.addEventListener("pm:ready", run, { once: true });
 })();
+
