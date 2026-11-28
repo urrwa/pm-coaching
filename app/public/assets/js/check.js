@@ -146,7 +146,7 @@
     function renderReview() {
       return `<div class="check__step is-active" data-qid="review">
         <h3 class="check__q">Deine Angaben im Überblick.</h3>
-        <p class="check__hint">${C.formEndpoint ? "Prüfe deine Angaben. Mit dem nächsten Schritt sendest du deine Anfrage ab." : C.contactEmail ? "Prüfe deine Angaben. Im nächsten Schritt öffnest du einen E-Mail-Entwurf, den du in deinem E-Mail-Programm selbst absendest." : "Prüfe deine Angaben. Du kannst deine Antworten anschließend kopieren; eine Übermittlung ist aktuell nicht eingerichtet."}</p>
+        <p class="check__hint">${C.formEndpoint ? "Prüfe deine Angaben. Mit dem nächsten Schritt sendest du deine Anfrage ab." : C.contactEmail ? "Prüfe deine Angaben. Im nächsten Schritt öffnet sich dein E-Mail-Programm. Sende deine Anfrage dort ab." : "Prüfe deine Angaben. Du kannst deine Antworten anschließend kopieren und später senden."}</p>
         <dl class="check__summary">${summaryRows()}</dl>
         <p class="check__error" data-error></p>
       </div>`;
@@ -162,11 +162,11 @@
     function renderDone(mode) {
       const summary = plainSummary();
       let extra = mode === "ok" ? renderResult() : "";
-      if (mode === "mailto") extra += `<p class="check__hint">Bitte sende den vorbereiteten Entwurf in deinem E-Mail-Programm ab, damit ich deine Anfrage erhalte. Falls sich kein Entwurf öffnet, kopiere deine Antworten und schreibe an <strong>${esc(C.contactEmail)}</strong>.</p><textarea class="check__raw" readonly aria-label="Deine Antworten">${esc(summary)}</textarea>`;
-      if (mode === "setup") extra += `<p class="check__hint">Deine Antworten wurden noch nicht gesendet. Die Online-Übermittlung ist momentan nicht verfügbar. Deine Angaben bleiben erhalten; du kannst sie unten kopieren.</p><textarea class="check__raw" readonly aria-label="Deine Antworten">${esc(summary)}</textarea>`;
+      if (mode === "mailto") extra += `<p class="check__hint">Sende die E-Mail ab, damit ich deine Anfrage erhalte. Falls sich dein E-Mail-Programm nicht öffnet, kopiere deine Antworten und schreibe an <strong>${esc(C.contactEmail)}</strong>.</p><textarea class="check__raw" readonly aria-label="Deine Antworten">${esc(summary)}</textarea>`;
+      if (mode === "setup") extra += `<p class="check__hint">Deine Antworten wurden noch nicht gesendet. Der direkte Versand ist momentan nicht verfügbar. Deine Angaben bleiben erhalten; du kannst sie unten kopieren.</p><textarea class="check__raw" readonly aria-label="Deine Antworten">${esc(summary)}</textarea>`;
       if (mode === "error") extra = `<p class="check__hint">Deine Anfrage konnte nicht übermittelt werden. Deine Antworten stehen unten zum Kopieren bereit. Versuche es erneut${C.contactEmail ? ` oder schreibe direkt an <strong>${esc(C.contactEmail)}</strong>` : ""}.</p><textarea class="check__raw" readonly>${esc(summary)}</textarea>`;
       if (mode !== "ok") extra += `<button type="button" class="btn btn--outline btn--sm check__copy" data-copy><span class="btn__label">Antworten kopieren</span></button><button type="button" class="link-underline" data-retry>Zurück zur Zusammenfassung</button>`;
-      const headline = mode === "ok" ? "Danke, deine Anfrage wurde übermittelt." : mode === "mailto" ? "Dein Entwurf ist vorbereitet." : "Noch nicht gesendet.";
+      const headline = mode === "ok" ? "Danke, deine Anfrage wurde übermittelt." : mode === "mailto" ? "Sende jetzt deine Anfrage per E-Mail." : "Noch nicht gesendet.";
       const sub = mode === "ok" ? `Kontaktadresse: <strong>${esc(state.contact.email)}</strong>.` : "";
       return `<div class="check__step is-active" data-qid="done"><div class="check__done">
         <div class="check__done-icon" aria-hidden="true">${mode === "error" ? "!" : '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>'}</div>
@@ -183,7 +183,7 @@
       else if (i === QUESTIONS.length) { stepLabel.textContent = "Fast geschafft"; stepName.textContent = "Kontakt"; }
       else { stepLabel.textContent = "Zusammenfassung"; stepName.textContent = "Prüfen & weiter"; }
       back.disabled = i === 0;
-      nextLabel.textContent = i === QUESTIONS.length + 1 ? (C.formEndpoint ? "Anfrage senden" : C.contactEmail ? "E-Mail-Entwurf öffnen" : "Antworten anzeigen") : "Weiter";
+      nextLabel.textContent = i === QUESTIONS.length + 1 ? (C.formEndpoint ? "Anfrage senden" : C.contactEmail ? "E-Mail öffnen" : "Antworten anzeigen") : "Weiter";
       next.hidden = false;
     }
 
@@ -268,7 +268,7 @@
       sending = false;
       next.disabled = false; next.removeAttribute("aria-disabled"); root.removeAttribute("aria-busy");
       next.hidden = true; back.disabled = true; bar.style.width = "100%";
-      stepLabel.textContent = mode === "ok" ? "Übermittelt" : mode === "mailto" ? "E-Mail-Entwurf" : "Noch nicht gesendet"; stepName.textContent = "";
+      stepLabel.textContent = mode === "ok" ? "Übermittelt" : mode === "mailto" ? "E-Mail" : "Noch nicht gesendet"; stepName.textContent = "";
       body.innerHTML = renderDone(mode);
       const copy = body.querySelector("[data-copy]");
       if (copy) copy.addEventListener("click", async () => {
@@ -340,3 +340,4 @@
   function boot() { document.querySelectorAll("[data-check]").forEach(mount); }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot); else boot();
 })();
+
