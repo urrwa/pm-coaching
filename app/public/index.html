@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="/assets/css/main.css?v=20261123-logo03">
   <link rel="stylesheet" href="/assets/css/pages/ergebnisse.css">
   <link rel="stylesheet" href="/assets/css/pages/kontakt.css">
-  <link rel="stylesheet" href="/assets/css/pages/home.css?v=20261127k">
+  <link rel="stylesheet" href="/assets/css/pages/home.css?v=20261127-playback3">
   <link rel="stylesheet" href="/assets/css/footer.css?v=20261126k">
   <style>
     [data-single-page-section], section[id], article[id] { scroll-margin-top: 90px; }
@@ -80,7 +80,6 @@
     .progress-cinema__description { margin: 1.5rem 0; color: #b6c2d3; font-size: 1.0625rem; line-height: 1.65; }
     .progress-cinema__card-foot { display: flex; align-items: center; gap: 1rem; margin-top: auto; padding-top: 1rem; border-top: 1px solid rgba(151, 185, 242, .14); color: #85b0ff; font-size: .75rem; line-height: 1.4; letter-spacing: .12em; font-variant-numeric: tabular-nums; }
     .progress-cinema__card-foot::after { content: ""; width: 2.5rem; height: 2px; margin-left: auto; background: #427eee; opacity: .65; }
-    .progress-cinema__note { position: relative; z-index: 1; margin: 0; text-align: center; color: #8b9bb0; font-size: .75rem; line-height: 1.6; }
     @media (max-width: 959px) {
       .progress-cinema__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5rem 1.25rem; }
       .progress-cinema.is-cinematic .progress-cinema__slot:nth-child(n) { --stagger: 0px; }
@@ -106,7 +105,7 @@
 
     /* The source clip includes letterboxing: overscan it inside the navy frame. */
     .page-home .alltag__video-wrap,
-    .page-home .alltag__reveal-sticky { overflow: hidden; background: var(--site-bg, #07111f); }
+    .page-home .alltag__merge-scene { overflow: hidden; background: var(--site-bg, #07111f); }
     .page-home #alltagVideo { width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; transform: scale(1.14); transform-origin: 50% 50%; }
   </style>
   <script>
@@ -121,10 +120,10 @@
   <script src="/assets/vendor/lenis.min.js" defer></script>
   <script src="/assets/js/config.js?v=20261124-net"></script>
   <script src="/assets/js/main.js?v=20261121-g5" defer></script>
-  <script defer src="/assets/js/check.js?v=fitness-check-20261126"></script>
-  <script defer src="/assets/js/pages/home.js?v=20261127i"></script>
-  <script defer src="/assets/js/pages/ergebnisse.js"></script>
-  <script defer src="/assets/js/pages/kontakt.js?v=copy-20261126"></script>
+  <script defer src="/assets/js/check.js?v=20261127-cleanup1"></script>
+  <script defer src="/assets/js/pages/home.js?v=20261127-playback3"></script>
+  <script defer src="/assets/js/pages/ergebnisse.js?v=20261127-cleanup1"></script>
+  <script defer src="/assets/js/pages/kontakt.js?v=20261127-cleanup1"></script>
 
   <script type="application/ld+json">{
   "@context": "https://schema.org",
@@ -252,7 +251,7 @@
       </a>
       <nav class="nav__links" aria-label="Hauptnavigation">
         <a href="#coaching" data-nav="#coaching">Coaching</a>
-        <a href="#ergebnisse" data-nav="#ergebnisse">Transformationen</a>
+        <a href="#ergebnisse" data-nav="#ergebnisse">Zielbilder</a>
         <a href="#ueber" data-nav="#ueber">Über Gabriel</a>
         <a href="#faq" data-nav="#faq">FAQ</a>
       </nav>
@@ -277,7 +276,7 @@
           <a href="#start"><span class="menu__index">01</span><span class="menu__link-text">Start</span></a>
           <a href="#coaching"><span class="menu__index">02</span><span class="menu__link-text">Coaching</span></a>
           <a href="#methode"><span class="menu__index">03</span><span class="menu__link-text">G5-Methode</span></a>
-          <a href="#ergebnisse"><span class="menu__index">04</span><span class="menu__link-text">Transformationen</span></a>
+          <a href="#ergebnisse"><span class="menu__index">04</span><span class="menu__link-text">Zielbilder</span></a>
           <a href="#ueber"><span class="menu__index">05</span><span class="menu__link-text">Über GV Coaching</span></a>
           <a href="#faq"><span class="menu__index">06</span><span class="menu__link-text">FAQ</span></a>
           <a href="#kontakt"><span class="menu__index">07</span><span class="menu__link-text">Kontakt</span></a>
@@ -308,7 +307,6 @@
       <img src="https://d2ol7oe51mr4n9.cloudfront.net/user_31EM6HTtcTFCyF2oVq3YoFVFsWr/58ced51e-2017-47db-a5d4-75adf2973416.webp" srcset="https://d2ol7oe51mr4n9.cloudfront.net/user_31EM6HTtcTFCyF2oVq3YoFVFsWr/93062140-8870-41fc-9d16-954aeb5a8d2b.webp 768w, https://d2ol7oe51mr4n9.cloudfront.net/user_31EM6HTtcTFCyF2oVq3YoFVFsWr/58ced51e-2017-47db-a5d4-75adf2973416.webp 1280w" sizes="100vw" width="1280" height="720" alt="" fetchpriority="high" decoding="async">
       <video muted loop playsinline preload="none" data-hero-video="https://d2ol7oe51mr4n9.cloudfront.net/user_31EM6HTtcTFCyF2oVq3YoFVFsWr/a0ed632a-2f52-43bc-ae3f-a570618400bf.mp4" data-hero-video-mobile="https://d2ol7oe51mr4n9.cloudfront.net/user_31EM6HTtcTFCyF2oVq3YoFVFsWr/cbca72d7-81d9-4c3d-96a7-55641631102d.mp4"></video>
     </div>
-    <button type="button" class="hero__playback" data-hero-playback hidden>Video abspielen</button>
     <div class="hero__inner container">
       <div class="hero__copy">
         <p class="eyebrow eyebrow--plain hero__eyebrow">Persönliches Online Fitness Coaching</p>
@@ -439,8 +437,8 @@
           <!-- Card 2: Begleitung — split layout: text left, photo right -->
           <article class="services-bento__card services-bento__card--wide services-bento__card--begleitung" data-bento="begleitung">
             <div class="services-bento__begleitung-text">
-              <h3 class="services-bento__card-title">Begleitung</h3>
-              <p class="services-bento__card-desc">Persönlicher Austausch mit mir zu deinen Fragen und nächsten Schritten.</p>
+              <h3 class="services-bento__card-title">Persönliche Betreuung</h3>
+              <p class="services-bento__card-desc">Direkter Austausch zu deinen Fragen und den nächsten Schritten.</p>
             </div>
             <div class="services-bento__begleitung-photo" aria-hidden="true">
               <img src="/assets/img/features-begleitung-coaching-900.webp"
@@ -477,9 +475,6 @@
                 <h3 class="services-bento__card-title">Fortschritt</h3>
                 <p class="services-bento__card-desc">Wöchentliche Rückmeldungen und Anpassungen an deine Entwicklung.</p>
               </div>
-              <button class="infographic__pause-btn" aria-label="Animation pausieren" data-pause-infographic="fortschritt">
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><rect x="2" y="2" width="3" height="8" rx="1" fill="currentColor"/><rect x="7" y="2" width="3" height="8" rx="1" fill="currentColor"/></svg>
-              </button>
             </article>
 
             <!-- Card 4: Ernährung — animated growing bar chart -->
@@ -513,9 +508,6 @@
                 <h3 class="services-bento__card-title">Ernährung</h3>
                 <p class="services-bento__card-desc">Klare Orientierung beim Essen, mit Spielraum für deinen Alltag.</p>
               </div>
-              <button class="infographic__pause-btn" aria-label="Animation pausieren" data-pause-infographic="ernaehrung">
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><rect x="2" y="2" width="3" height="8" rx="1" fill="currentColor"/><rect x="7" y="2" width="3" height="8" rx="1" fill="currentColor"/></svg>
-              </button>
             </article>
 
           </div><!-- /.services-bento__bottom-row -->
@@ -535,51 +527,23 @@
 <!-- ============ 03 ALLTAG SCROLL SEQUENCE ============ -->
 <section class="alltag" id="problem" data-theme="dark" aria-label="Wenn der Alltag dazwischenkommt">
 
-  <!-- ── Stage 1: KEEP SCROLLING text ── -->
-  <div class="alltag__ks-stage" data-alltag-stage="ks">
-    <div class="alltag__ks-sticky">
-      <p class="alltag__ks-text" aria-label="Weiter scrollen" data-ks><span class="ks-word" data-ks-word="W" aria-hidden="true">W</span><span class="ks-word" data-ks-word="E" aria-hidden="true">E</span><span class="ks-word" data-ks-word="I" aria-hidden="true">I</span><span class="ks-word" data-ks-word="T" aria-hidden="true">T</span><span class="ks-word" data-ks-word="E" aria-hidden="true">E</span><span class="ks-word" data-ks-word="R" aria-hidden="true">R</span><span class="ks-gap" aria-hidden="true">&nbsp;</span><span class="ks-word" data-ks-word="S" aria-hidden="true">S</span><span class="ks-word" data-ks-word="C" aria-hidden="true">C</span><span class="ks-word" data-ks-word="R" aria-hidden="true">R</span><span class="ks-word" data-ks-word="O" aria-hidden="true">O</span><span class="ks-word" data-ks-word="L" aria-hidden="true">L</span><span class="ks-word" data-ks-word="L" aria-hidden="true">L</span><span class="ks-word" data-ks-word="E" aria-hidden="true">E</span><span class="ks-word" data-ks-word="N" aria-hidden="true">N</span></p>
-    </div>
-  </div>
-
-  <!-- ── Stage 2: Opposing mask video reveal ── -->
-  <div class="alltag__reveal-stage" data-alltag-stage="reveal">
-    <div class="alltag__reveal-sticky">
-
-      <!-- Single continuous video element -->
+  <!-- Shared scroll scene: text exits while the video halves come together. -->
+  <div class="alltag__merge-stage" data-alltag-merge>
+    <div class="alltag__merge-scene">
+      <div class="alltag__merge-copy">
+        <p class="alltag__ks-text" aria-label="Weiter scrollen" data-ks><span class="ks-word" data-ks-word="W" aria-hidden="true">W</span><span class="ks-word" data-ks-word="E" aria-hidden="true">E</span><span class="ks-word" data-ks-word="I" aria-hidden="true">I</span><span class="ks-word" data-ks-word="T" aria-hidden="true">T</span><span class="ks-word" data-ks-word="E" aria-hidden="true">E</span><span class="ks-word" data-ks-word="R" aria-hidden="true">R</span><span class="ks-gap" aria-hidden="true">&nbsp;</span><span class="ks-word" data-ks-word="S" aria-hidden="true">S</span><span class="ks-word" data-ks-word="C" aria-hidden="true">C</span><span class="ks-word" data-ks-word="R" aria-hidden="true">R</span><span class="ks-word" data-ks-word="O" aria-hidden="true">O</span><span class="ks-word" data-ks-word="L" aria-hidden="true">L</span><span class="ks-word" data-ks-word="L" aria-hidden="true">L</span><span class="ks-word" data-ks-word="E" aria-hidden="true">E</span><span class="ks-word" data-ks-word="N" aria-hidden="true">N</span></p>
+      </div>
       <div class="alltag__video-wrap">
         <video
           class="alltag__video"
           id="alltagVideo"
-          src="/assets/video/gv-alltag-reveal.mp4"
           muted
-          autoplay
           playsinline
           loop
-          preload="auto"
-          aria-label="GV Coaching Training"
-        ></video>
-
-        <!-- Left cover: anchored top, retreats upward -->
-        <div class="alltag__cover alltag__cover--left" aria-hidden="true"></div>
-        <!-- Right cover: anchored bottom, retreats downward -->
-        <div class="alltag__cover alltag__cover--right" aria-hidden="true"></div>
-
-        <!-- Play/pause control -->
-        <button class="alltag__play-btn" id="alltagPlayBtn" aria-label="Video pausieren">
-          <span class="alltag__play-icon" aria-hidden="true">
-            <svg class="icon-pause" width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="3" y="2" width="4" height="12" rx="1" fill="currentColor"/><rect x="9" y="2" width="4" height="12" rx="1" fill="currentColor"/></svg>
-            <svg class="icon-play" width="16" height="16" viewBox="0 0 16 16" fill="none" style="display:none"><polygon points="4,2 14,8 4,14" fill="currentColor"/></svg>
-          </span>
-          <svg class="alltag__play-ring" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-            <path id="alltagRingPath" d="M 50,50 m -38,0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0" fill="none"/>
-            <text class="alltag__ring-text" font-size="11.5" fill="rgba(255,255,255,0.7)" letter-spacing="4">
-              <textPath href="#alltagRingPath">PLAY · PAUSE · GV COACHING · </textPath>
-            </text>
-          </svg>
-        </button>
+          aria-label="GV Coaching Training" data-alltag-video-desktop="/assets/video/gv-alltag-desktop-v3.mp4" data-alltag-video-mobile="/assets/video/gv-alltag-mobile-v3.mp4" poster="/assets/video/gv-alltag-poster-v3.jpg" preload="metadata"></video>
+        <div class="alltag__half alltag__half--left" aria-hidden="true"><canvas></canvas></div>
+        <div class="alltag__half alltag__half--right" aria-hidden="true"><canvas></canvas></div>
       </div>
-
     </div>
   </div>
 
@@ -654,8 +618,8 @@
     <div class="audience__layout">
       <div class="audience__visual" data-reveal="clip">
         <div class="frame frame--4-5 frame--grade audience__frame">
-          <img class="audience__img is-active" data-audience-img="yes" src="/assets/img/gv-client-lifestyle-1600.webp" srcset="/assets/img/gv-client-lifestyle-900.webp 900w, /assets/img/gv-client-lifestyle-1600.webp 1600w" sizes="(min-width: 900px) 45vw, 92vw" alt="Gabriel Vogt im Trainingsstudio" width="1600" height="1073" loading="lazy" decoding="async" style="object-position: 75% 40%">
-          <img class="audience__img" data-audience-img="no" src="/assets/img/gv-client-progress-1600.webp" srcset="/assets/img/gv-client-progress-900.webp 672w, /assets/img/gv-client-progress-1600.webp 1195w" sizes="(min-width: 900px) 45vw, 92vw" alt="" width="1195" height="1600" loading="lazy" decoding="async" style="object-position: 50% 40%">
+          <img class="audience__img is-active" data-audience-img="yes" src="/assets/img/gv-fit-guided-1600.webp" srcset="/assets/img/gv-fit-guided-900.webp 900w, /assets/img/gv-fit-guided-1600.webp 1600w" sizes="(min-width: 900px) 52vw, 92vw" alt="Krafttraining mit Kurzhanteln im Fitnessstudio" width="1600" height="893" loading="lazy" decoding="async" style="object-position: 73% 40%">
+          <img class="audience__img" data-audience-img="no" src="/assets/img/gv-fit-commitment-1600.webp" srcset="/assets/img/gv-fit-commitment-900.webp 900w, /assets/img/gv-fit-commitment-1600.webp 1600w" sizes="(min-width: 900px) 52vw, 92vw" alt="Viele offene Aufgaben am Schreibtisch" width="1600" height="893" loading="lazy" decoding="async" style="object-position: 60% 42%">
         </div>
       </div>
 
@@ -710,7 +674,7 @@
 
     <div class="g5__track" data-g5-track>
       <article class="g5__stage" data-g5-stage>
-        <div class="g5__stage-media frame frame--grade"><img src="/assets/img/1795284591653.webp" alt="Gabriel bespricht Trainingsziele und Ausgangslage mit einem Mann" width="900" height="1200" loading="lazy" decoding="async" data-drive-file="1VLHtMfHOEMCcmyTU3zKGGa-qoXJRpK3_" style="object-position: 50% 70%"></div>
+        <div class="g5__stage-media frame frame--grade" style="min-height:350px"><img src="/assets/img/1795284591653.webp" alt="Gabriel bespricht Trainingsziele und Ausgangslage mit einem Mann" width="1195" height="1600" loading="lazy" decoding="async" data-drive-file="1VLHtMfHOEMCcmyTU3zKGGa-qoXJRpK3_" style="object-position: 50% 55%"></div>
         <div class="g5__stage-body">
           <span class="g5__big">01</span>
           <p class="g5__name">Verstehen<span class="g5__name-de">Dein Ausgangspunkt</span></p>
@@ -719,7 +683,7 @@
         </div>
       </article>
       <article class="g5__stage" data-g5-stage>
-        <div class="g5__stage-media frame frame--grade"><img src="/assets/img/1795284775323.webp" alt="Gabriel erstellt am Laptop einen individuellen Trainingsplan" width="900" height="1200" loading="lazy" decoding="async" data-drive-file="1cyJTekFEsiAfiwnRZXSum8Q1vocU6J_F" style="object-position: 50% 55%"></div>
+        <div class="g5__stage-media frame frame--grade" style="min-height:350px"><img src="/assets/img/1795284775323.webp" alt="Gabriel erstellt am Laptop einen individuellen Trainingsplan" width="1195" height="1600" loading="lazy" decoding="async" data-drive-file="1cyJTekFEsiAfiwnRZXSum8Q1vocU6J_F" style="object-position: 50% 42%"></div>
         <div class="g5__stage-body">
           <span class="g5__big">02</span>
           <p class="g5__name">Planen<span class="g5__name-de">Dein persönlicher Aufbau</span></p>
@@ -728,7 +692,7 @@
         </div>
       </article>
       <article class="g5__stage" data-g5-stage>
-        <div class="g5__stage-media frame frame--grade"><img src="/assets/img/1795284891337.webp" alt="Gabriel begleitet einen Mann beim Kurzhanteltraining" width="900" height="1200" loading="lazy" decoding="async" data-drive-file="1f9pjJXpF8KLC7tw52NOpTLd5tKHBaN_K" style="object-position: 50% 42%"></div>
+        <div class="g5__stage-media frame frame--grade" style="min-height:350px"><img src="/assets/img/1795284891337.webp" alt="Gabriel begleitet einen Mann beim Kurzhanteltraining" width="1195" height="1600" loading="lazy" decoding="async" data-drive-file="1f9pjJXpF8KLC7tw52NOpTLd5tKHBaN_K" style="object-position: 50% 30%"></div>
         <div class="g5__stage-body">
           <span class="g5__big">03</span>
           <p class="g5__name">Umsetzen<span class="g5__name-de">Deine Trainingsroutine</span></p>
@@ -737,7 +701,7 @@
         </div>
       </article>
       <article class="g5__stage" data-g5-stage>
-        <div class="g5__stage-media frame frame--grade"><img src="/assets/img/1795285394990.webp" alt="Gabriel prüft den Trainingsverlauf am Laptop" width="900" height="1200" loading="lazy" decoding="async" data-drive-file="1WHB__6b5jAyZAZJIWSToM-4xRJujs1R5" style="object-position: 50% 58%"></div>
+        <div class="g5__stage-media frame frame--grade" style="min-height:350px"><img src="/assets/img/1795285394990.webp" alt="Gabriel prüft den Trainingsverlauf am Laptop" width="1195" height="1600" loading="lazy" decoding="async" data-drive-file="1WHB__6b5jAyZAZJIWSToM-4xRJujs1R5" style="object-position: 50% 58%"></div>
         <div class="g5__stage-body">
           <span class="g5__big">04</span>
           <p class="g5__name">Anpassen<span class="g5__name-de">Deine Entwicklung</span></p>
@@ -746,7 +710,7 @@
         </div>
       </article>
       <article class="g5__stage" data-g5-stage>
-        <div class="g5__stage-media frame frame--grade"><img src="/assets/img/1795283457176.webp" alt="Ein Mann im Fitnessstudio mit seiner Sporttasche" width="900" height="1200" loading="lazy" decoding="async" data-drive-file="1fXiTf03OSbFdv2aM-4wjeIJh3lATLtnA" style="object-position: 50% 30%"></div>
+        <div class="g5__stage-media frame frame--grade" style="min-height:350px"><img src="/assets/img/1795283457176.webp" alt="Ein Mann im Fitnessstudio vor seiner nächsten Trainingseinheit" width="1195" height="1600" loading="lazy" decoding="async" data-drive-file="1fXiTf03OSbFdv2aM-4wjeIJh3lATLtnA" style="object-position: 50% 15%"></div>
         <div class="g5__stage-body">
           <span class="g5__big">05</span>
           <p class="g5__name">Festigen<span class="g5__name-de">Deine Selbstständigkeit</span></p>
@@ -768,14 +732,13 @@
 <div id="ergebnisse" data-single-page-section>
 <!-- ============ 01 PAGE HERO ============ -->
 
-<section class="er-loop section" data-theme="dark" id="ergebnisse-start" aria-labelledby="ergebnisse-transformationen" aria-describedby="ergebnisse-hinweis" data-er-loop>
+<section class="er-loop section" data-theme="dark" id="ergebnisse-start" aria-labelledby="ergebnisse-transformationen" data-er-loop>
   <div class="container er-loop__head">
-    <h2 class="display-l" id="ergebnisse-transformationen">Transformationen</h2>
-    <p class="small muted" id="ergebnisse-hinweis">KI-generierte Vorher-Nachher-Illustrationen. Keine echten Kundenergebnisse und keine Ergebniszusage.</p>
+    <h2 class="display-l" id="ergebnisse-transformationen">Beispielhafte Zielbilder</h2>
   </div>
   <div class="er-loop__labels">
-    <span>Vorher</span>
-    <span>Nachher</span>
+    <span>Ausgangspunkt</span>
+    <span>Zielbild</span>
   </div>
   <div class="er-loop__viewport" aria-hidden="true">
     <div class="er-loop__track">
@@ -796,9 +759,6 @@
         <img class="er-loop__after" src="/assets/img/transformation-example-4-after.webp" alt="" width="380" height="508" decoding="async" loading="lazy">
       </div>
     </div>
-  </div>
-  <div class="container er-loop__controls" hidden>
-    <button type="button" data-er-pause>Bildlauf pausieren</button>
   </div>
 </section>
 
@@ -874,7 +834,6 @@
         </li>
       </ol>
     </div>
-    <p class="progress-cinema__note">KI-generierte Themenbilder. Keine Kundenergebnisse.</p>
   </div>
 </section>
 
@@ -901,9 +860,9 @@
             <div class="pcard__text">
               <span class="pcard__num">01</span>
               <h3 class="h3">Deine Ausgangslage schildern</h3>
-              <p class="muted">Beantworte acht Fragen zu deinem Ziel und deinem Alltag. Anschließend öffnest du einen E-Mail-Entwurf, den du selbst an mich sendest.</p>
+              <p class="muted">Beschreibe dein Ziel, deinen aktuellen Stand und deinen Alltag im Fitness-Check. Anschließend sendest du mir deine Antworten per E-Mail.</p>
             </div>
-            <div class="pcard__media frame frame--grade frame--16-10"><img src="/assets/img/gv-client-consultation-1600.webp" srcset="/assets/img/gv-client-consultation-900.webp 900w, /assets/img/gv-client-consultation-1600.webp 1600w" sizes="(min-width: 900px) 45vw, 92vw" alt="Gabriel im persönlichen Online-Gespräch" width="1600" height="1073" loading="lazy" decoding="async" style="object-position: 50% 45%"></div>
+            <div class="pcard__media frame frame--grade frame--16-10"><img src="/assets/img/gv-start-check-1600.webp" srcset="/assets/img/gv-start-check-900.webp 900w, /assets/img/gv-start-check-1600.webp 1600w" sizes="(min-width: 900px) 52vw, 92vw" alt="Die eigene Ausgangslage am Smartphone beschreiben" width="1600" height="2143" loading="lazy" decoding="async" style="object-position: 56% 25%"></div>
           </div>
         </article>
         <article class="pcard">
@@ -911,9 +870,9 @@
             <div class="pcard__text">
               <span class="pcard__num">02</span>
               <h3 class="h3">Persönlich kennenlernen</h3>
-              <p class="muted">Wir besprechen deine Ziele und offenen Fragen. Du erfährst, welche Leistungen dazugehören und was das Coaching kostet. Danach entscheidest du, ob du starten möchtest.</p>
+              <p class="muted">Wir lernen uns kennen und klären deine Fragen. Du erfährst, wie ich dich begleite und was das Coaching kostet. Danach entscheidest du in Ruhe.</p>
             </div>
-            <div class="pcard__media frame frame--grade frame--16-10"><img src="/assets/img/gv-client-consultation-1600.webp" srcset="/assets/img/gv-client-consultation-900.webp 900w, /assets/img/gv-client-consultation-1600.webp 1600w" sizes="(min-width: 900px) 45vw, 92vw" alt="Persönliches Strategiegespräch mit Gabriel" width="1600" height="1073" loading="lazy" decoding="async" style="object-position: 50% 45%"></div>
+            <div class="pcard__media frame frame--grade frame--16-10"><img src="/assets/img/gv-start-conversation-1600.webp" srcset="/assets/img/gv-start-conversation-900.webp 900w, /assets/img/gv-start-conversation-1600.webp 1600w" sizes="(min-width: 900px) 52vw, 92vw" alt="Persönliches Kennenlernen und Austausch über das Trainingsziel" width="1600" height="893" loading="lazy" decoding="async" style="object-position: 88% 42%"></div>
           </div>
         </article>
         <article class="pcard">
@@ -921,9 +880,9 @@
             <div class="pcard__text">
               <span class="pcard__num">03</span>
               <h3 class="h3">Die Grundlage schaffen</h3>
-              <p class="muted">Vor deinem ersten Plan besprechen wir dein Ziel, deine Trainingserfahrung, verfügbare Tage und Zeit, deine Ausstattung und deine Essgewohnheiten. So richtet sich die Planung nach deinen Möglichkeiten.</p>
+              <p class="muted">Wir stimmen Trainingstage, Ausstattung und Essgewohnheiten auf dein Ziel ab. So entsteht eine Grundlage, die zu deinen Möglichkeiten und deinem Alltag passt.</p>
             </div>
-            <div class="pcard__media frame frame--grade frame--16-10"><img src="/assets/img/gv-client-assessment-wide-1600.webp" srcset="/assets/img/gv-client-assessment-wide-900.webp 900w, /assets/img/gv-client-assessment-wide-1600.webp 1600w" sizes="(min-width: 900px) 45vw, 92vw" alt="Gabriel bei der Bestandsaufnahme mit Tablet" width="1600" height="1073" loading="lazy" decoding="async" style="object-position: 50% 40%"></div>
+            <div class="pcard__media frame frame--grade frame--16-10"><img src="/assets/img/gv-start-profile-1600.webp" srcset="/assets/img/gv-start-profile-900.webp 900w, /assets/img/gv-start-profile-1600.webp 1600w" sizes="(min-width: 900px) 52vw, 92vw" alt="Trainingsmöglichkeiten und Ausgangslage für die Planung prüfen" width="1600" height="2143" loading="lazy" decoding="async" style="object-position: 52% 42%"></div>
           </div>
         </article>
         <article class="pcard">
@@ -931,9 +890,9 @@
             <div class="pcard__text">
               <span class="pcard__num">04</span>
               <h3 class="h3">Mit deinem ersten Plan starten</h3>
-              <p class="muted">Zu Beginn erhältst du deinen Trainings- und Ernährungsplan mit klaren Aufgaben. Im ersten wöchentlichen Check-in besprechen wir deine Erfahrungen damit.</p>
+              <p class="muted">Du erhältst deinen Trainings- und Ernährungsplan und setzt die ersten Schritte um. Im ersten wöchentlichen Check-in besprechen wir deine Erfahrungen und offenen Fragen.</p>
             </div>
-            <div class="pcard__media frame frame--grade frame--16-10"><img src="/assets/img/gv-client-planning-1600.webp" srcset="/assets/img/gv-client-planning-900.webp 900w, /assets/img/gv-client-planning-1600.webp 1600w" sizes="(min-width: 900px) 45vw, 92vw" alt="Gabriel arbeitet den ersten Trainingsplan aus" width="1600" height="1073" loading="lazy" decoding="async" style="object-position: 50% 50%"></div>
+            <div class="pcard__media frame frame--grade frame--16-10"><img src="/assets/img/gv-start-first-session-1600.webp" srcset="/assets/img/gv-start-first-session-900.webp 900w, /assets/img/gv-start-first-session-1600.webp 1600w" sizes="(min-width: 900px) 52vw, 92vw" alt="Den ersten Trainingsplan mit persönlicher Anleitung umsetzen" width="1600" height="2143" loading="lazy" decoding="async" style="object-position: 52% 45%"></div>
           </div>
         </article>
         <article class="pcard">
@@ -941,9 +900,9 @@
             <div class="pcard__text">
               <span class="pcard__num">05</span>
               <h3 class="h3">Dranbleiben und nachsteuern</h3>
-              <p class="muted">Über 6 Monate begleite ich deine Umsetzung. Wöchentliche Check-ins und monatliche Gespräche helfen uns, deinen Plan passend weiterzuentwickeln.</p>
+              <p class="muted">Über 6 Monate bleiben wir im Austausch: mit wöchentlichen Check-ins und monatlichen Gesprächen. Wir prüfen deinen Verlauf und passen den Plan bei Bedarf an.</p>
             </div>
-            <div class="pcard__media frame frame--grade frame--16-10"><img src="/assets/img/gv-client-progress-wide-1600.webp" srcset="/assets/img/gv-client-progress-wide-900.webp 900w, /assets/img/gv-client-progress-wide-1600.webp 1600w" sizes="(min-width: 900px) 45vw, 92vw" alt="Gabriel wertet den Trainingsverlauf aus" width="1600" height="1073" loading="lazy" decoding="async" style="object-position: 50% 50%"></div>
+            <div class="pcard__media frame frame--grade frame--16-10"><img src="/assets/img/gv-start-review-1600.webp" srcset="/assets/img/gv-start-review-900.webp 900w, /assets/img/gv-start-review-1600.webp 1600w" sizes="(min-width: 900px) 52vw, 92vw" alt="Den Trainingsverlauf gemeinsam besprechen" width="1600" height="2143" loading="lazy" decoding="async" style="object-position: 54% 40%"></div>
           </div>
         </article>
       </div>
@@ -957,7 +916,7 @@
     <div class="pc__intro">
       <h2 class="h2" id="pc-title">Kostenloser Fitness-Check</h2>
       <p class="lead">Acht kurze Fragen zu deinem Ziel und deiner aktuellen Situation. Ich lese deine Antworten persönlich und schätze mit dir ein, ob mein Coaching zu dir passt.</p>
-      <p class="small muted">Am Ende öffnest du einen vorbereiteten E-Mail-Entwurf und sendest ihn selbst ab. Der Check ist kostenlos und unverbindlich.</p>
+      <p class="small muted">Kostenlos und unverbindlich. Am Ende sendest du deine Antworten per E-Mail.</p>
     </div>
     <div class="pc__form">
       <div class="check" data-check data-check-source="homepage"></div>
@@ -1092,7 +1051,7 @@
         </div>
         <p class="kt-form__error" data-kt-error role="alert" aria-live="polite"></p>
         <div class="kt-form__actions">
-          <button type="submit" class="btn btn--primary" data-kt-submit><span class="btn__fill" aria-hidden="true"></span><span class="btn__label">E-Mail-Entwurf öffnen</span><span class="btn__icon" aria-hidden="true"><svg class="arrow-exit" viewbox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 5l7 7-7 7"></path></svg><svg class="arrow-enter" viewbox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 5l7 7-7 7"></path></svg></span></button>
+          <button type="submit" class="btn btn--primary" data-kt-submit><span class="btn__fill" aria-hidden="true"></span><span class="btn__label">E-Mail öffnen</span><span class="btn__icon" aria-hidden="true"><svg class="arrow-exit" viewbox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 5l7 7-7 7"></path></svg><svg class="arrow-enter" viewbox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 5l7 7-7 7"></path></svg></span></button>
         </div>
       </form>
       <div class="kt-result" data-kt-result tabindex="-1" hidden></div>
@@ -1214,3 +1173,4 @@
   </script>
 </body>
 </html>
+
